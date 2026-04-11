@@ -310,6 +310,388 @@ const PROJECTS: Project[] = [
   },
 ];
 
+// --- Archive Projects (Toggl Track — 204 projects) ---
+interface ArchiveProject {
+  name: string;
+  hours: number;
+  category: string;
+}
+
+const ARCHIVE_PROJECTS: ArchiveProject[] = [
+  { name: "1901_15 EDWIN ST_OATLANDS", hours: 90.85, category: "Architecture" },
+  { name: "1937_41 MURRAY ST_LANE COVE_COMPLETED", hours: 2.98, category: "Architecture" },
+  { name: "2020.02_257 CLARENCE ST_FACADE+FLOOR PLANS", hours: 23.37, category: "Architecture" },
+  { name: "2020.04_MISO WORLD SQUARE_SYDNEY", hours: 4.37, category: "Commercial" },
+  { name: "2020.04_MISO WORLD SQUAR_SYDNEY", hours: 9.45, category: "Commercial" },
+  { name: "2103_22 WARRAWEE AVE_WARRAWEE", hours: 5.03, category: "Architecture" },
+  { name: "2104_221 BURRANEER BAY RD_CARINGBAH SOUTH", hours: 16.53, category: "Architecture" },
+  { name: "2108_84 HOLLYWOOD ST_MONTEREY", hours: 26.37, category: "Architecture" },
+  { name: "2122.01_87_BELLAMY ST_PENNANT HILLS", hours: 79.93, category: "Architecture" },
+  { name: "21 SWALLOW AVENUE_MODBURY HEIGHT_SA", hours: 28.28, category: "Architecture" },
+  { name: "2201_AR_106 WARRIGAL RD_CAMBERWELL", hours: 4.52, category: "Architecture" },
+  { name: "2211_5 COBA POINT_BEROWRA", hours: 18.00, category: "Architecture" },
+  { name: "2225_ANTS_288 FOREST RD_HURSTVILLE", hours: 17.64, category: "Commercial" },
+  { name: "2228_UNIT 7_53 MOORE PARK RD_CENTENNIAL PARK", hours: 10.14, category: "Architecture" },
+  { name: "2229_38 HICKSON RD_MILLERS POINT", hours: 242.11, category: "Architecture" },
+  { name: "2231_32 MCCLELLAND ST_WILLOUGHBY", hours: 24.66, category: "Architecture" },
+  { name: "2232_20 SOMERSET STREET_HURSTVILLE", hours: 60.05, category: "Architecture" },
+  { name: "2301.73_HOPETOUN AVENUE_VAUCLUSE", hours: 2.34, category: "Architecture" },
+  { name: "2301PS_613-615_PITTWATER RD_DEE WHY", hours: 1688.81, category: "Architecture" },
+  { name: "2302.01_1_ELIZABETH ST_SYDNEY", hours: 9.91, category: "Architecture" },
+  { name: "2302_AR_U12_13 ONSLOW AVE_POTTS POINT", hours: 88.26, category: "Architecture" },
+  { name: "2302_G2_3 MOOLTAN AVE_MACQUARIE PARK", hours: 5.78, category: "Architecture" },
+  { name: "2302PS_12 STUART STREET_WAHROONGA", hours: 217.61, category: "Architecture" },
+  { name: "2303_4 KINGSFORD STREET_FAIRY MEADOWS", hours: 46.51, category: "Architecture" },
+  { name: "2303_AR_97 RENWICK STREET_REDFERN", hours: 2.72, category: "Architecture" },
+  { name: "2303PS_L6_12 TOMAS ST_CHATSWOOD", hours: 1.89, category: "Architecture" },
+  { name: "2304_181 KINGSLAND RD_NORTH BEXLEY", hours: 21.19, category: "Architecture" },
+  { name: "2304_AR_SOUL BRIGHT_ST LEONARD", hours: 49.52, category: "Commercial" },
+  { name: "2305_19 LINDEN STREET_SUTHERLAND", hours: 0.67, category: "Architecture" },
+  { name: "2306_484 TUGGERAWONG RD_TUGGERAWONG", hours: 17.28, category: "Architecture" },
+  { name: "2307_39 ALLEYNE AVE_NORTH NARRABEEN", hours: 11.17, category: "Architecture" },
+  { name: "2308_3 SOUTHERN ST_OATLEY", hours: 3.14, category: "Architecture" },
+  { name: "2309_30 GRAY SPENCE CRESENT_WEST PENANT HILLS", hours: 105.31, category: "Architecture" },
+  { name: "2311_3 PORTER ST_RYDE", hours: 17.85, category: "Architecture" },
+  { name: "2312_KII_16-22 WENTWORTH AVE_SURRY HILLS", hours: 3.85, category: "Commercial" },
+  { name: "2313_SUITE 208_288 FOREST RD_HURSTVILLE", hours: 22.73, category: "Commercial" },
+  { name: "2314_155&155A_STUART ST_BLAKEHURST", hours: 122.68, category: "Architecture" },
+  { name: "2315_46 CLARENCE ST_BERRY", hours: 123.34, category: "Architecture" },
+  { name: "2316_83-91_RENWICK STREET_REDFERN", hours: 307.89, category: "Architecture" },
+  { name: "2318_KII_TENANCY 3_LEVEL 1_NO 1 TULLY RD_EAST PERTH", hours: 50.32, category: "Commercial" },
+  { name: "2319_SKC_413-421 GEORGE ST_66-70 YORK ST_SYDNEY", hours: 6.87, category: "Commercial" },
+  { name: "2320_GREENFIELD CARE_82 FAIREY ROAD_SOUTH WINDSOR", hours: 107.11, category: "Commercial" },
+  { name: "2320_GREENFIELD CARE_82 FAIREY ROAD_SOUTH WINDSOR (B)", hours: 13.36, category: "Commercial" },
+  { name: "2322_29 STANLEY STREET_RANDWICK", hours: 240.99, category: "Architecture" },
+  { name: "2323_14 WEST PARADE_CHATSWOOD", hours: 92.69, category: "Architecture" },
+  { name: "2401_10 ALBERT RD_CROYDON PARK", hours: 122.58, category: "Architecture" },
+  { name: "2401PS_1 TEDMAN PARADE_SYLVANIA", hours: 274.62, category: "Architecture" },
+  { name: "2402_58 & 60_BELEMBA AVE_ROSELANDS", hours: 469.08, category: "Architecture" },
+  { name: "2402_AR_WINE BAR_SHOPS 1&2_34-36A DARLINGHURST RD", hours: 3.53, category: "Hospitality" },
+  { name: "2402PS_82 CECIL AVE_CASTLE HILL", hours: 215.27, category: "Architecture" },
+  { name: "2403_AR_LEVEL 1_92 PITT STREET", hours: 4.58, category: "Architecture" },
+  { name: "2403_NEUTRAL BAY OFFICE_NEUTRAL BAY", hours: 31.22, category: "Commercial" },
+  { name: "2403PS_24 RAIMONDE ROAD_EASTWOOD", hours: 43.30, category: "Architecture" },
+  { name: "2404_14 TAYLOR STREET_KOGARAH", hours: 5.84, category: "Architecture" },
+  { name: "2404_TILLEY RECREATION PARK_SURREY DOWNS", hours: 6.01, category: "Architecture" },
+  { name: "2404_TILLEY RECREATION PARK_SURREY DOWNS_SA", hours: 22.62, category: "Architecture" },
+  { name: "2405_1-142 GREAT NORTH ROAD_FIVE DOCK", hours: 2.11, category: "Architecture" },
+  { name: "2405_54 LIPPIZIAN RD_AUSTRAL", hours: 86.36, category: "Architecture" },
+  { name: "2406_KEN'S MEGA EMPIRE", hours: 4.85, category: "Commercial" },
+  { name: "2406_KEN'S MEGA EMPIRE (B)", hours: 0.00, category: "Commercial" },
+  { name: "2409_GIRDLERS CAFE_NARABEEN", hours: 3.53, category: "Hospitality" },
+  { name: "2410_88 BARANGAROO AVENUE_BARANGAROO", hours: 32.99, category: "Architecture" },
+  { name: "2411_27 TYRWHITT ST_MAROUBRA", hours: 278.02, category: "Architecture" },
+  { name: "2413_6 COONRARDOO PL_CASTLE HILL", hours: 109.79, category: "Architecture" },
+  { name: "2414_NEXT LEVEL ESCAPE_80 PITT ST_SYDNEY", hours: 18.21, category: "Commercial" },
+  { name: "2415_MINISO_L11_257 CLARENCE ST_SYD", hours: 10.70, category: "Commercial" },
+  { name: "2416_51_1-5 MACKEON ST_MAROUBA", hours: 31.53, category: "Architecture" },
+  { name: "2416_51_1-5 MACKEON ST_MAROUBRA (B)", hours: 0.42, category: "Architecture" },
+  { name: "2417_UNIT 1_56-60 FOSTER STREET_SURRY HILLS", hours: 34.96, category: "Architecture" },
+  { name: "2417_UNIT 1_56-60 FOSTER ST_SURRY HILLS (B)", hours: 4.45, category: "Architecture" },
+  { name: "2418_LEVEL 1_128A_ERSKINEVILLE RD_ERSKINEVILLE", hours: 6.84, category: "Architecture" },
+  { name: "2419_3 CHAPMAN ST_SURRY HILLS", hours: 5.61, category: "Architecture" },
+  { name: "2420_RAITA NODA OMAKASE_SURRY HILLS", hours: 0.92, category: "Hospitality" },
+  { name: "2422_MEDIWORK_L9_257 CLARENCE ST_SYD", hours: 9.30, category: "Commercial" },
+  { name: "2501_NEXT LVL ESCAPE_72 BATHURST ST_SYD", hours: 0.99, category: "Commercial" },
+  { name: "2502_4 KERRIBEE PLACE_CARLINGFORD", hours: 65.81, category: "Architecture" },
+  { name: "2503_6 KERRIBEE PLACE_CARLINGFORD", hours: 60.09, category: "Architecture" },
+  { name: "2504_32 LAWSON ST_PADDINGTON", hours: 12.22, category: "Architecture" },
+  { name: "2505_127 AVOCA STREET_RANDWICK", hours: 3.17, category: "Architecture" },
+  { name: "2506_5C_56 MILITARY RD_DOVER HEIGHTS", hours: 6.76, category: "Architecture" },
+  { name: "2508_UNIT 9_1 BRIGHTON BLV_BONDI BEACH", hours: 6.44, category: "Architecture" },
+  { name: "2510_2 TOR ROAD_DEE WHY", hours: 161.06, category: "Architecture" },
+  { name: "2511_L11_27_ARGYLE ST_PARRAMATTA", hours: 4.22, category: "Architecture" },
+  { name: "2512_61 LAVENDER STREET_MILSONS POINT_NSW 206", hours: 18.10, category: "Architecture" },
+  { name: "2513_59 BORONIA RD_BELLEVUE HILL", hours: 42.45, category: "Architecture" },
+  { name: "2517_DULCET_655_KINGS ST_ST PETERS", hours: 20.87, category: "Commercial" },
+  { name: "2518_HEALTHCARE HOMELOANS_ST LEONARD", hours: 9.07, category: "Commercial" },
+  { name: "2520_KEN'S ARC_SYDNEY", hours: 0.33, category: "Commercial" },
+  { name: "2521_9_ASTON MARTIN PLACE_GOULBURN", hours: 21.46, category: "Architecture" },
+  { name: "2522_PICKLE BALL_BLDG 17_NORTH HEAD_MANLY", hours: 10.65, category: "Architecture" },
+  { name: "2531_10 KIMBERLEY COURT_BELLA VISTA_NSW 2153", hours: 22.48, category: "Architecture" },
+  { name: "2533_SHOP 7_599 PACIFIC HIGHWAY_ST LEONARDS", hours: 5.77, category: "Commercial" },
+  { name: "2534_LV 22_56 PITT STREET_SYDNEY_NSW 2000", hours: 2.50, category: "Architecture" },
+  { name: "2535_58 LAKE RD_SWANSEA", hours: 72.49, category: "Architecture" },
+  { name: "2540_22 ST PAULS STREET_RANDWICK", hours: 22.09, category: "Architecture" },
+  { name: "2541_1 KIRBY WALK_114-120 JOYNTON AVE_ZETLAND NSW 2017", hours: 97.75, category: "Architecture" },
+  { name: "2542_KTA OFFICE FITOUT", hours: 26.70, category: "Commercial" },
+  { name: "2545_NEXT LEVEL_ESCAPE_L1_259 GEORGE ST_SYDNEY", hours: 17.12, category: "Commercial" },
+  { name: "2546_162 ALMA RD_PADSTOW", hours: 25.31, category: "Architecture" },
+  { name: "2547_SHOP 119_2-8 DIXON STREET_SYDNEY NSW 2000", hours: 11.05, category: "Commercial" },
+  { name: "2549_2-4 PORTER ST_RYDE_NSW", hours: 20.61, category: "Architecture" },
+  { name: "2553_129 MEEHAN DRIVE_KIAMA DOWNS", hours: 17.17, category: "Architecture" },
+  { name: "2604_68 HARBOUR STREET_HAYMARKET_NSW", hours: 164.29, category: "Hospitality" },
+  { name: "29 MALTON ROAD_BEECROFT", hours: 4.62, category: "Architecture" },
+  { name: "39 PENNANT PARADE_CARLINGFORD", hours: 12.42, category: "Architecture" },
+  { name: "57_19A_YOUNG ST_NEUTRAL BAY", hours: 30.87, category: "Architecture" },
+  { name: "7 ST NEOT AVE", hours: 0.00, category: "Architecture" },
+  { name: "ADMIN", hours: 30.45, category: "Studio" },
+  { name: "AKD-2102_34 STREATFIELD ROAD_BELLEVUE HILL", hours: 276.32, category: "Architecture" },
+  { name: "BS-2201_QUIRK", hours: 11.01, category: "Commercial" },
+  { name: "BS-2301_AUSTIN_NORTH CURL CURL", hours: 16.80, category: "Architecture" },
+  { name: "CHIG-2001_SERVICE APARTMENTS DRAFTING", hours: 38.51, category: "Hospitality" },
+  { name: "CIHG-2202_INFINITY CONFERENCE CENTER_CONFERENCE CENTRE", hours: 113.88, category: "Hospitality" },
+  { name: "CIHG-2401_INFINITY CONFERENCE CENTER_BASE BUILDING UPGRADE", hours: 1.15, category: "Hospitality" },
+  { name: "DT-2105_10 JAMES STREET_WATERLOO", hours: 28.16, category: "Commercial" },
+  { name: "DT-2201_80 WILLIAM ST_DARLINGHURST", hours: 18.15, category: "Commercial" },
+  { name: "DT-2201_80 WILLIAM STREET_DARLINGHURST", hours: 59.91, category: "Commercial" },
+  { name: "DT-2210_60-70 WILLIAM ST_WOOLOOMOOLOO_GYM", hours: 1.25, category: "Commercial" },
+  { name: "DT-2301_HAIR SALON II", hours: 1.25, category: "Commercial" },
+  { name: "DT-2302_BYD MEGASTORE_MASCOT", hours: 104.13, category: "Automotive" },
+  { name: "DT-2303_REJUVED", hours: 8.46, category: "Commercial" },
+  { name: "DT-2304_PALMER STREET HOUSE", hours: 1.49, category: "Architecture" },
+  { name: "DT-2305_BYD CAFE KIOSKS_MASCOT", hours: 34.34, category: "Automotive" },
+  { name: "DT-2307_BETTA_SEAFORD", hours: 62.56, category: "Commercial" },
+  { name: "DT-2308_BETTA_PIMPAMA", hours: 104.44, category: "Commercial" },
+  { name: "DT-2310_BYD_SERVICE CENTRE_MASCOT", hours: 8.37, category: "Automotive" },
+  { name: "DT-2310_BYD_WAREHOUSE_MASCOT", hours: 4.70, category: "Automotive" },
+  { name: "DT-2311_L2_168 CHALMERS ST_SURRY HILLS", hours: 7.95, category: "Commercial" },
+  { name: "DT-2312_114 DEVONSHIRE ST_SURRY HILLS", hours: 4.30, category: "Commercial" },
+  { name: "DT-2313_483 RILEY STREET_SURRY HILLS", hours: 23.50, category: "Commercial" },
+  { name: "DT-2317_L3_100 NEW SOUTH HEAD RD_EDGECLIFF", hours: 13.62, category: "Commercial" },
+  { name: "DT-2318_35 TUMBALONG BLV_HAYMARKET", hours: 4.37, category: "Commercial" },
+  { name: "DT-2319_CHROMA TUNNEL+STUDIO_APOLLO BAY", hours: 14.32, category: "Commercial" },
+  { name: "DT-2320_834 ELIZABETH ST_WATERLOO", hours: 6.24, category: "Commercial" },
+  { name: "DT-2401_BYD HABBERFIELD_107-113 PARRAMATTA RD", hours: 92.20, category: "Automotive" },
+  { name: "DT-2401_BYD HABBERFIELD_107-113 PARRAMATTA RD (B)", hours: 0.00, category: "Automotive" },
+  { name: "DT-2403_30 BOWDEN STREET", hours: 12.04, category: "Commercial" },
+  { name: "DT-2405_BOURKE&BOWDEN_ALEXANDRIA", hours: 9.48, category: "Commercial" },
+  { name: "DT-2407_645 HARRIS ST_ULTIMO", hours: 20.79, category: "Commercial" },
+  { name: "DT-2408_SHOP 2_255 OXFORD ST_PADDINGTON", hours: 25.05, category: "Commercial" },
+  { name: "DT-2409_SONDERS_834 ELIZABETH ST_WATERLOO_NSW 2017", hours: 1.52, category: "Commercial" },
+  { name: "DT-2501_1-9 GLEBE POINT RD_GLEBE", hours: 19.93, category: "Commercial" },
+  { name: "DT-2506_LEVEL 11_82 ELIZABETH ST_SYDNEY", hours: 50.60, category: "Commercial" },
+  { name: "DT-2507_LEVEL 1_350 GEORGE ST_SYDNEY 2000", hours: 5.19, category: "Commercial" },
+  { name: "DT-2508_7-13 PARRAWEEN ST_CREMORNE", hours: 2.25, category: "Commercial" },
+  { name: "DT-2510_DENZA BYD_50 MCLACHLAN AVE_DARLINGHURST NSW 2010", hours: 15.09, category: "Automotive" },
+  { name: "DT-2511_DENZA OFFICE_SHOP 159_BLDG E_50 MCLACHLAN AVE_DARLINGHURST", hours: 10.17, category: "Automotive" },
+  { name: "DT-2512_1 WEST STREET_NORTH SYDNEY", hours: 33.80, category: "Commercial" },
+  { name: "DT-2517_DENZA INTERIOR JOINERY DETAILS", hours: 22.91, category: "Automotive" },
+  { name: "DT-2604_DENZA SERVICE CENTER_89 GRIFFTHS ROAD_LAMBTON", hours: 6.32, category: "Automotive" },
+  { name: "EV-2301_BYD POD_377 HUME HWY_LIVERPOOL", hours: 23.18, category: "Automotive" },
+  { name: "EV-2302_MAZDA SUTHERLAND_26-28 WARATAH STREET_KIRRAWEE", hours: 29.88, category: "Automotive" },
+  { name: "EV-2303_MAZDA LIVERPOOL_365 HUME HWY_LIVERPOOL", hours: 10.97, category: "Automotive" },
+  { name: "F2023_024_648 BOURKE STREET_REDFERN", hours: 16.28, category: "Architecture" },
+  { name: "F2024_012_7 NEOT AVE_POTTS POINT", hours: 20.44, category: "Architecture" },
+  { name: "F2024_013_GIRDLERS CAFE", hours: 6.24, category: "Hospitality" },
+  { name: "HT-2101_LEVEL 5_40 MACLEAY ST_POTTS POINT", hours: 3.15, category: "Hospitality" },
+  { name: "HT-2105_902_LEVEL 9&10_40 MACLEAY ST_POTTS POINT", hours: 125.49, category: "Hospitality" },
+  { name: "HT-2106_12 WILLIAM LANE_WOOLLOOMOOLOO", hours: 22.84, category: "Hospitality" },
+  { name: "K5_2206_KFIVE SHOWROOM_SURRY HILLS", hours: 8.68, category: "Interior & Furniture" },
+  { name: "K5_2301_JOINERY OPTIONS", hours: 7.98, category: "Interior & Furniture" },
+  { name: "K5_2302_GROUNDS FURNITURE", hours: 9.55, category: "Interior & Furniture" },
+  { name: "K5_2303_EXAMINATION BED", hours: 1.34, category: "Interior & Furniture" },
+  { name: "K5_2303_LORRETO SCHOOL", hours: 19.20, category: "Interior & Furniture" },
+  { name: "K5_2305_TRUGANINA", hours: 1.96, category: "Interior & Furniture" },
+  { name: "K5_2306_GHERKIN PADDING", hours: 1.12, category: "Interior & Furniture" },
+  { name: "K5-2307_HIGHPOINT VALET", hours: 5.01, category: "Interior & Furniture" },
+  { name: "K5-2401_LVL 4 RIVER ST_MELBOURNE", hours: 13.11, category: "Interior & Furniture" },
+  { name: "K5-2403_SPORTS HOUSE", hours: 4.40, category: "Interior & Furniture" },
+  { name: "K5-2405_DRUM THEATER_226_LONSDALE ST_DANDENONG", hours: 2.26, category: "Interior & Furniture" },
+  { name: "K5_2513_MONASH CIVIC", hours: 9.80, category: "Interior & Furniture" },
+  { name: "K5_2601_MELBOURNE EXHIBITION CENTRE", hours: 23.42, category: "Interior & Furniture" },
+  { name: "OGC-2501_MACQUARIE PARK", hours: 87.41, category: "Commercial" },
+  { name: "OGC-2502_EASTLAKES_MISC", hours: 19.66, category: "Commercial" },
+  { name: "OGC-2503_INFINITY_MISC", hours: 2.76, category: "Commercial" },
+  { name: "OGC-2602_SATUNG BALI", hours: 4.63, category: "Commercial" },
+  { name: "PF-1902_L4 50 CARRINGTON ST_SYD", hours: 0.64, category: "Architecture" },
+  { name: "PF-2301_LVL 13_SECURE PARKING_99 MOUNT ST_NORTH SYDNEY", hours: 26.52, category: "Architecture" },
+  { name: "SG-2401_INFINITY CONFERENCE CENTER_BASE BUILDING UPGRADE", hours: 28.10, category: "Commercial" },
+  { name: "TC-2402_PANDANUS PARK", hours: 1.69, category: "Architecture" },
+  { name: "TC-2402_PHYSICAL MODEL", hours: 0.72, category: "Architecture" },
+  { name: "TC-2402_WA PROJECT", hours: 12.42, category: "Architecture" },
+  { name: "UFO-2006_2 WEETAWA RD_NORTHBRIDGE", hours: 13.84, category: "Architecture" },
+  { name: "UFO-2009_4 ROYSTON ST_DARLINGHURST", hours: 14.74, category: "Architecture" },
+  { name: "UFO-2206_BIKRAM YOGA_OXFORD ST_DARLINGHURST", hours: 60.83, category: "Commercial" },
+  { name: "UFO-2208_BEIGENE_L4 GEORGE ST", hours: 23.28, category: "Commercial" },
+  { name: "UFO-2214_2 WEETAWA RD_NORTHBRIDGE_INTERIOR", hours: 17.76, category: "Architecture" },
+  { name: "UFO-2301_FAMILY SERVICES AUSTRALIA", hours: 1.90, category: "Commercial" },
+  { name: "UFO-2305_CARPARK_757 NEW SOUTH HEAD RD_ROSE BAY", hours: 7.49, category: "Architecture" },
+  { name: "UFO-2306_KING ISLAND MEAT CO_PADDINGTON", hours: 122.23, category: "Commercial" },
+  { name: "UFO-2307_NDY_L13_90 ARTHUR ST_NORTH SYDNEY", hours: 9.22, category: "Commercial" },
+  { name: "UFO-2308_489 PACIFIC HWY_PENRITH", hours: 5.94, category: "Architecture" },
+  { name: "UFO-2309_DEPOT_18 ABBOTT RD_SEVEN HILLS", hours: 133.66, category: "Commercial" },
+  { name: "UFO-2310_FRENCH CONSULATE", hours: 9.65, category: "Architecture" },
+  { name: "UFO-2312_ETEX GROUP", hours: 1.26, category: "Commercial" },
+  { name: "UFO-2314_LYLO ROOFTOP BAR_QLD", hours: 111.92, category: "Hospitality" },
+  { name: "UFO-2315_120 SUSSEX STREET_SYDNEY", hours: 13.50, category: "Architecture" },
+  { name: "UFO-2401_TERRY HILLS CLUB HOUSE_TERRY HILLS", hours: 18.49, category: "Architecture" },
+  { name: "UFO-2404_DICKSON VILLAGE_ACT", hours: 3.59, category: "Architecture" },
+  { name: "UFO-2407_477 PITT ST CAFE_SYDNEY", hours: 32.81, category: "Hospitality" },
+  { name: "UFO-2412_SELECT PLANT AUSTRALIA_VIC", hours: 0.18, category: "Commercial" },
+  { name: "UFO-2413_CROWN_1 BARANGAROO AVE", hours: 23.18, category: "Architecture" },
+  { name: "UFO-2417_L21_83_CLARENCE ST_SYDNEY", hours: 0.50, category: "Architecture" },
+  { name: "UFO-2502_PELOTON_20 MARTIN PLACE_SYDNEY", hours: 2.32, category: "Commercial" },
+  { name: "UFO-2505_CAMMERAY SQUARE_SHOPPING CENTER", hours: 0.00, category: "Commercial" },
+];
+
+const ARCHIVE_CATEGORIES = ['All', 'Architecture', 'Commercial', 'Hospitality', 'Interior & Furniture', 'Automotive', 'Studio'];
+
+// --- Project Archive Modal ---
+function ProjectArchiveModal({ onClose }: { onClose: () => void }) {
+  const [search, setSearch] = useState('');
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [sortBy, setSortBy] = useState<'hours' | 'name'>('hours');
+
+  const totalHours = ARCHIVE_PROJECTS.reduce((sum, p) => sum + p.hours, 0);
+
+  const filtered = ARCHIVE_PROJECTS
+    .filter((p) => {
+      const matchesCategory = activeCategory === 'All' || p.category === activeCategory;
+      const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase());
+      return matchesCategory && matchesSearch;
+    })
+    .sort((a, b) => sortBy === 'hours' ? b.hours - a.hours : a.name.localeCompare(b.name));
+
+  const categoryCounts = ARCHIVE_CATEGORIES.reduce((acc, cat) => {
+    acc[cat] = cat === 'All' ? ARCHIVE_PROJECTS.length : ARCHIVE_PROJECTS.filter(p => p.category === cat).length;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const categoryColors: Record<string, string> = {
+    'Architecture': 'bg-stone-800 text-stone-100',
+    'Commercial': 'bg-amber-100 text-amber-800',
+    'Hospitality': 'bg-sky-100 text-sky-800',
+    'Interior & Furniture': 'bg-rose-100 text-rose-800',
+    'Automotive': 'bg-emerald-100 text-emerald-800',
+    'Studio': 'bg-violet-100 text-violet-800',
+  };
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[200] bg-[#fdfaf6] flex flex-col"
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 40 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {/* Header */}
+      <div className="border-b border-stone-200 px-8 md:px-16 py-6 flex items-center justify-between flex-shrink-0">
+        <div>
+          <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-400 block mb-1">Project Archive</span>
+          <h2 className="text-2xl md:text-3xl font-display font-light text-stone-900">
+            {ARCHIVE_PROJECTS.length} Projects · {Math.round(totalHours).toLocaleString()}h Total
+          </h2>
+        </div>
+        <button
+          onClick={onClose}
+          className="w-10 h-10 flex items-center justify-center rounded-full border border-stone-200 hover:bg-stone-900 hover:text-white hover:border-stone-900 transition-all duration-300"
+        >
+          <X className="w-4 h-4" />
+        </button>
+      </div>
+
+      {/* Controls */}
+      <div className="px-8 md:px-16 py-5 border-b border-stone-100 flex-shrink-0 flex flex-col md:flex-row gap-4 md:items-center justify-between">
+        {/* Search */}
+        <div className="relative w-full md:w-80">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-400" />
+          <input
+            type="text"
+            placeholder="Search projects..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full pl-9 pr-4 py-2.5 text-xs border border-stone-200 bg-white focus:outline-none focus:border-stone-400 font-light text-stone-800 placeholder-stone-400"
+          />
+        </div>
+
+        {/* Sort */}
+        <div className="flex items-center gap-2">
+          <span className="text-[9px] uppercase tracking-[0.3em] font-bold text-stone-400">Sort</span>
+          <button
+            onClick={() => setSortBy('hours')}
+            className={`px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.25em] border transition-all duration-200 ${sortBy === 'hours' ? 'bg-stone-900 text-white border-stone-900' : 'border-stone-200 text-stone-500 hover:border-stone-400'}`}
+          >Hours</button>
+          <button
+            onClick={() => setSortBy('name')}
+            className={`px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.25em] border transition-all duration-200 ${sortBy === 'name' ? 'bg-stone-900 text-white border-stone-900' : 'border-stone-200 text-stone-500 hover:border-stone-400'}`}
+          >Name</button>
+        </div>
+      </div>
+
+      {/* Category Filter */}
+      <div className="px-8 md:px-16 py-4 border-b border-stone-100 flex-shrink-0 overflow-x-auto">
+        <div className="flex gap-2 min-w-max">
+          {ARCHIVE_CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-1.5 text-[9px] font-bold uppercase tracking-[0.25em] border transition-all duration-200 whitespace-nowrap ${
+                activeCategory === cat
+                  ? 'bg-stone-900 text-white border-stone-900'
+                  : 'border-stone-200 text-stone-500 hover:border-stone-500 hover:text-stone-800'
+              }`}
+            >
+              {cat} <span className="opacity-60">({categoryCounts[cat]})</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Results count */}
+      <div className="px-8 md:px-16 py-3 flex-shrink-0">
+        <span className="text-[9px] uppercase tracking-[0.3em] font-bold text-stone-400">
+          {filtered.length} {filtered.length === 1 ? 'project' : 'projects'} shown
+        </span>
+      </div>
+
+      {/* Project List */}
+      <div className="flex-1 overflow-y-auto px-8 md:px-16 pb-12">
+        <div className="divide-y divide-stone-100">
+          {filtered.map((project, idx) => (
+            <motion.div
+              key={project.name}
+              className="flex items-center justify-between py-4 group"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: Math.min(idx * 0.01, 0.3) }}
+            >
+              <div className="flex items-center gap-4 min-w-0">
+                <span className="text-[9px] font-mono text-stone-300 w-8 flex-shrink-0 text-right">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+                <div className="min-w-0">
+                  <p className="text-xs font-light text-stone-700 tracking-wide truncate group-hover:text-stone-900 transition-colors">
+                    {project.name}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 flex-shrink-0 ml-4">
+                <span className={`hidden md:inline-block px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.2em] rounded-sm ${categoryColors[project.category] || 'bg-stone-100 text-stone-600'}`}>
+                  {project.category}
+                </span>
+                <span className="text-[10px] font-mono text-stone-500 w-20 text-right">
+                  {project.hours >= 10 ? `${project.hours.toFixed(0)}h` : `${project.hours.toFixed(2)}h`}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        {filtered.length === 0 && (
+          <div className="py-24 text-center">
+            <p className="text-sm font-light text-stone-400">No projects found for "{search}"</p>
+          </div>
+        )}
+
+        {/* Total hours footer */}
+        {filtered.length > 0 && (
+          <div className="mt-8 pt-6 border-t border-stone-200 flex items-center justify-between">
+            <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-400">
+              {filtered.length} projects
+            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-400">Total Hours</span>
+              <span className="text-lg font-mono font-light text-stone-800">
+                {filtered.reduce((sum, p) => sum + p.hours, 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}h
+              </span>
+            </div>
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
 const ARTICLES: Article[] = [
   {
     id: 4,
@@ -1951,10 +2333,6 @@ const FeaturedSlider = ({ projects, onOpen }: { projects: Project[]; onOpen: (p:
           <div className="absolute inset-0 bg-gradient-to-r from-stone-950/70 to-transparent" />
         </motion.div>
       </AnimatePresence>
-      <div className="absolute top-10 left-10 z-10 flex items-center gap-3">
-        <span className="w-6 h-px bg-white/30" />
-        <span className="text-[9px] uppercase tracking-[0.5em] text-white/40 font-bold">Featured Work</span>
-      </div>
       <div className="absolute top-10 right-10 z-10 font-mono text-[10px] text-white/30 tracking-widest">
         {String(active + 1).padStart(2, '0')} / {String(featured.length).padStart(2, '0')}
       </div>
@@ -2026,7 +2404,7 @@ const StatsSection = () => (
   <section className="py-20 bg-[#fdfaf6] border-t border-stone-100">
     <div className="max-w-[1400px] mx-auto px-8">
       <div className="grid grid-cols-2 md:grid-cols-5 gap-12">
-        <StatItem value={PROJECTS.length} suffix="" label="Involving Projects" delay={0} />
+        <StatItem value={ARCHIVE_PROJECTS.length} suffix="" label="Involving Projects" delay={0} />
         <StatItem value={12} suffix="+" label="Projects Completed" delay={0.1} />
         <StatItem value={3} suffix="+" label="Years Experience" delay={0.2} />
         <StatItem value={5} suffix="" label="Cities" delay={0.3} />
@@ -2056,6 +2434,7 @@ export default function App() {
   const [inquirySent, setInquirySent] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [toast, setToast] = useState('');
+  const [showArchive, setShowArchive] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -2097,6 +2476,13 @@ export default function App() {
           >
             {toast}
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Project Archive Modal */}
+      <AnimatePresence>
+        {showArchive && (
+          <ProjectArchiveModal onClose={() => setShowArchive(false)} />
         )}
       </AnimatePresence>
 
@@ -2387,8 +2773,6 @@ export default function App() {
           </motion.div>
         </section>
 
-        {/* Featured Project Slider */}
-        <FeaturedSlider projects={PROJECTS} onOpen={(p) => setSelectedProject(p)} />
         <MarqueeStrip />
 
         {/* Publication strip */}
@@ -2784,6 +3168,7 @@ export default function App() {
               <motion.button
                 className="px-16 py-5 border border-stone-300 text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-stone-900 hover:text-white hover:border-stone-900 transition-all duration-500"
                 whileHover={{ scale: 1.02 }}
+                onClick={() => setShowArchive(true)}
               >
                 View Full Archive
               </motion.button>
@@ -2824,6 +3209,64 @@ export default function App() {
               </div>
             </div>
             <UniversitySection />
+          </div>
+        </section>
+
+        {/* Credentials */}
+        <section id="credentials" className="py-24 md:py-36 bg-white">
+          <div className="max-w-[1400px] mx-auto px-8">
+            <div className="flex items-end justify-between mb-16 border-b border-stone-100 pb-8">
+              <div>
+                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">Qualifications</span>
+                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">Credentials</h2>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              {/* Certificate image */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="relative shadow-xl"
+              >
+                <img
+                  src="/certificate-uts.png"
+                  alt="Bachelor of Design in Architecture — University of Technology Sydney"
+                  className="w-full h-auto"
+                />
+              </motion.div>
+
+              {/* Text side */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+              >
+                <img src="/logos/uts.png" alt="UTS" className="h-10 mb-8 object-contain object-left" />
+                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-6">Academic Background</span>
+                <h4 className="text-xl md:text-2xl font-display font-light text-stone-800 mb-6 leading-snug">
+                  A design education grounded in built environment thinking
+                </h4>
+                <p className="text-sm font-light text-stone-500 leading-relaxed mb-8">
+                  Graduated from the University of Technology Sydney with a Bachelor of Design in Architecture — a programme that developed critical thinking across spatial design, documentation, technology, and sustainable practice. The degree provided the foundation for professional work across residential, commercial, and hospitality typologies in Sydney and Southeast Asia.
+                </p>
+                <div className="space-y-4">
+                  {[
+                    { label: 'Degree', value: 'Bachelor of Design in Architecture' },
+                    { label: 'Institution', value: 'University of Technology Sydney' },
+                    { label: 'Location', value: 'Ultimo, NSW, Australia' },
+                    { label: 'Conferred', value: '7 February 2023' },
+                  ].map((item) => (
+                    <div key={item.label} className="flex items-baseline gap-4 border-b border-stone-100 pb-4">
+                      <span className="text-[9px] uppercase tracking-[0.35em] font-bold text-stone-400 w-24 flex-shrink-0">{item.label}</span>
+                      <span className="text-xs font-light text-stone-600">{item.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
 
@@ -3139,7 +3582,7 @@ export default function App() {
               <a href="#" className="hover:text-stone-300 transition-colors">Sitemap</a>
             </div>
           </div>
-          <p className="mt-4 text-center text-[8px] font-mono text-stone-400 tracking-[0.2em]">v1.0.0</p>
+          <p className="mt-4 text-center text-[8px] font-mono text-stone-400 tracking-[0.2em]">v1.1.0</p>
         </div>
       </footer>
     </div>
