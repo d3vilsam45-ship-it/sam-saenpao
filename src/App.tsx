@@ -1934,6 +1934,27 @@ const WorldMapSection = () => {
   );
 };
 
+// --- Custom Cursor ---
+const CustomCursor = () => {
+  const [pos, setPos] = useState({ x: -100, y: -100 });
+  const [hovering, setHovering] = useState(false);
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
+    const onOver = (e: MouseEvent) => setHovering(!!(e.target as HTMLElement).closest('a,button,[role="button"]'));
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseover', onOver);
+    return () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseover', onOver); };
+  }, []);
+  return (
+    <motion.div
+      className="fixed pointer-events-none z-[999] mix-blend-difference rounded-full bg-white"
+      animate={{ width: hovering ? 36 : 8, height: hovering ? 36 : 8 }}
+      transition={{ duration: 0.15 }}
+      style={{ left: pos.x, top: pos.y, transform: 'translate(-50%, -50%)' }}
+    />
+  );
+};
+
 // --- Main App ---
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -1951,6 +1972,9 @@ export default function App() {
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [inquiryForm, setInquiryForm] = useState({ name: '', email: '', message: '' });
   const [inquirySent, setInquirySent] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [toast, setToast] = useState('');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -1964,10 +1988,69 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => setShowBackToTop(window.scrollY > 600);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const copyEmail = (email: string) => {
+    navigator.clipboard.writeText(email);
+    setToast(`${email} copied!`);
+    setTimeout(() => setToast(''), 2500);
+  };
+
 
 
   return (
-    <div className="min-h-screen font-sans selection:bg-[#f3e5d0] selection:text-[#3d3a35]">
+    <div className={`min-h-screen font-sans selection:bg-[#f3e5d0] selection:text-[#3d3a35] cursor-none`} style={darkMode ? { filter: 'invert(1) hue-rotate(180deg)' } : {}}>
+
+      {/* Dark mode image fix */}
+      {darkMode && <style>{`img, video, canvas { filter: invert(1) hue-rotate(180deg); }`}</style>}
+
+      {/* Custom Cursor */}
+      <CustomCursor />
+
+      {/* Toast */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[300] bg-stone-900 text-white px-6 py-3 text-[9px] font-bold uppercase tracking-[0.3em]"
+          >
+            {toast}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Back to Top */}
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="fixed bottom-24 right-8 z-[90] w-10 h-10 bg-white border border-stone-200 flex items-center justify-center shadow-md hover:bg-stone-900 hover:text-white hover:border-stone-900 transition-all duration-300"
+          >
+            <ChevronDown className="w-4 h-4 rotate-180" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      {/* Dark Mode Toggle */}
+      <motion.button
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isLoading ? 0 : 1 }}
+        transition={{ delay: 0.5 }}
+        onClick={() => setDarkMode(d => !d)}
+        className="fixed bottom-8 left-8 z-[90] w-10 h-10 bg-stone-900 border border-stone-700 flex items-center justify-center text-white hover:bg-stone-700 transition-colors duration-300"
+        title="Toggle dark mode"
+      >
+        <span className="text-[11px]">{darkMode ? '☀️' : '🌙'}</span>
+      </motion.button>
 
       {/* Loading Screen */}
       <AnimatePresence>
@@ -2945,8 +3028,8 @@ export default function App() {
               <h4 className="text-[9px] font-bold uppercase tracking-[0.4em] text-stone-500 mb-8">Contact</h4>
               <ul className="space-y-4 text-xs font-light text-stone-400">
                 <li className="flex items-start gap-2"><MapPin className="w-3 h-3 mt-0.5 text-stone-600 flex-shrink-0" /><span>888/141 Moo 5 Ban Pet<br />Khon Kaen 40000</span></li>
-                <li className="flex items-center gap-2"><Mail className="w-3 h-3 text-stone-600" /><a href="mailto:sam.saenpao@outlook.com" className="hover:text-white transition-colors">sam.saenpao@outlook.com</a></li>
-                <li className="flex items-center gap-2"><Mail className="w-3 h-3 text-stone-600" /><a href="mailto:sam@nissa.co.th" className="hover:text-white transition-colors">sam@nissa.co.th</a></li>
+                <li className="flex items-center gap-2"><Mail className="w-3 h-3 text-stone-600" /><button onClick={() => copyEmail('sam.saenpao@outlook.com')} className="hover:text-white transition-colors text-left">sam.saenpao@outlook.com</button></li>
+                <li className="flex items-center gap-2"><Mail className="w-3 h-3 text-stone-600" /><button onClick={() => copyEmail('sam@nissa.co.th')} className="hover:text-white transition-colors text-left">sam@nissa.co.th</button></li>
                 <li className="flex items-center gap-2"><Linkedin className="w-3 h-3 text-stone-600" /><a href="https://www.linkedin.com/in/sam-saenpao-a58373250" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">sam-saenpao</a></li>
                 <li className="flex items-center gap-2"><Instagram className="w-3 h-3 text-stone-600" /><a href="https://www.instagram.com/sammy_architecture" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">@sammy_architecture</a></li>
               </ul>
