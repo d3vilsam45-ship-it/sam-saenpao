@@ -2833,6 +2833,9 @@ export default function App() {
               <a href="#" className="hover:text-stone-300 transition-colors">Sitemap</a>
             </div>
           </div>
+          <div className="mt-6 text-center text-[8px] font-mono text-stone-700 tracking-[0.2em]">
+            v1.0.0 — {new Date().toLocaleDateString('en-AU', { month: 'long', year: 'numeric' })}
+          </div>
         </div>
       </footer>
     </div>
