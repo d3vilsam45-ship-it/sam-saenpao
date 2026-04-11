@@ -2826,15 +2826,12 @@ export default function App() {
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] font-bold uppercase tracking-[0.3em] text-stone-600">
-            <p>© {new Date().getFullYear()} SAM SAENPAO. All Rights Reserved.</p>
+            <p>© {new Date().getFullYear()} SAM SAENPAO. All Rights Reserved. <span className="text-stone-700 ml-4">v1.0.0</span></p>
             <div className="flex gap-8">
               <a href="#" className="hover:text-stone-300 transition-colors">Privacy</a>
               <a href="#" className="hover:text-stone-300 transition-colors">Terms</a>
               <a href="#" className="hover:text-stone-300 transition-colors">Sitemap</a>
             </div>
-          </div>
-          <div className="mt-6 text-center text-[8px] font-mono text-stone-700 tracking-[0.2em]">
-            v1.0.0 — {new Date().toLocaleDateString('en-AU', { month: 'long', year: 'numeric' })}
           </div>
         </div>
       </footer>
