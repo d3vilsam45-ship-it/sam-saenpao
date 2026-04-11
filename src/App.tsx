@@ -3013,7 +3013,6 @@ export default function App() {
               <h4 className="text-[9px] font-bold uppercase tracking-[0.4em] text-stone-500 mb-8">Contact</h4>
               <ul className="space-y-4 text-xs font-light text-stone-400">
                 <li className="flex items-start gap-2"><MapPin className="w-3 h-3 mt-0.5 text-stone-600 flex-shrink-0" /><span>888/141 Moo 5 Ban Pet<br />Khon Kaen 40000</span></li>
-                <li className="flex items-center gap-2"><Mail className="w-3 h-3 text-stone-600" /><button onClick={() => copyEmail('sam.saenpao@outlook.com')} className="hover:text-white transition-colors text-left">sam.saenpao@outlook.com</button></li>
                 <li className="flex items-center gap-2"><Mail className="w-3 h-3 text-stone-600" /><button onClick={() => copyEmail('sam@nissa.co.th')} className="hover:text-white transition-colors text-left">sam@nissa.co.th</button></li>
                 <li className="flex items-center gap-2"><Layers className="w-3 h-3 text-stone-600" /><a href="https://www.nissa.co.th/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">nissa.co.th</a></li>
                 <li className="flex items-center gap-2"><Linkedin className="w-3 h-3 text-stone-600" /><a href="https://www.linkedin.com/in/sam-saenpao-a58373250" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">sam-saenpao</a></li>
