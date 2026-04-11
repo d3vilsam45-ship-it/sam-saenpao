@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'motion/react';
 import {
   Github,
   Mail,
@@ -1934,6 +1934,107 @@ const WorldMapSection = () => {
   );
 };
 
+// --- Featured Project Slider ---
+const FeaturedSlider = ({ projects, onOpen }: { projects: Project[]; onOpen: (p: Project) => void }) => {
+  const featured = projects.slice(0, 5);
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setActive(a => (a + 1) % featured.length), 5000);
+    return () => clearInterval(t);
+  }, [featured.length]);
+  return (
+    <section className="relative w-full overflow-hidden bg-stone-900" style={{ height: '85vh' }}>
+      <AnimatePresence mode="sync">
+        <motion.div key={active} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1.2, ease: [0.2, 0.8, 0.2, 1] }} className="absolute inset-0">
+          <img src={featured[active].image} alt={featured[active].title} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-stone-950/70 to-transparent" />
+        </motion.div>
+      </AnimatePresence>
+      <div className="absolute top-10 left-10 z-10 flex items-center gap-3">
+        <span className="w-6 h-px bg-white/30" />
+        <span className="text-[9px] uppercase tracking-[0.5em] text-white/40 font-bold">Featured Work</span>
+      </div>
+      <div className="absolute top-10 right-10 z-10 font-mono text-[10px] text-white/30 tracking-widest">
+        {String(active + 1).padStart(2, '0')} / {String(featured.length).padStart(2, '0')}
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 z-10 p-10 md:p-16">
+        <AnimatePresence mode="wait">
+          <motion.div key={active} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.65, ease: [0.2, 0.8, 0.2, 1] }} className="max-w-xl">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="px-3 py-1.5 border border-white/20 bg-white/10 backdrop-blur-sm text-[9px] font-bold uppercase tracking-[0.25em] text-white">{featured[active].category}</span>
+              <span className="text-[9px] font-mono text-white/40 uppercase tracking-widest flex items-center gap-1.5"><MapPin className="w-3 h-3" /> {featured[active].location}</span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-display font-light text-white leading-none tracking-tight mb-4">{featured[active].title}</h2>
+            <p className="hidden md:block text-sm text-white/55 font-light leading-relaxed mb-7 max-w-lg">{featured[active].description}</p>
+            <button onClick={() => onOpen(featured[active])} className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-white/60 hover:text-white transition-colors">
+              View Project <ArrowRight className="w-3 h-3" />
+            </button>
+          </motion.div>
+        </AnimatePresence>
+        <div className="flex items-center gap-4 mt-10">
+          <button onClick={() => setActive(a => (a - 1 + featured.length) % featured.length)} className="w-10 h-10 border border-white/20 flex items-center justify-center text-white/50 hover:text-white hover:border-white transition-all"><ChevronLeft className="w-4 h-4" /></button>
+          <div className="flex gap-2">
+            {featured.map((_, i) => (<button key={i} onClick={() => setActive(i)} className={`transition-all duration-500 rounded-full ${i === active ? 'w-6 h-1.5 bg-white' : 'w-1.5 h-1.5 bg-white/30 hover:bg-white/60'}`} />))}
+          </div>
+          <button onClick={() => setActive(a => (a + 1) % featured.length)} className="w-10 h-10 border border-white/20 flex items-center justify-center text-white/50 hover:text-white hover:border-white transition-all"><ChevronRight className="w-4 h-4" /></button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// --- Marquee Strip ---
+const MarqueeStrip = () => (
+  <div className="overflow-hidden py-4 bg-[#3d3a35] border-y border-stone-700">
+    <style>{`@keyframes marquee-scroll { from { transform: translateX(0) } to { transform: translateX(-50%) } }`}</style>
+    <div style={{ animation: 'marquee-scroll 28s linear infinite', display: 'inline-flex', gap: '3rem' }}>
+      {Array(16).fill(null).map((_, i) => (
+        <span key={i} className="text-[10px] uppercase tracking-[0.4em] text-stone-500 font-bold flex-shrink-0 whitespace-nowrap">
+          {['Architecture', 'Interior Design', 'Documentation', 'Spatial Design'][i % 4]}
+          <span className="text-stone-700 mx-6">·</span>
+        </span>
+      ))}
+    </div>
+  </div>
+);
+
+// --- Stats Section ---
+const StatItem = ({ value, suffix, label, delay = 0 }: { value: number; suffix: string; label: string; delay?: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true });
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const step = value / 40;
+    const t = setInterval(() => {
+      start += step;
+      if (start >= value) { setCount(value); clearInterval(t); }
+      else setCount(Math.floor(start));
+    }, 30);
+    return () => clearInterval(t);
+  }, [inView, value]);
+  return (
+    <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay }} className="text-center">
+      <div className="text-5xl md:text-7xl font-display font-light text-stone-800 mb-2">{count}{suffix}</div>
+      <div className="text-[9px] uppercase tracking-[0.3em] text-stone-400 font-bold">{label}</div>
+    </motion.div>
+  );
+};
+const StatsSection = () => (
+  <section className="py-20 bg-[#fdfaf6] border-t border-stone-100">
+    <div className="max-w-[1400px] mx-auto px-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+        <StatItem value={12} suffix="+" label="Projects Completed" delay={0} />
+        <StatItem value={3} suffix="+" label="Years Experience" delay={0.1} />
+        <StatItem value={5} suffix="" label="Cities" delay={0.2} />
+        <StatItem value={2} suffix="" label="Countries" delay={0.3} />
+      </div>
+    </div>
+  </section>
+);
+
 // --- Main App ---
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -2284,6 +2385,10 @@ export default function App() {
             <ChevronDown className="w-4 h-4" />
           </motion.div>
         </section>
+
+        {/* Featured Project Slider */}
+        <FeaturedSlider projects={PROJECTS} onOpen={(p) => setSelectedProject(p)} />
+        <MarqueeStrip />
 
         {/* Publication strip */}
         <section className="py-5 bg-[#3d3a35]">
@@ -2704,6 +2809,9 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        {/* Stats */}
+        <StatsSection />
 
         {/* University */}
         <section id="university" className="py-24 md:py-36 bg-[#f9f6f2]">
