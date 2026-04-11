@@ -1950,6 +1950,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [inquiryForm, setInquiryForm] = useState({ name: '', email: '', message: '' });
+  const [inquiryImages, setInquiryImages] = useState<File[]>([]);
   const [inquirySent, setInquirySent] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [toast, setToast] = useState('');
@@ -2107,6 +2108,30 @@ export default function App() {
                       onChange={(e) => setInquiryForm(f => ({ ...f, message: e.target.value }))}
                       className="w-full border-b border-stone-200 pb-3 text-sm text-stone-800 placeholder:text-stone-300 focus:outline-none focus:border-stone-900 bg-transparent resize-none"
                     />
+                    {/* Image upload */}
+                    <div>
+                      <label className="block text-[9px] uppercase tracking-[0.3em] text-stone-400 font-bold mb-3">Attach Images <span className="text-stone-300 normal-case tracking-normal font-normal">(optional)</span></label>
+                      <label className="flex items-center gap-3 border border-dashed border-stone-300 px-4 py-3 cursor-pointer hover:border-stone-500 transition-colors">
+                        <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-stone-400">Choose files</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          className="hidden"
+                          onChange={(e) => setInquiryImages(Array.from(e.target.files || []))}
+                        />
+                      </label>
+                      {inquiryImages.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {inquiryImages.map((file, i) => (
+                            <div key={i} className="flex items-center gap-1.5 bg-stone-100 px-3 py-1.5">
+                              <span className="text-[9px] text-stone-600 font-medium truncate max-w-[140px]">{file.name}</span>
+                              <button onClick={() => setInquiryImages(imgs => imgs.filter((_, j) => j !== i))} className="text-stone-400 hover:text-stone-900 ml-1">×</button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                     <button
                       onClick={() => setInquirySent(true)}
                       className="w-full bg-stone-900 text-white py-4 text-[9px] font-bold uppercase tracking-[0.4em] hover:bg-stone-700 transition-colors duration-300 mt-2"
