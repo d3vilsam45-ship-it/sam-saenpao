@@ -2894,11 +2894,11 @@ export default function App() {
                       </div>
                       <div className="col-span-1 flex items-start pt-0.5">
                         {exp.logo ? (
-                          <div className="w-8 h-8 rounded bg-white flex items-center justify-center overflow-hidden flex-shrink-0">
+                          <div className="w-8 h-8 rounded bg-white flex items-start justify-center overflow-hidden flex-shrink-0 p-0.5">
                             <img
                               src={exp.logo}
                               alt=""
-                              className="w-6 h-6 object-contain"
+                              className="w-full h-full object-contain object-top"
                               onError={(e) => {
                                 const el = e.currentTarget;
                                 el.parentElement!.style.display = 'none';
