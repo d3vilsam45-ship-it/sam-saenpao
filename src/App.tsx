@@ -1934,27 +1934,6 @@ const WorldMapSection = () => {
   );
 };
 
-// --- Custom Cursor ---
-const CustomCursor = () => {
-  const [pos, setPos] = useState({ x: -100, y: -100 });
-  const [hovering, setHovering] = useState(false);
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
-    const onOver = (e: MouseEvent) => setHovering(!!(e.target as HTMLElement).closest('a,button,[role="button"]'));
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseover', onOver);
-    return () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseover', onOver); };
-  }, []);
-  return (
-    <motion.div
-      className="fixed pointer-events-none z-[999] mix-blend-difference rounded-full bg-white"
-      animate={{ width: hovering ? 36 : 8, height: hovering ? 36 : 8 }}
-      transition={{ duration: 0.15 }}
-      style={{ left: pos.x, top: pos.y, transform: 'translate(-50%, -50%)' }}
-    />
-  );
-};
-
 // --- Main App ---
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -2002,10 +1981,7 @@ export default function App() {
 
 
   return (
-    <div className="min-h-screen font-sans selection:bg-[#f3e5d0] selection:text-[#3d3a35] cursor-none">
-
-      {/* Custom Cursor */}
-      <CustomCursor />
+    <div className="min-h-screen font-sans selection:bg-[#f3e5d0] selection:text-[#3d3a35]">
 
       {/* Toast */}
       <AnimatePresence>
