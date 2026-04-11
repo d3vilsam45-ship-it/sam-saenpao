@@ -1160,65 +1160,40 @@ const ProjectItem = ({ project, index, onOpen }: { project: Project; index: numb
     className="group cursor-pointer flex flex-col"
     onClick={onOpen}
   >
-    {/* Image */}
-    <div className="aspect-[3/2] overflow-hidden bg-stone-100 soft-shadow relative mb-0 rounded-xl">
+    {/* Image with hover reveal */}
+    <div className="aspect-[3/2] overflow-hidden bg-stone-100 soft-shadow relative rounded-xl">
       <img
         src={project.image}
         alt={project.title}
         className="w-full h-full object-cover transition-transform duration-[3s] ease-out group-hover:scale-105"
         referrerPolicy="no-referrer"
       />
-      <div className="absolute top-5 left-5 flex gap-2">
+      {/* Category badge — always visible */}
+      <div className="absolute top-5 left-5">
         <span className="px-2.5 py-1 bg-white/90 backdrop-blur-sm text-[9px] font-bold uppercase tracking-[0.2em] text-stone-900">
           {project.category}
         </span>
       </div>
-      {/* Hover overlay */}
-      <div className="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/20 transition-colors duration-700" />
+      {/* Dark gradient — fades in on hover */}
+      <div className="absolute inset-0 bg-gradient-to-t from-stone-900/85 via-stone-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* Slide-up content reveal */}
+      <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+        <div className="flex items-center gap-1.5 mb-2 text-[9px] font-mono text-white/60 uppercase tracking-widest">
+          <MapPin className="w-3 h-3" /> {project.location} · {project.year}
+        </div>
+        <h3 className="text-xl md:text-2xl font-display font-light text-white leading-tight mb-3">
+          {project.title}
+        </h3>
+        <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.3em] text-white/70">
+          View Project <ArrowRight className="w-3 h-3" />
+        </div>
+      </div>
     </div>
 
-    {/* Content */}
-    <div className="flex-1 pt-7 pb-2 border-t border-stone-200 mt-0">
-      <div className="flex items-center justify-between mb-3">
-        <span className="text-[9px] font-mono text-stone-300 uppercase tracking-widest flex items-center gap-1.5">
-          <MapPin className="w-3 h-3" /> {project.location}
-        </span>
-        <span className="text-[9px] font-mono text-stone-300 uppercase tracking-widest">{project.year}</span>
-      </div>
-
-      <h3 className="text-2xl md:text-3xl font-display font-light mb-4 tracking-tight text-stone-800 group-hover:text-stone-500 transition-colors leading-tight">
-        {project.title}
-      </h3>
-
-      <p className="text-sm text-stone-500 font-light leading-relaxed mb-6">
-        {project.description}
-      </p>
-
-      {/* Metadata strip */}
-      <div className="flex flex-wrap gap-x-6 gap-y-3 pt-5 border-t border-stone-100">
-        <div>
-          <span className="text-[9px] uppercase tracking-widest text-stone-300 font-bold block mb-1">Role</span>
-          <span className="text-xs text-stone-600 font-medium">{project.role}</span>
-        </div>
-        {project.area && (
-          <div>
-            <span className="text-[9px] uppercase tracking-widest text-stone-300 font-bold block mb-1">Area</span>
-            <span className="text-xs text-stone-600 font-medium">{project.area}</span>
-          </div>
-        )}
-        {project.client && (
-          <div>
-            <span className="text-[9px] uppercase tracking-widest text-stone-300 font-bold block mb-1">Client</span>
-            <span className="text-xs text-stone-600 font-medium">{project.client}</span>
-          </div>
-        )}
-      </div>
-
-      <div className="flex items-center gap-2 mt-6 text-[10px] font-bold uppercase tracking-[0.3em] text-stone-300 group-hover:text-stone-900 transition-colors">
-        <span>{project.readTime}</span>
-        <span>·</span>
-        <span className="flex items-center gap-1.5">View Project <ArrowRight className="w-3 h-3" /></span>
-      </div>
+    {/* Below card — minimal */}
+    <div className="pt-5 pb-2 border-t border-stone-200 mt-0 flex items-center justify-between">
+      <span className="text-[9px] font-mono text-stone-400 uppercase tracking-widest">{project.role}</span>
+      <span className="text-[9px] font-mono text-stone-300 uppercase tracking-widest">{project.year}</span>
     </div>
   </motion.div>
 );
@@ -2444,23 +2419,28 @@ export default function App() {
         {/* Projects — Editorial Features */}
         <section id="projects" className="py-24 md:py-36 bg-[#f9f6f2]">
           <div className="max-w-[1400px] mx-auto px-8">
-            <div className="flex items-end justify-between mb-20 border-b border-stone-200 pb-8">
+            <div className="flex items-end justify-between mb-8 border-b border-stone-200 pb-8">
               <div>
                 <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">Featured Work</span>
                 <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">Complete</h2>
               </div>
-              <div className="hidden md:flex gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400">
-                {['All', 'Interior', 'Retail', 'Food & Beverage', 'Commercial'].map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveFilter(cat)}
-                    className={`transition-colors ${activeFilter === cat ? 'text-stone-900 border-b border-stone-900 pb-0.5' : 'hover:text-stone-900'}`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
             </div>
+          </div>
+          {/* Sticky filter bar */}
+          <div className="sticky top-14 z-40 bg-[#f9f6f2]/95 backdrop-blur-sm border-b border-stone-200">
+            <div className="max-w-[1400px] mx-auto px-8 py-4 flex gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400">
+              {['All', 'Interior', 'Retail', 'Food & Beverage', 'Commercial'].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveFilter(cat)}
+                  className={`transition-colors pb-0.5 ${activeFilter === cat ? 'text-stone-900 border-b border-stone-900' : 'hover:text-stone-900'}`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="max-w-[1400px] mx-auto px-8 mt-16">
             {(() => {
               const filtered = PROJECTS.filter((p) => activeFilter === 'All' || p.category === activeFilter);
               const [hero, ...rest] = filtered;
