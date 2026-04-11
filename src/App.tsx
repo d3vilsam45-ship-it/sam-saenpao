@@ -1088,7 +1088,7 @@ const ProjectHeroCard = ({ project, onOpen }: { project: Project; onOpen: () => 
     className="group cursor-pointer"
     onClick={onOpen}
   >
-    <div className="relative overflow-hidden bg-stone-900 soft-shadow" style={{ aspectRatio: '16/7' }}>
+    <div className="relative overflow-hidden bg-stone-900 soft-shadow rounded-xl" style={{ aspectRatio: '16/7' }}>
       <img
         src={project.image}
         alt={project.title}
@@ -1161,7 +1161,7 @@ const ProjectItem = ({ project, index, onOpen }: { project: Project; index: numb
     onClick={onOpen}
   >
     {/* Image */}
-    <div className="aspect-[3/2] overflow-hidden bg-stone-100 soft-shadow relative mb-0">
+    <div className="aspect-[3/2] overflow-hidden bg-stone-100 soft-shadow relative mb-0 rounded-xl">
       <img
         src={project.image}
         alt={project.title}
@@ -1232,7 +1232,7 @@ const MakerCard = ({ maker, delay = 0 }: { maker: Maker; delay?: number }) => (
     transition={{ duration: 1, delay }}
     className="group cursor-pointer"
   >
-    <div className="aspect-[4/3] overflow-hidden bg-stone-100 mb-6 soft-shadow">
+    <div className="aspect-[4/3] overflow-hidden bg-stone-100 mb-6 soft-shadow rounded-xl">
       <img
         src={maker.image}
         alt={maker.name}
@@ -1373,7 +1373,7 @@ const UniversitySection = () => {
             </div>
 
             {/* Featured image */}
-            <div className="relative overflow-hidden bg-stone-50 border border-stone-100 mb-4" style={{ aspectRatio: '4/3' }}>
+            <div className="relative overflow-hidden bg-stone-50 border border-stone-100 mb-4 rounded-xl" style={{ aspectRatio: '4/3' }}>
               <AnimatePresence mode="wait">
                 <motion.img
                   key={activePage}
