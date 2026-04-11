@@ -838,6 +838,14 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Available for work badge */}
+            <div className="hidden lg:flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <span className={`text-[9px] font-bold uppercase tracking-[0.2em] ${isScrolled ? 'text-green-600' : 'text-green-400'}`}>Available</span>
+            </div>
             <button className={`hidden lg:flex p-2 transition-colors ${isScrolled ? 'text-stone-400 hover:text-stone-900' : 'text-white/70 hover:text-white'}`}>
               <Search className="w-4 h-4" />
             </button>
@@ -1939,6 +1947,10 @@ export default function App() {
   const [articleIndex, setArticleIndex] = useState(0);
   const [modelSlide, setModelSlide] = useState(0);
   const [articleGallery, setArticleGallery] = useState<{ images: string[]; index: number } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [inquiryOpen, setInquiryOpen] = useState(false);
+  const [inquiryForm, setInquiryForm] = useState({ name: '', email: '', message: '' });
+  const [inquirySent, setInquirySent] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -1947,10 +1959,125 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2400);
+    return () => clearTimeout(timer);
+  }, []);
+
 
 
   return (
     <div className="min-h-screen font-sans selection:bg-[#f3e5d0] selection:text-[#3d3a35]">
+
+      {/* Loading Screen */}
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.9, ease: 'easeInOut' }}
+            className="fixed inset-0 z-[300] bg-[#1a1917] flex items-center justify-center"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
+              className="text-center"
+            >
+              <p className="text-[9px] uppercase tracking-[0.5em] text-white/40 font-bold mb-5">Architecture & Design</p>
+              <h1 className="text-4xl md:text-6xl font-display font-light text-white tracking-tight">Sam Saenpao</h1>
+              <motion.div
+                className="mt-8 h-px bg-white/20 mx-auto"
+                initial={{ width: 0 }}
+                animate={{ width: 64 }}
+                transition={{ duration: 1.6, ease: 'easeInOut', delay: 0.3 }}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Floating Inquiry Button */}
+      <motion.button
+        onClick={() => setInquiryOpen(true)}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 20 : 0 }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+        className="fixed bottom-8 right-8 z-[90] flex items-center gap-3 bg-stone-900 text-white px-6 py-3.5 text-[9px] font-bold uppercase tracking-[0.3em] shadow-xl hover:bg-stone-700 transition-colors duration-300"
+      >
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+        </span>
+        Start a Project
+      </motion.button>
+
+      {/* Inquiry Modal */}
+      <AnimatePresence>
+        {inquiryOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] bg-black/60 backdrop-blur-sm flex items-center justify-center px-4"
+            onClick={() => setInquiryOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
+              className="bg-white w-full max-w-lg p-10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button onClick={() => setInquiryOpen(false)} className="absolute top-5 right-5 text-stone-400 hover:text-stone-900 transition-colors">
+                <X className="w-4 h-4" />
+              </button>
+              {inquirySent ? (
+                <div className="text-center py-8">
+                  <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold mb-3">Message Sent</p>
+                  <h3 className="text-2xl font-display font-light text-stone-800">Thank you, I'll be in touch.</h3>
+                </div>
+              ) : (
+                <>
+                  <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold mb-2">New Enquiry</p>
+                  <h3 className="text-2xl font-display font-light text-stone-800 mb-8">Start a Project</h3>
+                  <div className="space-y-5">
+                    <input
+                      type="text"
+                      placeholder="Your name"
+                      value={inquiryForm.name}
+                      onChange={(e) => setInquiryForm(f => ({ ...f, name: e.target.value }))}
+                      className="w-full border-b border-stone-200 pb-3 text-sm text-stone-800 placeholder:text-stone-300 focus:outline-none focus:border-stone-900 bg-transparent"
+                    />
+                    <input
+                      type="email"
+                      placeholder="Your email"
+                      value={inquiryForm.email}
+                      onChange={(e) => setInquiryForm(f => ({ ...f, email: e.target.value }))}
+                      className="w-full border-b border-stone-200 pb-3 text-sm text-stone-800 placeholder:text-stone-300 focus:outline-none focus:border-stone-900 bg-transparent"
+                    />
+                    <textarea
+                      placeholder="Tell me about your project"
+                      rows={4}
+                      value={inquiryForm.message}
+                      onChange={(e) => setInquiryForm(f => ({ ...f, message: e.target.value }))}
+                      className="w-full border-b border-stone-200 pb-3 text-sm text-stone-800 placeholder:text-stone-300 focus:outline-none focus:border-stone-900 bg-transparent resize-none"
+                    />
+                    <button
+                      onClick={() => setInquirySent(true)}
+                      className="w-full bg-stone-900 text-white py-4 text-[9px] font-bold uppercase tracking-[0.4em] hover:bg-stone-700 transition-colors duration-300 mt-2"
+                    >
+                      Send Message
+                    </button>
+                  </div>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {selectedProject && (
           <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
@@ -2833,7 +2960,7 @@ export default function App() {
               <a href="#" className="hover:text-stone-300 transition-colors">Sitemap</a>
             </div>
           </div>
-          <p className="mt-4 text-center text-[8px] font-mono text-stone-700 tracking-[0.2em]">v1.0.0</p>
+          <p className="mt-4 text-center text-[8px] font-mono text-stone-400 tracking-[0.2em]">v1.0.0</p>
         </div>
       </footer>
     </div>
