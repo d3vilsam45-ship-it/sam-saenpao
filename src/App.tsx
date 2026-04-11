@@ -1972,7 +1972,6 @@ export default function App() {
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [inquiryForm, setInquiryForm] = useState({ name: '', email: '', message: '' });
   const [inquirySent, setInquirySent] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [toast, setToast] = useState('');
 
@@ -2003,10 +2002,7 @@ export default function App() {
 
 
   return (
-    <div className={`min-h-screen font-sans selection:bg-[#f3e5d0] selection:text-[#3d3a35] cursor-none`} style={darkMode ? { filter: 'invert(1) hue-rotate(180deg)' } : {}}>
-
-      {/* Dark mode image fix */}
-      {darkMode && <style>{`img, video, canvas { filter: invert(1) hue-rotate(180deg); }`}</style>}
+    <div className="min-h-screen font-sans selection:bg-[#f3e5d0] selection:text-[#3d3a35] cursor-none">
 
       {/* Custom Cursor */}
       <CustomCursor />
@@ -2039,18 +2035,6 @@ export default function App() {
           </motion.button>
         )}
       </AnimatePresence>
-
-      {/* Dark Mode Toggle */}
-      <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ delay: 0.5 }}
-        onClick={() => setDarkMode(d => !d)}
-        className="fixed bottom-8 left-8 z-[90] w-10 h-10 bg-stone-900 border border-stone-700 flex items-center justify-center text-white hover:bg-stone-700 transition-colors duration-300"
-        title="Toggle dark mode"
-      >
-        <span className="text-[11px]">{darkMode ? '☀️' : '🌙'}</span>
-      </motion.button>
 
       {/* Loading Screen */}
       <AnimatePresence>
