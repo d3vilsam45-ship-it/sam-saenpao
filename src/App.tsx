@@ -2819,6 +2819,7 @@ export default function App() {
               <ul className="space-y-4 text-xs font-light text-stone-400">
                 <li className="flex items-start gap-2"><MapPin className="w-3 h-3 mt-0.5 text-stone-600 flex-shrink-0" /><span>888/141 Moo 5 Ban Pet<br />Khon Kaen 40000</span></li>
                 <li className="flex items-center gap-2"><Mail className="w-3 h-3 text-stone-600" /><a href="mailto:sam.saenpao@outlook.com" className="hover:text-white transition-colors">sam.saenpao@outlook.com</a></li>
+                <li className="flex items-center gap-2"><Mail className="w-3 h-3 text-stone-600" /><a href="mailto:sam@nissa.co.th" className="hover:text-white transition-colors">sam@nissa.co.th</a></li>
                 <li className="flex items-center gap-2"><Linkedin className="w-3 h-3 text-stone-600" /><a href="https://www.linkedin.com/in/sam-saenpao-a58373250" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">sam-saenpao</a></li>
                 <li className="flex items-center gap-2"><Instagram className="w-3 h-3 text-stone-600" /><a href="https://www.instagram.com/sammy_architecture" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">@sammy_architecture</a></li>
               </ul>
