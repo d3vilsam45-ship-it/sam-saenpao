@@ -2025,11 +2025,12 @@ const StatItem = ({ value, suffix, label, delay = 0 }: { value: number; suffix: 
 const StatsSection = () => (
   <section className="py-20 bg-[#fdfaf6] border-t border-stone-100">
     <div className="max-w-[1400px] mx-auto px-8">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
-        <StatItem value={12} suffix="+" label="Projects Completed" delay={0} />
-        <StatItem value={3} suffix="+" label="Years Experience" delay={0.1} />
-        <StatItem value={5} suffix="" label="Cities" delay={0.2} />
-        <StatItem value={2} suffix="" label="Countries" delay={0.3} />
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-12">
+        <StatItem value={PROJECTS.length} suffix="" label="Involving Projects" delay={0} />
+        <StatItem value={12} suffix="+" label="Projects Completed" delay={0.1} />
+        <StatItem value={3} suffix="+" label="Years Experience" delay={0.2} />
+        <StatItem value={5} suffix="" label="Cities" delay={0.3} />
+        <StatItem value={2} suffix="" label="Countries" delay={0.4} />
       </div>
     </div>
   </section>
