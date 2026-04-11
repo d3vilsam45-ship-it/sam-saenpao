@@ -2894,16 +2894,18 @@ export default function App() {
                       </div>
                       <div className="col-span-1 flex items-start pt-0.5">
                         {exp.logo ? (
-                          <img
-                            src={exp.logo}
-                            alt=""
-                            className="w-8 h-8 object-contain rounded"
-                            onError={(e) => {
-                              const el = e.currentTarget;
-                              el.style.display = 'none';
-                              if (el.nextElementSibling) (el.nextElementSibling as HTMLElement).style.display = 'flex';
-                            }}
-                          />
+                          <div className="w-8 h-8 rounded bg-white flex items-center justify-center overflow-hidden flex-shrink-0">
+                            <img
+                              src={exp.logo}
+                              alt=""
+                              className="w-6 h-6 object-contain"
+                              onError={(e) => {
+                                const el = e.currentTarget;
+                                el.parentElement!.style.display = 'none';
+                                if (el.parentElement?.nextElementSibling) (el.parentElement.nextElementSibling as HTMLElement).style.display = 'flex';
+                              }}
+                            />
+                          </div>
                         ) : null}
                         <div
                           className="w-8 h-8 rounded bg-stone-700 flex items-center justify-center text-[9px] font-bold text-stone-400 uppercase tracking-wide"
