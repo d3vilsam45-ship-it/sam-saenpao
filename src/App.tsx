@@ -812,7 +812,7 @@ const Navbar = () => {
       <div className="max-w-[1400px] mx-auto px-8">
         {!isScrolled && (
           <div className="flex justify-center mb-4">
-            <span className="text-[9px] uppercase tracking-[0.5em] text-white/60 font-bold">Architecture & Design — Sydney, Australia</span>
+            <span className="text-[9px] uppercase tracking-[0.5em] text-white/60 font-bold">Architecture & Design — Sydney, Australia & Khon Kaen, Thailand</span>
           </div>
         )}
         <div className="flex items-center justify-between">
@@ -2620,8 +2620,9 @@ export default function App() {
 
                 <div className="mt-12">
                   <motion.a
-                    href="/resume.pdf"
-                    download
+                    href="/cv.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-4 px-10 py-5 bg-[#fdfaf6] text-[#3d3a35] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-stone-200 transition-colors"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
