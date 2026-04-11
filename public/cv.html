@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sam Saenpao — CV</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #fdfaf6;
+      --stone-900: #1c1917;
+      --stone-700: #44403c;
+      --stone-500: #78716c;
+      --stone-400: #a8a29e;
+      --stone-300: #d6d3d1;
+      --stone-200: #e7e5e4;
+      --stone-100: #f5f4f2;
+      --accent: #3d3a35;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--stone-900);
+      font-size: 13px;
+      line-height: 1.6;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 60px 80px;
+    }
+
+    /* Print button - hidden on print */
+    .print-bar {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+    }
+    .print-btn {
+      background: var(--stone-900);
+      color: var(--cream);
+      border: none;
+      padding: 12px 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .print-btn:hover { background: var(--stone-700); }
+
+    /* Header */
+    .header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--stone-300);
+      margin-bottom: 40px;
+    }
+    .name {
+      font-family: 'EB Garamond', serif;
+      font-size: 42px;
+      font-weight: 400;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      color: var(--stone-900);
+    }
+    .title-tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--stone-500);
+      margin-top: 8px;
+    }
+    .contact-info {
+      text-align: right;
+      font-size: 11px;
+      color: var(--stone-500);
+      line-height: 2;
+    }
+    .contact-info a {
+      color: var(--stone-500);
+      text-decoration: none;
+    }
+
+    /* Two-column layout */
+    .body-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 48px;
+    }
+
+    /* Section label */
+    .section-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--stone-400);
+      border-top: 1px solid var(--stone-300);
+      padding-top: 14px;
+      margin-bottom: 20px;
+      margin-top: 36px;
+    }
+    .section-label:first-child { margin-top: 0; }
+
+    /* Summary */
+    .summary {
+      font-size: 13px;
+      color: var(--stone-700);
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    /* Experience */
+    .exp-item {
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+    .exp-item:last-child { margin-bottom: 0; }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .exp-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--stone-900);
+    }
+    .exp-year {
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--stone-400);
+      font-family: 'Inter', monospace;
+      white-space: nowrap;
+    }
+    .exp-company {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--stone-500);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .exp-desc {
+      font-size: 12px;
+      color: var(--stone-500);
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
+    /* Projects */
+    .project-item {
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--stone-200);
+    }
+    .project-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .project-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--stone-900);
+    }
+    .project-year {
+      font-size: 10px;
+      color: var(--stone-400);
+    }
+    .project-meta {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--stone-400);
+      margin: 3px 0;
+    }
+    .project-desc {
+      font-size: 11px;
+      color: var(--stone-500);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* Sidebar */
+    .sidebar .section-label { margin-top: 32px; }
+    .sidebar .section-label:first-child { margin-top: 0; }
+
+    /* Skills */
+    .skill-group { margin-bottom: 16px; }
+    .skill-group:last-child { margin-bottom: 0; }
+    .skill-category {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--stone-500);
+      margin-bottom: 6px;
+    }
+    .skill-list {
+      list-style: none;
+    }
+    .skill-list li {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--stone-700);
+      padding: 3px 0;
+      border-bottom: 1px solid var(--stone-200);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .skill-list li::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--stone-400);
+      flex-shrink: 0;
+    }
+
+    /* Info block (sidebar) */
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--stone-200);
+      font-size: 11px;
+    }
+    .info-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone-400);
+    }
+    .info-value {
+      color: var(--stone-700);
+      font-weight: 300;
+      text-align: right;
+    }
+
+    /* Languages */
+    .lang-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--stone-200);
+      font-size: 11px;
+    }
+    .lang-name { color: var(--stone-700); font-weight: 400; }
+    .lang-level { color: var(--stone-400); font-weight: 300; font-style: italic; }
+
+    /* Footer */
+    .footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--stone-300);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      color: var(--stone-400);
+      font-style: italic;
+    }
+    .footer-url {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--stone-400);
+      text-transform: uppercase;
+    }
+
+    @media print {
+      .print-bar { display: none; }
+      body { background: white; }
+      .page { padding: 40px 48px 60px; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="print-bar">
+  <button class="print-btn" onclick="window.print()">Save as PDF</button>
+</div>
+
+<div class="page">
+
+  <!-- Header -->
+  <header class="header">
+    <div>
+      <h1 class="name">Sam Saenpao</h1>
+      <p class="title-tag">Architectural Drafter &amp; Interior Designer</p>
+    </div>
+    <div class="contact-info">
+      <div>Sydney, NSW &amp; Khon Kaen, Thailand</div>
+      <div><a href="mailto:hello@samsaenpao.com">hello@samsaenpao.com</a></div>
+      <div><a href="https://samsaenpao.com" target="_blank">samsaenpao.com</a></div>
+      <div><a href="https://linkedin.com/in/samsaenpao" target="_blank">linkedin.com/in/samsaenpao</a></div>
+    </div>
+  </header>
+
+  <!-- Body -->
+  <div class="body-grid">
+
+    <!-- Left: Main content -->
+    <main>
+
+      <!-- Summary -->
+      <div class="section-label">Profile</div>
+      <p class="summary">
+        Architectural drafter and interior designer with 3+ years of professional experience
+        across commercial, retail, hospitality, and residential projects in Sydney.
+        Educated at the University of Technology Sydney, with deep expertise in spatial design,
+        construction documentation, and 3D visualisation. Fluent in bridging conceptual intent
+        with construction-ready drawings, and experienced working across multidisciplinary
+        design teams on projects ranging from boutique fitouts to large-scale commercial developments.
+      </p>
+
+      <!-- Experience -->
+      <div class="section-label">Experience</div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Architectural Drafter</span>
+          <span class="exp-year">2025 — Present</span>
+        </div>
+        <div class="exp-company">Nissa Group · Khon Kaen, Thailand</div>
+        <p class="exp-desc">
+          Senior role overseeing architectural and construction documentation while managing
+          project coordination and team workflows across a range of design projects. Responsible
+          for production drawings, design development, and client coordination.
+        </p>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Architectural Drafter</span>
+          <span class="exp-year">Feb 2023 — Present</span>
+        </div>
+        <div class="exp-company">M.A.R.S (Marcellino Sain Architects) · Sydney, Australia</div>
+        <p class="exp-desc">
+          Full-time role producing architectural and construction drawings across commercial,
+          retail, and hospitality projects. Responsibilities span design development, technical
+          documentation, construction drawing packages, consultant coordination, and 3D modelling
+          in SketchUp and Rhino. Projects include fitouts from 50m² to 6,500m².
+        </p>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Architectural Intern</span>
+          <span class="exp-year">Jan 2023 — Feb 2023</span>
+        </div>
+        <div class="exp-company">M.A.R.S (Marcellino Sain Architects) · Sydney, Australia</div>
+        <p class="exp-desc">
+          Introductory placement developing foundational skills in architectural drawings,
+          SketchUp modelling, and studio workflow.
+        </p>
+      </div>
+
+      <!-- Education -->
+      <div class="section-label">Education</div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Bachelor of Design in Architecture</span>
+          <span class="exp-year">Feb 2020 — Dec 2022</span>
+        </div>
+        <div class="exp-company">University of Technology Sydney, Australia</div>
+        <p class="exp-desc">
+          Studied architecture with a focus on spatial design, technical documentation,
+          and the relationship between built form and human experience.
+        </p>
+      </div>
+
+      <!-- Selected Projects -->
+      <div class="section-label">Selected Projects</div>
+
+      <div class="project-item">
+        <div class="project-header">
+          <span class="project-title">BYD Service Centre</span>
+          <span class="project-year">2023</span>
+        </div>
+        <div class="project-meta">Commercial · Mascot, NSW · 6,500 sqm · Client: BYD Australia</div>
+        <p class="project-desc">Large-scale commercial fitout balancing operational demands of an automotive service environment with a clean, brand-forward spatial identity.</p>
+      </div>
+
+      <div class="project-item">
+        <div class="project-header">
+          <span class="project-title">Lylo Brisbane — Rooftop Bar</span>
+          <span class="project-year">2023</span>
+        </div>
+        <div class="project-meta">Food &amp; Beverage · Fortitude Valley, QLD · 250 sqm · Client: EVT Limited</div>
+        <p class="project-desc">Sky-level rooftop bar layering casual hospitality with sweeping city views, balancing bold social moments with quieter retreat zones.</p>
+      </div>
+
+      <div class="project-item">
+        <div class="project-header">
+          <span class="project-title">Something by Grace II</span>
+          <span class="project-year">2023</span>
+        </div>
+        <div class="project-meta">Interior · Botany Bay, NSW · 100 sqm · Client: Something by Grace &amp; Co</div>
+        <p class="project-desc">Luxury beauty salon defined by warmth and tactility — fluted panels, warm brass, and soft terrazzo creating an atmosphere of calm indulgence.</p>
+      </div>
+
+      <div class="project-item">
+        <div class="project-header">
+          <span class="project-title">Betta Home Living</span>
+          <span class="project-year">2023</span>
+        </div>
+        <div class="project-meta">Retail · Seaford, SA · 1,000 sqm · Client: Betta Home Living</div>
+        <p class="project-desc">Large-format retail environment prioritising intuitive customer flow and aspirational product presentation across a 1,000m² showroom.</p>
+      </div>
+
+      <div class="project-item">
+        <div class="project-header">
+          <span class="project-title">Field to Fork</span>
+          <span class="project-year">2023</span>
+        </div>
+        <div class="project-meta">Food &amp; Beverage · Paddington, NSW · 250 sqm · Client: Alamour</div>
+        <p class="project-desc">Butcher shop and commercial kitchen where provenance and craft are expressed through material honesty — raw timber, honed stone, exposed refrigeration.</p>
+      </div>
+
+      <div class="project-item">
+        <div class="project-header">
+          <span class="project-title">KII International College</span>
+          <span class="project-year">2023</span>
+        </div>
+        <div class="project-meta">Commercial · Surry Hills, NSW · 350 sqm · Client: Kingsford International Institute</div>
+        <p class="project-desc">Educational environment designed to inspire focus, collaboration, and a sense of place for its international student community.</p>
+      </div>
+
+      <div class="project-item">
+        <div class="project-header">
+          <span class="project-title">68 Harbour Street — Furama Hotel</span>
+          <span class="project-year">2025 — In Progress</span>
+        </div>
+        <div class="project-meta">Hospitality · Darling Harbour, NSW · Current Project</div>
+        <p class="project-desc">Ongoing transformation of the lobby and canteen at Furama Darling Harbour — reimagining arrival as a warm, layered welcome through soft materiality and considered lighting.</p>
+      </div>
+
+    </main>
+
+    <!-- Right: Sidebar -->
+    <aside class="sidebar">
+
+      <!-- Key info -->
+      <div class="section-label">Details</div>
+      <div class="info-row">
+        <span class="info-label">Based</span>
+        <span class="info-value">Sydney &amp; Thailand</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Nationality</span>
+        <span class="info-value">Thai</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Availability</span>
+        <span class="info-value">Open to roles</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Website</span>
+        <span class="info-value">samsaenpao.com</span>
+      </div>
+
+      <!-- Software -->
+      <div class="section-label">Software</div>
+      <div class="skill-group">
+        <div class="skill-category">Design &amp; Modelling</div>
+        <ul class="skill-list">
+          <li>AutoCAD</li>
+          <li>SketchUp</li>
+          <li>Rhinoceros 3D</li>
+          <li>Revit</li>
+        </ul>
+      </div>
+      <div class="skill-group" style="margin-top:14px">
+        <div class="skill-category">Visualisation</div>
+        <ul class="skill-list">
+          <li>Enscape</li>
+          <li>Twinmotion</li>
+          <li>D5 Render</li>
+          <li>Lumion</li>
+        </ul>
+      </div>
+      <div class="skill-group" style="margin-top:14px">
+        <div class="skill-category">Adobe Suite</div>
+        <ul class="skill-list">
+          <li>Photoshop</li>
+          <li>InDesign</li>
+          <li>Illustrator</li>
+        </ul>
+      </div>
+
+      <!-- Skills -->
+      <div class="section-label">Expertise</div>
+      <ul class="skill-list">
+        <li>Architectural Documentation</li>
+        <li>Construction Drawings</li>
+        <li>3D Visualisation</li>
+        <li>Interior Design</li>
+        <li>Spatial Planning</li>
+        <li>Material Selection</li>
+        <li>BIM Coordination</li>
+        <li>Client Presentations</li>
+        <li>Design Development</li>
+        <li>Consultant Coordination</li>
+      </ul>
+
+      <!-- Project types -->
+      <div class="section-label">Project Types</div>
+      <ul class="skill-list">
+        <li>Commercial Fitouts</li>
+        <li>Retail &amp; Showrooms</li>
+        <li>Hospitality</li>
+        <li>Residential</li>
+        <li>Mixed-Use</li>
+      </ul>
+
+      <!-- Languages -->
+      <div class="section-label">Languages</div>
+      <div class="lang-item">
+        <span class="lang-name">English</span>
+        <span class="lang-level">Fluent</span>
+      </div>
+      <div class="lang-item">
+        <span class="lang-name">Thai</span>
+        <span class="lang-level">Native</span>
+      </div>
+
+    </aside>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-name">Sam Saenpao — Curriculum Vitae</span>
+    <span class="footer-url">samsaenpao.com</span>
+  </footer>
+
+</div>
+</body>
+</html>
