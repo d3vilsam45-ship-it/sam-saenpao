@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    /* Warm, early morning light base */
+    @apply bg-[#fdfaf6] text-[#3d3a35] selection:bg-[#f3e5d0] selection:text-[#3d3a35];
+  }
+}
+
+.organic-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Atmospheric haze effect */
+.haze-overlay {
+  background: linear-gradient(to bottom, rgba(253, 250, 246, 0) 0%, rgba(253, 250, 246, 0.4) 100%);
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+}
+
+/* Volumetric light simulation */
+.volumetric-light {
+  background: radial-gradient(circle at 100% 0%, rgba(255, 245, 225, 0.4) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Custom scrollbar for a cleaner look */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #e9e2d8;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #dcd3c5;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-on-scroll.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Soft shadows for that golden hour feel */
+.soft-shadow {
+  box-shadow: 0 20px 50px -10px rgba(61, 58, 53, 0.08);
+}
+
+.golden-glow {
+  text-shadow: 0 0 20px rgba(255, 230, 180, 0.3);
+}
