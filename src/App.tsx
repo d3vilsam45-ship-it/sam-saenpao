@@ -694,6 +694,62 @@ function ProjectArchiveModal({ onClose }: { onClose: () => void }) {
 
 const ARTICLES: Article[] = [
   {
+    id: 12,
+    title: "613–615 Pittwater Road — Dee Why",
+    excerpt: "The largest project in the studio — a large-scale residential development on Pittwater Road, Dee Why. Spanning over 1,688 hours of design work, the project encompasses multiple building options, unit typologies, and detailed documentation across a significant mixed-use site on Sydney's Northern Beaches.",
+    image: "/photos/pittwater-rd-dee-why/building-a-option-1.jpg",
+    category: "Current Project",
+    date: "2023–2024",
+    readTime: "8 min read",
+    featured: true,
+    gallery: [
+      "/photos/pittwater-rd-dee-why/building-a-option-1.jpg",
+      "/photos/pittwater-rd-dee-why/building-a-option-2.jpg",
+      "/photos/pittwater-rd-dee-why/building-a-option-3.jpg",
+      "/photos/pittwater-rd-dee-why/building-a-option-4.jpg",
+      "/photos/pittwater-rd-dee-why/unit-ag04-view-01.jpg",
+      "/photos/pittwater-rd-dee-why/unit-ag04-view-02.jpg",
+      "/photos/pittwater-rd-dee-why/unit-ag04-view-03.jpg",
+      "/photos/pittwater-rd-dee-why/unit-ag04-view-04.jpg",
+      "/photos/pittwater-rd-dee-why/type-l-axo-01.png",
+      "/photos/pittwater-rd-dee-why/type-l-axo-02.png",
+    ],
+  },
+  {
+    id: 11,
+    title: "27 Tyrwhitt Street — Maroubra",
+    excerpt: "A residential architecture project in Maroubra — a considered street-facing home that negotiates a sloping site with clarity and restraint. The exterior composition balances privacy with openness using clean geometric forms and a robust material palette suited to the coastal suburban context.",
+    image: "/photos/tyrwhitt-maroubra/ext-01.png",
+    category: "Current Project",
+    date: "2024 — In Progress",
+    readTime: "5 min read",
+    featured: true,
+    gallery: [
+      "/photos/tyrwhitt-maroubra/ext-01.png",
+      "/photos/tyrwhitt-maroubra/ext-02.png",
+      "/photos/tyrwhitt-maroubra/ext-03.png",
+    ],
+  },
+  {
+    id: 10,
+    title: "Macquarie Park — Mixed-Use Development",
+    excerpt: "A mixed-use development study for Macquarie Park exploring building massing, height limits, and design options within the site's planning envelope. Detailed height limit analysis and volumetric modelling tested feasibility across multiple design scenarios.",
+    image: "/photos/macquarie-park/display-render-01.jpg",
+    category: "Current Project",
+    date: "2025 — In Progress",
+    readTime: "5 min read",
+    featured: true,
+    gallery: [
+      "/photos/macquarie-park/display-render-01.jpg",
+      "/photos/macquarie-park/display-render-02.jpg",
+      "/photos/macquarie-park/display-render-03.jpg",
+      "/photos/macquarie-park/height-diagram-01.jpg",
+      "/photos/macquarie-park/height-diagram-02.jpg",
+      "/photos/macquarie-park/height-diagram-03.jpg",
+      "/photos/macquarie-park/height-diagram-04.jpg",
+    ],
+  },
+  {
     id: 4,
     title: "68 Harbour Street — Furama Darling Harbour: Lobby & Canteen",
     excerpt: "An ongoing hospitality transformation at the iconic Furama Hotel on Harbour Street — reimagining the lobby and canteen as a warm, layered welcome for guests arriving at the edge of Darling Harbour. The design draws on soft materiality and considered lighting to create a sense of arrival that feels both refined and grounded.",
@@ -792,32 +848,34 @@ const ARTICLES: Article[] = [
     ],
   },
   {
-    id: 1,
-    title: "Modern Homes Forecast 2025: The Return of the Organic Form",
-    excerpt: "As the design industry looks ahead, organic shapes, natural materials, and biophilic principles are emerging as the defining language of contemporary residential architecture.",
-    image: "https://picsum.photos/seed/article-forecast/1200/800",
-    category: "Insights",
-    date: "March 2025",
-    readTime: "8 min read",
+    id: 9,
+    title: "1 West Street — North Sydney",
+    excerpt: "A commercial office fitout in the heart of North Sydney — designed to foster collaboration and focus within a compact floor plate. Clean lines, considered material selection, and a neutral palette create a professional environment that feels both refined and approachable.",
+    image: "/photos/west-st-north-sydney/Riedel_building_view1.jpg",
+    category: "Current Project",
+    date: "2024 — Completed",
+    readTime: "3 min read",
     featured: true,
+    gallery: [
+      "/photos/west-st-north-sydney/Riedel_building_view1.jpg",
+      "/photos/west-st-north-sydney/Riedel_building_view2.jpg",
+    ],
   },
   {
-    id: 2,
-    title: "The Architecture of Stillness",
-    excerpt: "How a new generation of designers is embracing minimalism not as an aesthetic, but as a philosophy of restraint.",
-    image: "https://picsum.photos/seed/article-stillness/1200/800",
-    category: "Editorial",
-    date: "February 2025",
-    readTime: "5 min read",
-  },
-  {
-    id: 3,
-    title: "Parametric Facades: Tools Shaping Tomorrow's Skylines",
-    excerpt: "From Rhino to Grasshopper, a deep dive into the software workflows transforming architectural surfaces.",
-    image: "https://picsum.photos/seed/article-parametric/1200/800",
-    category: "Technology",
-    date: "January 2025",
-    readTime: "6 min read",
+    id: 8,
+    title: "12 Stuart Street — Wahroonga Residence",
+    excerpt: "A warm residential interior for a Wahroonga family home — centred on a refined kitchen and dining space that balances everyday functionality with considered materiality. Timber joinery, soft stone surfaces, and layered lighting bring a sense of calm domesticity to the heart of the home.",
+    image: "/photos/stuart-st-wahroonga/dining-view.png",
+    category: "Current Project",
+    date: "2023 — Completed",
+    readTime: "4 min read",
+    featured: true,
+    gallery: [
+      "/photos/stuart-st-wahroonga/dining-view.png",
+      "/photos/stuart-st-wahroonga/formal-dining.png",
+      "/photos/stuart-st-wahroonga/kitchen-view.png",
+      "/photos/stuart-st-wahroonga/kitchen-view2.png",
+    ],
   },
 ];
 
@@ -1696,6 +1754,81 @@ const UNI_PROJECTS = [
   },
 ];
 
+// --- 3D Process Slider ---
+const PROCESS_SLIDES = Array.from({ length: 37 }, (_, i) =>
+  `/photos/3d-process/slide-${String(i + 1).padStart(2, '0')}.jpg`
+);
+
+const ProcessSlider = () => {
+  const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const total = PROCESS_SLIDES.length;
+
+  const go = (next: number) => {
+    setDirection(next > current ? 1 : -1);
+    setCurrent((next + total) % total);
+  };
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setDirection(1);
+      setCurrent(prev => (prev + 1) % total);
+    }, 4000);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <div className="relative w-full bg-stone-950 overflow-hidden" style={{ aspectRatio: '16/9' }}>
+      <AnimatePresence mode="wait" custom={direction}>
+        <motion.img
+          key={current}
+          src={PROCESS_SLIDES[current]}
+          alt={`3D Process ${current + 1}`}
+          className="absolute inset-0 w-full h-full object-cover"
+          custom={direction}
+          initial={{ opacity: 0, x: direction * 60 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: direction * -60 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        />
+      </AnimatePresence>
+
+      {/* Overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+
+      {/* Counter */}
+      <div className="absolute top-5 right-6 z-10 font-mono text-[10px] text-white/50 tracking-widest">
+        {String(current + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+      </div>
+
+      {/* Prev / Next */}
+      <button
+        onClick={() => go(current - 1)}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center border border-white/20 bg-black/30 hover:bg-black/60 transition-all duration-200"
+      >
+        <ChevronLeft className="w-4 h-4 text-white" />
+      </button>
+      <button
+        onClick={() => go(current + 1)}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center border border-white/20 bg-black/30 hover:bg-black/60 transition-all duration-200"
+      >
+        <ChevronRight className="w-4 h-4 text-white" />
+      </button>
+
+      {/* Dot indicators */}
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
+        {PROCESS_SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => go(i)}
+            className={`h-0.5 transition-all duration-300 ${i === current ? 'w-6 bg-white' : 'w-1.5 bg-white/30'}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const UniversitySection = () => {
   const [activeProject, setActiveProject] = useState(0);
   const [activePage, setActivePage] = useState(0);
@@ -2367,9 +2500,9 @@ const MarqueeStrip = () => (
   <div className="overflow-hidden py-4 bg-[#3d3a35] border-y border-stone-700">
     <style>{`@keyframes marquee-scroll { from { transform: translateX(0) } to { transform: translateX(-50%) } }`}</style>
     <div style={{ animation: 'marquee-scroll 28s linear infinite', display: 'inline-flex', gap: '3rem' }}>
-      {Array(16).fill(null).map((_, i) => (
+      {Array(18).fill(null).map((_, i) => (
         <span key={i} className="text-[10px] uppercase tracking-[0.4em] text-stone-500 font-bold flex-shrink-0 whitespace-nowrap">
-          {['Architecture', 'Interior Design', 'Documentation', 'Spatial Design'][i % 4]}
+          {['Architecture', 'Interior Design', 'Documentation', 'Spatial Design', 'Concept Design', 'Landscaping'][i % 6]}
           <span className="text-stone-700 mx-6">·</span>
         </span>
       ))}
@@ -2785,7 +2918,7 @@ export default function App() {
               <span>Makers</span><span>·</span>
               <span>Print Edition</span>
             </div>
-            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">Vol. 01 · 2025</span>
+            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">v1.1.0 · 2025</span>
           </div>
         </section>
 
@@ -3132,7 +3265,7 @@ export default function App() {
             <div className="flex items-end justify-between mb-20 border-b border-stone-200 pb-8">
               <div>
                 <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">Featured Work</span>
-                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">Complete</h2>
+                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">Completed</h2>
               </div>
               <div className="hidden md:flex gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400">
                 {['All', 'Interior', 'Retail', 'Food & Beverage', 'Commercial'].map((cat) => (
@@ -3209,6 +3342,20 @@ export default function App() {
               </div>
             </div>
             <UniversitySection />
+          </div>
+        </section>
+
+        {/* 3D Modelling Process */}
+        <section className="py-24 md:py-36 bg-stone-950">
+          <div className="max-w-[1400px] mx-auto px-8">
+            <div className="flex items-end justify-between mb-12 border-b border-stone-800 pb-8">
+              <div>
+                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-600 block mb-3">Workflow</span>
+                <h2 className="text-3xl md:text-5xl font-display font-light text-white">3D Modelling Process</h2>
+              </div>
+              <span className="hidden md:block text-[9px] uppercase tracking-[0.4em] font-bold text-stone-600">37 frames</span>
+            </div>
+            <ProcessSlider />
           </div>
         </section>
 
