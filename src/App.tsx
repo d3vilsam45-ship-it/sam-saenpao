@@ -2918,7 +2918,7 @@ export default function App() {
               <span>Makers</span><span>·</span>
               <span>Print Edition</span>
             </div>
-            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">v1.1.0 · 2025</span>
+            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">v1.2.0 · 2025</span>
           </div>
         </section>
 
@@ -3729,7 +3729,7 @@ export default function App() {
               <a href="#" className="hover:text-stone-300 transition-colors">Sitemap</a>
             </div>
           </div>
-          <p className="mt-4 text-center text-[8px] font-mono text-stone-400 tracking-[0.2em]">v1.1.0</p>
+          <p className="mt-4 text-center text-[8px] font-mono text-stone-400 tracking-[0.2em]">v1.2.0</p>
         </div>
       </footer>
     </div>
