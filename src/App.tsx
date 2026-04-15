@@ -308,6 +308,54 @@ const PROJECTS: Project[] = [
       "/photos/kii-college/660ad8_e60d731899e14034aa7c592707a5746f~mv2.jpg",
     ],
   },
+  {
+    id: 14,
+    title: "BYD Megastore",
+    location: "Mascot, NSW",
+    year: "2023",
+    image: "/photos/byd-megastore/660ad8_17028e80b0e14c16b2da8ea9473ce68c~mv2.jpg",
+    category: "Commercial",
+    role: "Design Team Member",
+    description: "A flagship showroom and megastore for BYD Australia in Mascot — a large-format automotive retail environment designed to showcase the full BYD vehicle lineup with an emphasis on brand immersion, spatial clarity, and a considered customer journey.",
+    readTime: "5 min read",
+    client: "BYD Australia Pty Ltd",
+    builder: "DT Corporation Pty Ltd",
+    designTeam: "Carla D'Angelo, Shaun Khor, Theresa Helen, Chloe Lam & Sam Saenpao",
+    gallery: [
+      "/photos/byd-megastore/660ad8_17028e80b0e14c16b2da8ea9473ce68c~mv2.jpg",
+      "/photos/byd-megastore/660ad8_40c0d3b84f4941fb81e72393c688602d~mv2.jpg",
+      "/photos/byd-megastore/660ad8_50ddbaef47f64dda9da1d3621b51922c~mv2.jpg",
+      "/photos/byd-megastore/660ad8_7f874ca8c502419282c8e657ee97391a~mv2.jpg",
+      "/photos/byd-megastore/660ad8_970fde96b9df4e6a9205eaed37a21ca2~mv2.jpg",
+      "/photos/byd-megastore/660ad8_d6c243e117d3407d893c9350fd8fc199~mv2.jpg",
+      "/photos/byd-megastore/660ad8_da61aff8b018487894c4e3896c7e6355~mv2.jpg",
+      "/photos/byd-megastore/660ad8_e2209ef2648a416ca3ac72576d584adb~mv2.jpg",
+      "/photos/byd-megastore/660ad8_e4cd51a17ff34b2bbac828d3ec821483~mv2.jpg",
+      "/photos/byd-megastore/660ad8_fc6f26a7dcaf4a1983e5decb02c4d5f4~mv2.jpg",
+      "/photos/byd-megastore/660ad8_fdc92f63e0b8431f88f37aa807407535~mv2.jpg",
+    ],
+  },
+  {
+    id: 15,
+    title: "BYD Cafe Kiosk",
+    location: "Mascot, NSW",
+    year: "2023",
+    image: "/photos/byd-cafe-kiosk/garden_cafe_perspective_interior.png",
+    category: "Food & Beverage",
+    role: "Design Team Member",
+    description: "A refined cafe kiosk concept for BYD Australia's Mascot precinct — an intimate, hospitality-forward space designed to complement the broader BYD showroom campus. Warm materiality and considered spatial organisation create a welcoming environment for customers and visitors.",
+    readTime: "3 min read",
+    client: "BYD Australia Pty Ltd",
+    builder: "DT Corporation Pty Ltd",
+    designTeam: "Carla D'Angelo, Shaun Khor, Theresa Helen, Brian Yung, Chloe Lam & Sam Saenpao",
+    gallery: [
+      "/photos/byd-cafe-kiosk/garden_cafe_perspective_interior.png",
+      "/photos/byd-cafe-kiosk/garden_cafe_perspective_counter.png",
+      "/photos/byd-cafe-kiosk/garden_cafe_perspective_seating.png",
+      "/photos/byd-cafe-kiosk/garden_cafe_axo_view01.png",
+      "/photos/byd-cafe-kiosk/garden_cafe_axo_view02.png",
+    ],
+  },
 ];
 
 // --- Archive Projects (Toggl Track — 204 projects) ---
@@ -694,6 +742,30 @@ function ProjectArchiveModal({ onClose }: { onClose: () => void }) {
 
 const ARTICLES: Article[] = [
   {
+    id: 13,
+    title: "155 & 155A Stuart Street — Blakehurst",
+    excerpt: "A dual-occupancy residential project in Blakehurst — two architecturally resolved dwellings designed for a tight suburban site. The design negotiates street presentation, privacy, and natural light with a composed facade, considered garage integration, and a material palette suited to the leafy southern Sydney context.",
+    image: "/photos/stuart-st-blakehurst/VIEW 01.jpg",
+    category: "Current Project",
+    date: "2023 — In Progress",
+    readTime: "5 min read",
+    featured: true,
+    gallery: [
+      "/photos/stuart-st-blakehurst/VIEW 01.jpg",
+      "/photos/stuart-st-blakehurst/VIEW 02.jpg",
+      "/photos/stuart-st-blakehurst/VIEW 03.jpg",
+      "/photos/stuart-st-blakehurst/GARAGE OPEN.jpg",
+      "/photos/stuart-st-blakehurst/GARAGE CLOSED.jpg",
+      "/photos/stuart-st-blakehurst/GARAGE OPEN_TIMBER.jpg",
+      "/photos/stuart-st-blakehurst/GARAGE CLOSED_TIMBER.jpg",
+      "/photos/stuart-st-blakehurst/AXO.jpg",
+      "/photos/stuart-st-blakehurst/stuart_overall_view01.png",
+      "/photos/stuart-st-blakehurst/stuart_overall_view02.png",
+      "/photos/stuart-st-blakehurst/stuart_overall_view03.png",
+      "/photos/stuart-st-blakehurst/stuart_axonometric_view.png",
+    ],
+  },
+  {
     id: 12,
     title: "613–615 Pittwater Road — Dee Why",
     excerpt: "The largest project in the studio — a large-scale residential development on Pittwater Road, Dee Why. Spanning over 1,688 hours of design work, the project encompasses multiple building options, unit typologies, and detailed documentation across a significant mixed-use site on Sydney's Northern Beaches.",
@@ -907,268 +979,264 @@ const MAKERS: Maker[] = [
 ];
 
 const MODEL_SLIDES = [
-  // — Macquarie Park Tower (slides 01–20) —
+  // — BYD Megastore, Mascot —
   {
-    image: "/photos/3d-process/slide-01.jpg",
+    image: "/photos/byd-megastore/660ad8_17028e80b0e14c16b2da8ea9473ce68c~mv2.jpg",
     step: "01",
-    title: "Massing Study — Front Elevation",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Front elevation of the proposed tower massing — establishing the vertical fin blade facade, the stepped podium base, and the distinctive looped crown element.",
+    title: "Showroom Entry — Street View",
+    tool: "Lumion · BYD Megastore, Mascot",
+    description: "Photorealistic exterior render of the BYD Megastore entry — capturing the brand-forward facade, full-height glazing, and the curated approach sequence.",
   },
   {
-    image: "/photos/3d-process/slide-02.jpg",
+    image: "/photos/byd-megastore/660ad8_40c0d3b84f4941fb81e72393c688602d~mv2.jpg",
     step: "02",
-    title: "Massing Study — Aerial Overview",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Aerial axonometric of the full tower showing the rooftop amenity deck, pool, and the planted crown pergola above the uppermost residential floor.",
+    title: "Showroom Interior — Display Floor",
+    tool: "Lumion · BYD Megastore, Mascot",
+    description: "Interior render of the main display floor — a wide, light-filled space designed to showcase BYD's full vehicle lineup with clarity and brand precision.",
   },
   {
-    image: "/photos/3d-process/slide-03.jpg",
+    image: "/photos/byd-megastore/660ad8_50ddbaef47f64dda9da1d3621b51922c~mv2.jpg",
     step: "03",
-    title: "Rooftop Crown — Close-up",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Close-up of the rooftop crown structure — the looped pergola frame, green planting, and the pool pavilion nestled within the amenity level.",
+    title: "Showroom — View 03",
+    tool: "Lumion · BYD Megastore, Mascot",
+    description: "Render exploring the spatial depth of the showroom floor — vehicle bays framed by a clean ceiling grid and considered lighting strategy.",
   },
   {
-    image: "/photos/3d-process/slide-04.jpg",
+    image: "/photos/byd-megastore/660ad8_7f874ca8c502419282c8e657ee97391a~mv2.jpg",
     step: "04",
-    title: "Massing Study — Aerial, Rear View",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Aerial view from the rear showing the tower's blade facade on the secondary elevation, ground-level landscape setbacks, and pool at podium level.",
+    title: "Showroom — View 04",
+    tool: "Lumion · BYD Megastore, Mascot",
+    description: "Side perspective of the showroom interior — emphasis on materiality, floor finish, and the relationship between vehicles and the surrounding retail environment.",
   },
   {
-    image: "/photos/3d-process/slide-05.jpg",
+    image: "/photos/byd-megastore/660ad8_970fde96b9df4e6a9205eaed37a21ca2~mv2.jpg",
     step: "05",
-    title: "Tower Elevation — Side View",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Side elevation study of the tower form with a simplified facade — testing massing proportions, floor-to-floor heights, and the podium-to-tower transition.",
+    title: "Showroom — View 05",
+    tool: "Lumion · BYD Megastore, Mascot",
+    description: "Render of the rear showroom zone — capturing the full spatial volume and the coordinated brand signage across the back wall.",
   },
   {
-    image: "/photos/3d-process/slide-06.jpg",
+    image: "/photos/byd-megastore/660ad8_d6c243e117d3407d893c9350fd8fc199~mv2.jpg",
     step: "06",
-    title: "Elevation — Mahogany Avenue",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Formal elevation facing Mahogany Avenue, showing the full height of the tower with vertical fin blades, glazed curtain wall, and landscaped podium base.",
+    title: "Showroom — View 06",
+    tool: "Lumion · BYD Megastore, Mascot",
+    description: "Evening render of the showroom with artificial lighting activated — demonstrating the lighting strategy and its effect on the brand environment.",
   },
   {
-    image: "/photos/3d-process/slide-07.jpg",
+    image: "/photos/byd-megastore/660ad8_da61aff8b018487894c4e3896c7e6355~mv2.jpg",
     step: "07",
-    title: "Podium Entry — Street Perspective",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Street-level perspective of the podium lobby entry — showing the vertical fin canopy, cylindrical column feature, and the activated ground-floor facade.",
+    title: "Showroom — View 07",
+    tool: "Lumion · BYD Megastore, Mascot",
+    description: "Wide-angle render of the showroom at full capacity — all vehicle bays occupied, demonstrating the spatial efficiency of the 6,500m² floor plan.",
   },
   {
-    image: "/photos/3d-process/slide-08.jpg",
+    image: "/photos/byd-megastore/660ad8_e2209ef2648a416ca3ac72576d584adb~mv2.jpg",
     step: "08",
-    title: "Podium Facade — Street View",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Street-level view of the podium facade from a second angle — capturing the blade fin rhythm, podium setback, and the landscape edge treatment.",
+    title: "Showroom — View 08",
+    tool: "Lumion · BYD Megastore, Mascot",
+    description: "Focused render on the customer reception and consultation zone — balancing operational function with a warm, premium spatial experience.",
   },
   {
-    image: "/photos/3d-process/slide-09.jpg",
+    image: "/photos/byd-megastore/660ad8_e4cd51a17ff34b2bbac828d3ec821483~mv2.jpg",
     step: "09",
-    title: "Podium Level — Aerial Close-up",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Aerial close-up looking down at the podium entry forecourt — showing the entry canopy, circular water feature, pool lanes, and surrounding landscape.",
+    title: "Showroom — View 09",
+    tool: "Lumion · BYD Megastore, Mascot",
+    description: "Detail render of the display bay arrangement — vehicles presented against a refined material backdrop with controlled accent lighting.",
   },
   {
-    image: "/photos/3d-process/slide-10.jpg",
+    image: "/photos/byd-megastore/660ad8_fc6f26a7dcaf4a1983e5decb02c4d5f4~mv2.jpg",
     step: "10",
-    title: "Podium Pool — Aerial View",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Overhead aerial of the podium level showing the full pool extent, landscaped borders, and the relationship between the pool deck and the tower base.",
+    title: "Showroom — View 10",
+    tool: "Lumion · BYD Megastore, Mascot",
+    description: "Elevated perspective of the showroom — demonstrating the ceiling height, structural grid, and the interplay of natural and artificial light across the floor plate.",
   },
   {
-    image: "/photos/3d-process/slide-11.jpg",
+    image: "/photos/byd-megastore/660ad8_fdc92f63e0b8431f88f37aa807407535~mv2.jpg",
     step: "11",
-    title: "Podium Corner — Lower Floors",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Corner close-up of the podium and lower residential floors — studying the overhang, pool edge setback, and planted perimeter at ground level.",
+    title: "Showroom — View 11",
+    tool: "Lumion · BYD Megastore, Mascot",
+    description: "Final exterior dusk render of the BYD Megastore — showcasing the illuminated facade and the visual impact of the brand presence on the street.",
   },
   {
-    image: "/photos/3d-process/slide-12.jpg",
+    image: "/photos/byd-megastore/ramp-view-01.jpg",
     step: "12",
-    title: "Podium Pool Edge — Detail",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Detailed study of the podium pool edge — examining coping details, the pavilion column placement, and the blade fins framing the outdoor amenity space.",
+    title: "Showroom Ramp — 3D Model View",
+    tool: "SketchUp · BYD Megastore, Mascot",
+    description: "3D model view of the internal vehicle ramp — demonstrating the structural geometry, clearance heights, and the flow of the multi-level showroom layout.",
   },
+  // — BYD Cafe Kiosk, Mascot —
   {
-    image: "/photos/3d-process/slide-13.jpg",
+    image: "/photos/byd-cafe-kiosk/garden_cafe_perspective_interior.png",
     step: "13",
-    title: "Display Suite — SketchUp Model",
-    tool: "SketchUp · Macquarie Park, Display Suite",
-    description: "Early SketchUp massing model of the temporary display suite — a 2-storey sales pavilion used to market the tower to off-the-plan buyers on-site.",
+    title: "Cafe Kiosk — Interior Perspective",
+    tool: "Lumion · BYD Cafe Kiosk, Mascot",
+    description: "Interior perspective render of the BYD Cafe Kiosk — a warm, garden-adjacent hospitality space designed to complement the broader showroom campus.",
   },
   {
-    image: "/photos/3d-process/slide-14.jpg",
+    image: "/photos/byd-cafe-kiosk/garden_cafe_perspective_counter.png",
+    step: "13",
+    title: "Cafe Kiosk — Counter View",
+    tool: "Lumion · BYD Cafe Kiosk, Mascot",
+    description: "Render focused on the service counter — materiality, joinery detailing, and the relationship between the barista station and the garden outlook.",
+  },
+  {
+    image: "/photos/byd-cafe-kiosk/garden_cafe_perspective_seating.png",
     step: "14",
-    title: "Display Suite — Pavilion Interior",
-    tool: "SketchUp · Macquarie Park, Display Suite",
-    description: "Under-canopy perspective of the display suite pavilion — showing the open entry sequence, blade columns, and the glazed sales gallery beyond.",
+    title: "Cafe Kiosk — Seating Area",
+    tool: "Lumion · BYD Cafe Kiosk, Mascot",
+    description: "Perspective render of the seating zone — compact, considered furniture placement within a 50m² footprint without compromising on spatial quality.",
   },
+  // — Macquarie Park Display Suite —
   {
-    image: "/photos/3d-process/slide-15.jpg",
+    image: "/photos/macquarie-park/display-render-01.jpg",
     step: "15",
-    title: "Pool View 01",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Pool View 01 — street-level perspective of the ground-floor pool pavilion, showing the cylindrical column, pool coping, and surrounding landscaping.",
-  },
-  {
-    image: "/photos/3d-process/slide-16.jpg",
-    step: "16",
-    title: "Pool View 02",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Pool View 02 — aerial perspective across the pool deck with the vertical fin facade visible above, framing the outdoor amenity space.",
-  },
-  {
-    image: "/photos/3d-process/slide-17.jpg",
-    step: "17",
-    title: "Pool View 03",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Pool View 03 — eye-level view along the pool edge highlighting the column grid, overhead canopy beam, and the spa/plunge pool element.",
-  },
-  {
-    image: "/photos/3d-process/slide-18.jpg",
-    step: "18",
-    title: "Pool View 04",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Pool View 04 — low-angle perspective along the pool length, with the tower's curved facade and louvred screen rising behind the water's edge.",
-  },
-  {
-    image: "/photos/3d-process/slide-19.jpg",
-    step: "19",
-    title: "Pool View 05",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Pool View 05 — elevated aerial of the full pool deck showing the circular entry water feature, pool lanes, and the landscape buffer to the street.",
-  },
-  {
-    image: "/photos/3d-process/slide-20.jpg",
-    step: "20",
-    title: "Pool View 06",
-    tool: "SketchUp · Macquarie Park Tower",
-    description: "Pool View 06 — overhead aerial of the pool and podium terrace, showing the full extent of the ground-floor amenity zone and planted setbacks.",
-  },
-  // — Macquarie Park Display Suite — Rendered Views (slides 21–23) —
-  {
-    image: "/photos/3d-process/slide-21.jpg",
-    step: "21",
     title: "Display Suite — Street View",
     tool: "Lumion · Macquarie Park, Display Suite",
     description: "Photorealistic exterior render of the sales display suite — a 2-storey pavilion with timber screens, double-height glazing, and the 'one' project branding signage.",
   },
   {
-    image: "/photos/3d-process/slide-22.jpg",
-    step: "22",
+    image: "/photos/macquarie-park/display-render-02.jpg",
+    step: "16",
     title: "Display Suite — View 02",
     tool: "Lumion · Macquarie Park, Display Suite",
     description: "Second exterior render of the display suite from a shifted street angle — capturing the canopy overhang, landscaped setback, and the tower marketing imagery on the facade.",
   },
   {
-    image: "/photos/3d-process/slide-23.jpg",
-    step: "23",
+    image: "/photos/macquarie-park/display-render-03.jpg",
+    step: "17",
     title: "Display Suite — View 03",
     tool: "Lumion · Macquarie Park, Display Suite",
     description: "Wide exterior render of the display suite within its site context — showing the full building width, mature tree canopy, and the pedestrian arrival experience.",
   },
-  // — 1 West Street, North Sydney — Riedel Showroom Fitout (slides 24–25) —
+  // — 27 Tyrwhitt Street, Maroubra —
   {
-    image: "/photos/3d-process/slide-24.jpg",
+    image: "/photos/tyrwhitt-maroubra/ext-01.png",
+    step: "18",
+    title: "Street Facade — View 01",
+    tool: "Lumion · 27 Tyrwhitt Street, Maroubra",
+    description: "Exterior render of the Tyrwhitt Street residence — a considered street-facing composition that negotiates a sloping site with clean geometric forms and a robust material palette.",
+  },
+  {
+    image: "/photos/tyrwhitt-maroubra/ext-02.png",
+    step: "19",
+    title: "Street Facade — View 02",
+    tool: "Lumion · 27 Tyrwhitt Street, Maroubra",
+    description: "Second exterior render exploring the facade depth, shadow play, and the relationship between solid and void across the street-facing elevation.",
+  },
+  {
+    image: "/photos/tyrwhitt-maroubra/ext-03.png",
+    step: "20",
+    title: "Street Facade — View 03",
+    tool: "Lumion · 27 Tyrwhitt Street, Maroubra",
+    description: "Angled exterior view capturing the full building profile, entry sequence, and the materiality of the coastal suburban context.",
+  },
+  // — 613–615 Pittwater Road, Dee Why —
+  {
+    image: "/photos/pittwater-rd-dee-why/building-a-option-1.jpg",
+    step: "21",
+    title: "Building A — Option 01",
+    tool: "Lumion · 613–615 Pittwater Road, Dee Why",
+    description: "Rendered massing option for Building A — exploring the tower form, podium setback, and facade expression for the Pittwater Road mixed-use development.",
+  },
+  {
+    image: "/photos/pittwater-rd-dee-why/building-a-option-2.jpg",
+    step: "22",
+    title: "Building A — Option 02",
+    tool: "Lumion · 613–615 Pittwater Road, Dee Why",
+    description: "Alternative facade treatment for Building A — refining the balcony grid, material zones, and the visual weight of the tower above the podium.",
+  },
+  {
+    image: "/photos/pittwater-rd-dee-why/building-a-option-3.jpg",
+    step: "23",
+    title: "Building A — Option 03",
+    tool: "Lumion · 613–615 Pittwater Road, Dee Why",
+    description: "Third design option testing a contrasting facade palette — lighter upper floors against a heavier podium base, with articulated balcony edges.",
+  },
+  {
+    image: "/photos/pittwater-rd-dee-why/building-a-option-4.jpg",
     step: "24",
-    title: "Riedel Showroom — Front Elevation",
-    tool: "SketchUp · 1 West Street, North Sydney",
-    description: "Front elevation of the Riedel glassware showroom fitout — dark facade with red canopy signage band, full-height glazed shopfronts, and brand identity treatment.",
+    title: "Building A — Option 04",
+    tool: "Lumion · 613–615 Pittwater Road, Dee Why",
+    description: "Final preferred massing option consolidating facade articulation, materiality, and the street-level activation of the ground-floor retail podium.",
   },
   {
-    image: "/photos/3d-process/slide-25.jpg",
+    image: "/photos/pittwater-rd-dee-why/unit-ag04-view-01.jpg",
     step: "25",
-    title: "Riedel Showroom — Corner View",
-    tool: "SketchUp · 1 West Street, North Sydney",
-    description: "Corner perspective showing the Riedel, Spiegelau, and Nachtmann brand signage across both street-facing elevations, with the stepped gable entry canopy.",
+    title: "Unit AG04 — View 01",
+    tool: "Lumion · 613–615 Pittwater Road, Dee Why",
+    description: "Interior render of ground-floor apartment AG04 — open-plan living and dining with direct garden access and a considered material palette.",
   },
-  // — 58 & 60 Belemba Avenue, Roselands (slides 26–37) —
   {
-    image: "/photos/3d-process/slide-26.jpg",
+    image: "/photos/pittwater-rd-dee-why/unit-ag04-view-02.jpg",
     step: "26",
-    title: "Exterior Model — Aerial Overview",
-    tool: "SketchUp · 58 & 60 Belemba Avenue, Roselands",
-    description: "Bird's-eye view of the dual-lot residential model, establishing site coverage, roof form, and the spatial relationship between both dwellings.",
+    title: "Unit AG04 — View 02",
+    tool: "Lumion · 613–615 Pittwater Road, Dee Why",
+    description: "Kitchen and dining zone of AG04 — refined joinery, stone benchtops, and the connection between the indoor living space and the private outdoor garden.",
   },
   {
-    image: "/photos/3d-process/slide-27.jpg",
+    image: "/photos/pittwater-rd-dee-why/unit-ag04-view-03.jpg",
     step: "27",
-    title: "Exterior Model — View 02",
-    tool: "SketchUp · 58 & 60 Belemba Avenue, Roselands",
-    description: "Exterior work-in-progress model exploring facade articulation, materiality, and the transition between the two adjoining properties.",
+    title: "Unit AG04 — View 03",
+    tool: "Lumion · 613–615 Pittwater Road, Dee Why",
+    description: "Living area perspective of AG04 — full-height glazing, layered lighting, and a warm material palette create a sense of domestic calm within the residential development.",
   },
   {
-    image: "/photos/3d-process/slide-28.jpg",
+    image: "/photos/pittwater-rd-dee-why/unit-ag04-view-04.jpg",
     step: "28",
-    title: "Exterior Model — View 03",
-    tool: "SketchUp · 58 & 60 Belemba Avenue, Roselands",
-    description: "Further exterior study refining roof pitches, window placement, and the landscaped edges that frame each dwelling.",
+    title: "Unit AG04 — View 04",
+    tool: "Lumion · 613–615 Pittwater Road, Dee Why",
+    description: "Final interior render of AG04 with all furnishings resolved — demonstrating the spatial quality and livability of the ground-floor typology.",
   },
+  // — 155 & 155A Stuart Street, Blakehurst —
   {
-    image: "/photos/3d-process/slide-29.jpg",
+    image: "/photos/stuart-st-blakehurst/VIEW 01.jpg",
     step: "29",
-    title: "Exterior Model — View 04",
-    tool: "SketchUp · 58 & 60 Belemba Avenue, Roselands",
-    description: "Street-level perspective testing the facade composition, entry sequence, and visual privacy between the two residences.",
+    title: "Stuart Street — View 01",
+    tool: "Lumion · 155 & 155A Stuart Street, Blakehurst",
+    description: "Exterior render of the Blakehurst dual-occupancy — street-facing facade composition with considered garage integration and a material palette suited to the leafy southern Sydney context.",
   },
   {
-    image: "/photos/3d-process/slide-30.jpg",
+    image: "/photos/stuart-st-blakehurst/VIEW 02.jpg",
     step: "30",
-    title: "Exterior Model — View 05",
-    tool: "SketchUp · 58 & 60 Belemba Avenue, Roselands",
-    description: "Rear elevation study exploring outdoor living zones, setbacks, and the connection between interior spaces and the garden.",
+    title: "Stuart Street — View 02",
+    tool: "Lumion · 155 & 155A Stuart Street, Blakehurst",
+    description: "Second exterior view — exploring the facade depth, shadow play, and the relationship between the two dwellings as a composed streetscape composition.",
   },
   {
-    image: "/photos/3d-process/slide-31.jpg",
+    image: "/photos/stuart-st-blakehurst/VIEW 03.jpg",
     step: "31",
-    title: "Exterior Model — View 06",
-    tool: "SketchUp · 58 & 60 Belemba Avenue, Roselands",
-    description: "Final exterior model view consolidating all facade, roof, and landscape elements ahead of documentation.",
+    title: "Stuart Street — View 03",
+    tool: "Lumion · 155 & 155A Stuart Street, Blakehurst",
+    description: "Angled street view capturing the full site width — both dwellings resolved as a unified yet distinct pair within the suburban streetscape.",
   },
   {
-    image: "/photos/3d-process/slide-32.jpg",
+    image: "/photos/stuart-st-blakehurst/GARAGE OPEN.jpg",
     step: "32",
-    title: "Interior Model — Living & Dining",
-    tool: "SketchUp · Unit 01, Belemba Avenue",
-    description: "Section perspective of the open-plan living, dining, and kitchen — testing spatial proportions, joinery layout, and the view to the rear garden.",
+    title: "Stuart Street — Garage Open",
+    tool: "Lumion · 155 & 155A Stuart Street, Blakehurst",
+    description: "Render with garage doors open — demonstrating the visual integration of the garage into the facade composition and its impact on the street presentation.",
   },
   {
-    image: "/photos/3d-process/slide-33.jpg",
+    image: "/photos/stuart-st-blakehurst/GARAGE CLOSED.jpg",
     step: "33",
-    title: "Interior Model — View 02",
-    tool: "SketchUp · Unit 01, Belemba Avenue",
-    description: "Interior study exploring the material palette — stone feature wall, timber joinery, and the quality of natural light through full-height glazing.",
+    title: "Stuart Street — Garage Closed",
+    tool: "Lumion · 155 & 155A Stuart Street, Blakehurst",
+    description: "Render with garage doors closed — showing the preferred street-facing composition with the garage panel reading as a resolved element of the facade.",
   },
+  // — 1 West Street, North Sydney —
   {
-    image: "/photos/3d-process/slide-34.jpg",
+    image: "/photos/west-st-north-sydney/Riedel_building_view1.jpg",
     step: "34",
-    title: "Interior Model — View 03",
-    tool: "SketchUp · Unit 01, Belemba Avenue",
-    description: "Further interior development refining ceiling heights, lighting positions, and the spatial relationship between living zones.",
+    title: "Riedel Showroom — Street View",
+    tool: "Lumion · 1 West Street, North Sydney",
+    description: "Exterior render of the Riedel glassware showroom at 1 West Street — dark facade, red canopy signage band, and full-height glazed shopfronts in a premium North Sydney address.",
   },
   {
-    image: "/photos/3d-process/slide-35.jpg",
+    image: "/photos/west-st-north-sydney/Riedel_building_view2.jpg",
     step: "35",
-    title: "Interior Model — View 04",
-    tool: "SketchUp · Unit 01, Belemba Avenue",
-    description: "Kitchen and dining close-up study testing bench proportions, overhead cabinetry, and pendant lighting placement.",
-  },
-  {
-    image: "/photos/3d-process/slide-36.jpg",
-    step: "36",
-    title: "Interior Model — View 05",
-    tool: "SketchUp · Unit 01, Belemba Avenue",
-    description: "Secondary living area study exploring furniture layout, storage integration, and the flow between internal and external spaces.",
-  },
-  {
-    image: "/photos/3d-process/slide-37.jpg",
-    step: "37",
-    title: "Interior Model — View 06",
-    tool: "SketchUp · Unit 01, Belemba Avenue",
-    description: "Final interior model view with all finishes and furnishings resolved, ready for client presentation and construction documentation.",
+    title: "Riedel Showroom — Corner View",
+    tool: "Lumion · 1 West Street, North Sydney",
+    description: "Corner perspective capturing the Riedel, Spiegelau, and Nachtmann brand signage across both street-facing elevations with the stepped gable entry canopy.",
   },
 ];
 
@@ -2565,6 +2633,8 @@ export default function App() {
   const [inquiryForm, setInquiryForm] = useState({ name: '', email: '', message: '' });
   const [inquiryImages, setInquiryImages] = useState<File[]>([]);
   const [inquirySent, setInquirySent] = useState(false);
+  const [inquirySending, setInquirySending] = useState(false);
+  const [inquiryError, setInquiryError] = useState('');
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [toast, setToast] = useState('');
   const [showArchive, setShowArchive] = useState(false);
@@ -2573,6 +2643,13 @@ export default function App() {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % HERO_VIDEOS.length);
     }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setModelSlide((prev) => (prev + 1) % MODEL_SLIDES.length);
+    }, 4000);
     return () => clearInterval(timer);
   }, []);
 
@@ -2586,6 +2663,42 @@ export default function App() {
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xbdqlobz';
+
+  const handleInquirySubmit = async () => {
+    if (!inquiryForm.name || !inquiryForm.email || !inquiryForm.message) {
+      setInquiryError('Please fill in all fields.');
+      return;
+    }
+    setInquiryError('');
+    setInquirySending(true);
+    try {
+      const formData = new FormData();
+      formData.append('name', inquiryForm.name);
+      formData.append('email', inquiryForm.email);
+      formData.append('message', inquiryForm.message);
+      inquiryImages.forEach((file) => formData.append('attachment', file));
+
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' },
+      });
+
+      if (res.ok) {
+        setInquirySent(true);
+        setInquiryForm({ name: '', email: '', message: '' });
+        setInquiryImages([]);
+      } else {
+        setInquiryError('Something went wrong. Please try again.');
+      }
+    } catch {
+      setInquiryError('Something went wrong. Please try again.');
+    } finally {
+      setInquirySending(false);
+    }
+  };
 
   const copyEmail = (email: string) => {
     navigator.clipboard.writeText(email);
@@ -2753,11 +2866,15 @@ export default function App() {
                         </div>
                       )}
                     </div>
+                    {inquiryError && (
+                      <p className="text-[9px] text-red-500 uppercase tracking-[0.2em] font-bold">{inquiryError}</p>
+                    )}
                     <button
-                      onClick={() => setInquirySent(true)}
-                      className="w-full bg-stone-900 text-white py-4 text-[9px] font-bold uppercase tracking-[0.4em] hover:bg-stone-700 transition-colors duration-300 mt-2"
+                      onClick={handleInquirySubmit}
+                      disabled={inquirySending}
+                      className="w-full bg-stone-900 text-white py-4 text-[9px] font-bold uppercase tracking-[0.4em] hover:bg-stone-700 transition-colors duration-300 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Send Message
+                      {inquirySending ? 'Sending…' : 'Send Message'}
                     </button>
                   </div>
                 </>
@@ -2918,7 +3035,7 @@ export default function App() {
               <span>Makers</span><span>·</span>
               <span>Print Edition</span>
             </div>
-            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">v1.2.0 · 2025</span>
+            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">v1.3.0 · 2025</span>
           </div>
         </section>
 
@@ -3026,21 +3143,19 @@ export default function App() {
           <div className="max-w-[1400px] mx-auto px-8 pt-24 pb-12">
             <div className="flex items-end justify-between border-b border-stone-800 pb-8">
               <div>
-                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-600 block mb-3">Behind the Work</span>
-                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-200">3D Modelling Process</h2>
+                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-600 block mb-3">Visual Work</span>
+                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-200">Rendering</h2>
               </div>
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => setModelSlide((i) => Math.max(i - 1, 0))}
-                  disabled={modelSlide === 0}
-                  className="w-10 h-10 border border-stone-700 flex items-center justify-center text-stone-500 hover:border-stone-400 hover:text-stone-200 disabled:opacity-20 transition-all duration-300"
+                  onClick={() => setModelSlide((i) => (i - 1 + MODEL_SLIDES.length) % MODEL_SLIDES.length)}
+                  className="w-10 h-10 border border-stone-700 flex items-center justify-center text-stone-500 hover:border-stone-400 hover:text-stone-200 transition-all duration-300"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
-                  onClick={() => setModelSlide((i) => Math.min(i + 1, MODEL_SLIDES.length - 1))}
-                  disabled={modelSlide === MODEL_SLIDES.length - 1}
-                  className="w-10 h-10 border border-stone-700 flex items-center justify-center text-stone-500 hover:border-stone-400 hover:text-stone-200 disabled:opacity-20 transition-all duration-300"
+                  onClick={() => setModelSlide((i) => (i + 1) % MODEL_SLIDES.length)}
+                  className="w-10 h-10 border border-stone-700 flex items-center justify-center text-stone-500 hover:border-stone-400 hover:text-stone-200 transition-all duration-300"
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>
@@ -3062,7 +3177,7 @@ export default function App() {
                 <img
                   src={MODEL_SLIDES[modelSlide].image}
                   alt={MODEL_SLIDES[modelSlide].title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).style.display = 'none';
                   }}
@@ -3083,7 +3198,7 @@ export default function App() {
                   transition={{ duration: 0.5, delay: 0.15 }}
                 >
                   <span className="text-[9px] font-mono text-stone-500 uppercase tracking-[0.4em] block mb-3">
-                    Step {MODEL_SLIDES[modelSlide].step} · {MODEL_SLIDES[modelSlide].tool}
+                    {MODEL_SLIDES[modelSlide].tool}
                   </span>
                   <h3 className="text-3xl md:text-5xl font-display font-light text-stone-100 mb-4 leading-tight">
                     {MODEL_SLIDES[modelSlide].title}
@@ -3098,11 +3213,11 @@ export default function App() {
             {/* Click nav zones */}
             <button
               className="absolute left-0 top-0 h-full w-1/4 z-10"
-              onClick={() => setModelSlide((i) => Math.max(i - 1, 0))}
+              onClick={() => setModelSlide((i) => (i - 1 + MODEL_SLIDES.length) % MODEL_SLIDES.length)}
             />
             <button
               className="absolute right-0 top-0 h-full w-1/4 z-10"
-              onClick={() => setModelSlide((i) => Math.min(i + 1, MODEL_SLIDES.length - 1))}
+              onClick={() => setModelSlide((i) => (i + 1) % MODEL_SLIDES.length)}
             />
           </div>
 
@@ -3729,7 +3844,7 @@ export default function App() {
               <a href="#" className="hover:text-stone-300 transition-colors">Sitemap</a>
             </div>
           </div>
-          <p className="mt-4 text-center text-[8px] font-mono text-stone-400 tracking-[0.2em]">v1.2.0</p>
+          <p className="mt-4 text-center text-[8px] font-mono text-stone-400 tracking-[0.2em]">v1.3.0</p>
         </div>
       </footer>
     </div>
