@@ -1238,6 +1238,56 @@ const MODEL_SLIDES = [
     tool: "Lumion · 1 West Street, North Sydney",
     description: "Corner perspective capturing the Riedel, Spiegelau, and Nachtmann brand signage across both street-facing elevations with the stepped gable entry canopy.",
   },
+  // — BYD Haberfield, 107–113 Parramatta Road —
+  {
+    image: "/photos/byd-haberfield/EXT 01.jpg",
+    step: "36",
+    title: "Exterior — View 01",
+    tool: "Lumion · BYD Haberfield, Parramatta Road",
+    description: "Exterior render of the BYD Haberfield showroom on Parramatta Road — a brand-forward automotive retail facade designed for high street visibility and customer engagement.",
+  },
+  {
+    image: "/photos/byd-haberfield/EXT 02.jpg",
+    step: "37",
+    title: "Exterior — View 02",
+    tool: "Lumion · BYD Haberfield, Parramatta Road",
+    description: "Second exterior view capturing the full facade width, signage placement, and the relationship between the showroom entry and the street edge.",
+  },
+  {
+    image: "/photos/byd-haberfield/OFFICE 01.jpg",
+    step: "38",
+    title: "Office Interior — View 01",
+    tool: "Lumion · BYD Haberfield, Parramatta Road",
+    description: "Interior render of the staff office zone — a clean, functional workspace integrated within the showroom building with a considered material palette.",
+  },
+  {
+    image: "/photos/byd-haberfield/OFFICE 02.jpg",
+    step: "39",
+    title: "Office Interior — View 02",
+    tool: "Lumion · BYD Haberfield, Parramatta Road",
+    description: "Second office interior view exploring desk layout, lighting strategy, and the spatial relationship between workstations and the glazed perimeter.",
+  },
+  {
+    image: "/photos/byd-haberfield/OFFICE 03.jpg",
+    step: "40",
+    title: "Office Interior — View 03",
+    tool: "Lumion · BYD Haberfield, Parramatta Road",
+    description: "Third office interior render with all furnishings resolved — demonstrating the quality of the work environment within the BYD Haberfield campus.",
+  },
+  {
+    image: "/photos/byd-haberfield/OFFICE AXO 01.jpg",
+    step: "41",
+    title: "Office Axonometric — View 01",
+    tool: "Lumion · BYD Haberfield, Parramatta Road",
+    description: "Axonometric render of the office fitout — revealing the spatial organisation, furniture arrangement, and the overall layout of the staff workspace.",
+  },
+  {
+    image: "/photos/byd-haberfield/OFFICE AXO 02.jpg",
+    step: "42",
+    title: "Office Axonometric — View 02",
+    tool: "Lumion · BYD Haberfield, Parramatta Road",
+    description: "Second axonometric view of the office — showing the full extent of the fitout from an elevated angle, with all zones and circulation paths clearly resolved.",
+  },
 ];
 
 const EXPERIENCE: Experience[] = [
@@ -2631,7 +2681,6 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [inquiryForm, setInquiryForm] = useState({ name: '', email: '', message: '' });
-  const [inquiryImages, setInquiryImages] = useState<File[]>([]);
   const [inquirySent, setInquirySent] = useState(false);
   const [inquirySending, setInquirySending] = useState(false);
   const [inquiryError, setInquiryError] = useState('');
@@ -2678,7 +2727,6 @@ export default function App() {
       formData.append('name', inquiryForm.name);
       formData.append('email', inquiryForm.email);
       formData.append('message', inquiryForm.message);
-      inquiryImages.forEach((file) => formData.append('attachment', file));
 
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
@@ -2689,9 +2737,9 @@ export default function App() {
       if (res.ok) {
         setInquirySent(true);
         setInquiryForm({ name: '', email: '', message: '' });
-        setInquiryImages([]);
       } else {
-        setInquiryError('Something went wrong. Please try again.');
+        const data = await res.json().catch(() => ({}));
+        setInquiryError(data?.error || 'Something went wrong. Please try again.');
       }
     } catch {
       setInquiryError('Something went wrong. Please try again.');
@@ -2842,30 +2890,6 @@ export default function App() {
                       onChange={(e) => setInquiryForm(f => ({ ...f, message: e.target.value }))}
                       className="w-full border-b border-stone-200 pb-3 text-sm text-stone-800 placeholder:text-stone-300 focus:outline-none focus:border-stone-900 bg-transparent resize-none"
                     />
-                    {/* Image upload */}
-                    <div>
-                      <label className="block text-[9px] uppercase tracking-[0.3em] text-stone-400 font-bold mb-3">Attach Images <span className="text-stone-300 normal-case tracking-normal font-normal">(optional)</span></label>
-                      <label className="flex items-center gap-3 border border-dashed border-stone-300 px-4 py-3 cursor-pointer hover:border-stone-500 transition-colors">
-                        <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-stone-400">Choose files</span>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          multiple
-                          className="hidden"
-                          onChange={(e) => setInquiryImages(Array.from(e.target.files || []))}
-                        />
-                      </label>
-                      {inquiryImages.length > 0 && (
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {inquiryImages.map((file, i) => (
-                            <div key={i} className="flex items-center gap-1.5 bg-stone-100 px-3 py-1.5">
-                              <span className="text-[9px] text-stone-600 font-medium truncate max-w-[140px]">{file.name}</span>
-                              <button onClick={() => setInquiryImages(imgs => imgs.filter((_, j) => j !== i))} className="text-stone-400 hover:text-stone-900 ml-1">×</button>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
                     {inquiryError && (
                       <p className="text-[9px] text-red-500 uppercase tracking-[0.2em] font-bold">{inquiryError}</p>
                     )}
