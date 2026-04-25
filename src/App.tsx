@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, createContext, useContext } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'motion/react';
 import {
   Github,
@@ -26,6 +26,181 @@ import {
   PenTool,
   Maximize2,
 } from 'lucide-react';
+
+// --- i18n ---
+type Lang = 'en' | 'th';
+
+const translations = {
+  en: {
+    // Nav
+    navProjects: 'Projects', navArticles: 'Articles', navMakers: 'Makers',
+    navStudio: 'Studio', navJournal: 'Journal', navWorld: 'World', navContact: 'Contact',
+    available: 'Available', subscribe: 'Subscribe',
+    navTagline: 'Architecture & Design — Sydney, Australia & Khon Kaen, Thailand',
+    // Hero
+    heroBadge: 'Featured Studio — Sydney, Australia',
+    heroSubtitle: 'Documenting architecture and design across Australia and beyond — where precision meets poetic vision.',
+    exploreWork: 'Explore Work', readArticles: 'Read Articles', scroll: 'Scroll',
+    // Pub strip
+    pubLabel: 'Architecture & Design Publication', printEdition: 'Print Edition',
+    // Articles
+    editorial: 'Editorial', latestFeatures: 'Latest Features', readFeature: 'Read Feature',
+    // 3D
+    visualWork: 'Visual Work', rendering: 'Rendering', workflow: 'Workflow', modelling3D: '3D Modelling Process',
+    // Who Am I
+    whoAmI: 'Who Am I', fullStudioProfile: 'Full Studio Profile',
+    whoAmIText1: "I am an Architectural Designer and Drafter shaped by two worlds — the warmth and craft culture of Thailand, where I was born and raised, and the precision and professionalism of Sydney's architectural industry, where I spent eight formative years building my career.",
+    whoAmIText2: "Growing up in Thailand instilled in me an appreciation for material culture, human-scale environments, and the quiet poetry of everyday spaces. Moving to Australia at 19 pushed me to grow independently — working part-time, studying English, earning my degree at UTS, and eventually finding my professional footing at M.A.R.S Architects across a diverse range of commercial, retail, and hospitality projects.",
+    whoAmIText3: "That journey across cultures, cities, and disciplines is what defines how I approach design — with curiosity, adaptability, and a commitment to work that is both technically rigorous and deeply considered. I bring that breadth of experience to every project I take on.",
+    // Projects
+    featuredWork: 'Featured Work', completed: 'Completed', viewFullArchive: 'View Full Archive',
+    // Makers
+    marketplace: 'Marketplace', makersAndMaterials: 'Makers & Materials', viewMarketplace: 'View Marketplace',
+    // Stats
+    involvingProjects: 'Involving Projects', projectsCompleted: 'Projects Completed',
+    yearsExperience: 'Years Experience', cities: 'Cities', countries: 'Countries',
+    // University / Credentials
+    academicWork: 'Academic Work', university: 'University', academicBackground: 'Academic Background',
+    degreeLabel: 'Degree', institutionLabel: 'Institution', locationLabel: 'Location', conferredLabel: 'Conferred',
+    qualifications: 'Qualifications', credentials: 'Credentials',
+    // Studio Profile
+    studioProfile: 'Studio Profile', experienceEducation: 'Experience & Education', downloadCV: 'Download CV',
+    studioQuote: '"I believe in an architecture that is as technically sound as it is emotionally resonant."',
+    studioBio1: "A UTS Architecture graduate with a passion for the technical intricacies of design. With 8 years of experience in Sydney — studying at UTS and working at M.A.R.S (Marcellino Sain Architects) — I've honed my skills in bridging the gap between conceptual sketches and construction-ready documentation.",
+    studioBio2: "I thrive in the details—whether it's coordinating construction drawings or refining the materiality of a facade. My goal is to grow into a versatile architect who understands every layer of the building process.",
+    skillClarity: 'Clarity in Drawings', skillClarityDesc: 'Every plan communicates intent without ambiguity.',
+    skill3D: '3D Visualization', skill3DDesc: 'Rhino & SketchUp to test spatial qualities.',
+    skillBIM: 'BIM Coordination', skillBIMDesc: 'Complex model coordination across disciplines.',
+    skillEnv: 'Environmental Design', skillEnvDesc: 'Sustainable principles from concept to detail.',
+    // Journey
+    personalNarrative: 'Personal Narrative', theJourney: 'The Journey',
+    journeyCaption: 'Bangkok · Sydney · Bangkok',
+    j01label: 'ORIGIN', j01text: 'Born and raised in Thailand. Shaped by craft, curiosity, and an early love of building things.',
+    j02label: 'DEPARTURE', j02text: 'Left home to pursue architectural education in Australia — a leap of intent and ambition.',
+    j03label: 'NEW CHAPTER', j03text: 'A year of beginnings — working part-time, absorbing a new city, studying English, and quietly searching for direction.',
+    j04label: 'EDUCATION', j04text: 'Bachelor of Design in Architecture. Graduated with UTS Capstone Prize.',
+    j05label: 'CAREER', j05text: 'From Intern to Architectural Drafter at Marcellino Sain Architects — honing technical precision across commercial projects.',
+    j06label: 'THE RETURN', j06text: 'Bringing 8 years of study, studio practice, and life in Sydney — returning home with refined skills and a sharpened design sensibility.',
+    // Print / Subscribe
+    theAnnualDesign: 'The Annual Design', publication: 'Publication',
+    printDesc: 'Three times a year, in-depth architectural stories, studio profiles, and design insights — curated and printed for those who look closer.',
+    emailPlaceholder: 'Your email address', subscribeFree: 'Subscribe Free',
+    // Footer
+    footerDesc: 'Architectural Designer & Drafter based in Khon Kaen, Thailand. Available for freelance projects and collaborations.',
+    followStudio: 'Follow the Studio', navigate: 'Navigate',
+    privacy: 'Privacy', terms: 'Terms', sitemap: 'Sitemap', allRightsReserved: 'All Rights Reserved.',
+    // Inquiry modal
+    startProject: 'Start a Project', newEnquiry: 'New Enquiry',
+    messageSent: 'Message Sent', thankYou: "Thank you, I'll be in touch.",
+    yourName: 'Your name', yourEmail: 'Your email', aboutProject: 'Tell me about your project',
+    sending: 'Sending…', sendMessage: 'Send Message',
+    fillFields: 'Please fill in all fields.', somethingWrong: 'Something went wrong. Please try again.',
+    // Project modal
+    roleLabel: 'Role', clientLabel: 'Client', builderLabel: 'Builder',
+    areaLabel: 'Area', designTeamLabel: 'Design Team', photographyLabel: 'Photography',
+    projectGallery: 'Project Gallery', imageLabel: 'Image', imagesLabel: 'Images',
+    viewProject: 'View Project',
+    // World map
+    globalFootprint: 'Global Footprint', whereBeen: "Where I've Been",
+    dragRotate: 'Drag · Rotate · Zoom · Click any country',
+    livedWorked: 'Lived & Worked', travelled: 'Travelled', restOfWorld: 'Rest of World',
+    // Archive
+    projectArchive: 'Project Archive', sortLabel: 'Sort', hoursLabel: 'Hours',
+    nameLabel: 'Name', totalHours: 'Total Hours', close: 'Close',
+    searchPlaceholder: 'Search projects...',
+  },
+  th: {
+    // Nav
+    navProjects: 'โครงการ', navArticles: 'บทความ', navMakers: 'ผู้ผลิต',
+    navStudio: 'สตูดิโอ', navJournal: 'บันทึก', navWorld: 'โลก', navContact: 'ติดต่อ',
+    available: 'ว่างงาน', subscribe: 'สมัครสมาชิก',
+    navTagline: 'สถาปัตยกรรมและการออกแบบ — ซิดนีย์, ออสเตรเลีย & ขอนแก่น, ไทย',
+    // Hero
+    heroBadge: 'สตูดิโอเด่น — ซิดนีย์, ออสเตรเลีย',
+    heroSubtitle: 'บันทึกสถาปัตยกรรมและการออกแบบทั่วออสเตรเลียและที่อื่น ๆ — ที่ความแม่นยำพบกับวิสัยทัศน์เชิงกวี',
+    exploreWork: 'สำรวจผลงาน', readArticles: 'อ่านบทความ', scroll: 'เลื่อน',
+    // Pub strip
+    pubLabel: 'สิ่งพิมพ์สถาปัตยกรรมและการออกแบบ', printEdition: 'ฉบับพิมพ์',
+    // Articles
+    editorial: 'บทบรรณาธิการ', latestFeatures: 'บทความล่าสุด', readFeature: 'อ่านบทความ',
+    // 3D
+    visualWork: 'งานภาพ', rendering: 'งานเรนเดอร์', workflow: 'กระบวนการ', modelling3D: 'กระบวนการสร้างโมเดล 3 มิติ',
+    // Who Am I
+    whoAmI: 'ฉันคือใคร', fullStudioProfile: 'โปรไฟล์สตูดิโอทั้งหมด',
+    whoAmIText1: 'ฉันเป็นนักออกแบบสถาปัตยกรรมและนักเขียนแบบที่ถูกหล่อหลอมจากสองโลก — ความอบอุ่นและวัฒนธรรมงานฝีมือของไทย ที่ที่ฉันเกิดและเติบโต และความแม่นยำและความเป็นมืออาชีพของอุตสาหกรรมสถาปัตยกรรมในซิดนีย์ ที่ที่ฉันใช้เวลาแปดปีสร้างอาชีพ',
+    whoAmIText2: 'การเติบโตในประเทศไทยทำให้ฉันซาบซึ้งกับวัฒนธรรมงานวัสดุ สภาพแวดล้อมในระดับมนุษย์ และบทกวีเงียบของพื้นที่ในชีวิตประจำวัน การย้ายไปออสเตรเลียตอนอายุ 19 ปีผลักดันให้ฉันเติบโตอย่างอิสระ — ทำงานพาร์ทไทม์ เรียนภาษาอังกฤษ สำเร็จการศึกษาที่ UTS และในที่สุดก็ก้าวสู่เส้นทางอาชีพที่ M.A.R.S Architects',
+    whoAmIText3: 'การเดินทางข้ามวัฒนธรรม เมือง และสาขาวิชาต่าง ๆ คือสิ่งที่กำหนดแนวทางการออกแบบของฉัน — ด้วยความอยากรู้ ความยืดหยุ่น และความมุ่งมั่นในงานที่ทั้งเข้มแข็งทางเทคนิคและลึกซึ้งทางความคิด',
+    // Projects
+    featuredWork: 'ผลงานเด่น', completed: 'เสร็จสิ้น', viewFullArchive: 'ดูคลังทั้งหมด',
+    // Makers
+    marketplace: 'ตลาด', makersAndMaterials: 'ผู้ผลิตและวัสดุ', viewMarketplace: 'ดูตลาด',
+    // Stats
+    involvingProjects: 'โครงการที่เกี่ยวข้อง', projectsCompleted: 'โครงการที่เสร็จสิ้น',
+    yearsExperience: 'ปีประสบการณ์', cities: 'เมือง', countries: 'ประเทศ',
+    // University / Credentials
+    academicWork: 'งานวิชาการ', university: 'มหาวิทยาลัย', academicBackground: 'ประวัติการศึกษา',
+    degreeLabel: 'ปริญญา', institutionLabel: 'สถาบัน', locationLabel: 'ที่ตั้ง', conferredLabel: 'วันสำเร็จการศึกษา',
+    qualifications: 'คุณสมบัติ', credentials: 'ใบรับรอง',
+    // Studio Profile
+    studioProfile: 'โปรไฟล์สตูดิโอ', experienceEducation: 'ประสบการณ์และการศึกษา', downloadCV: 'ดาวน์โหลด CV',
+    studioQuote: '"ฉันเชื่อในสถาปัตยกรรมที่มีความแม่นยำทางเทคนิคควบคู่ไปกับการสะท้อนอารมณ์ความรู้สึก"',
+    studioBio1: 'บัณฑิตสถาปัตยกรรมจาก UTS ที่มีความหลงใหลในรายละเอียดทางเทคนิคของการออกแบบ ด้วยประสบการณ์ 8 ปีในซิดนีย์ — ศึกษาที่ UTS และทำงานที่ M.A.R.S (Marcellino Sain Architects) — ฉันได้พัฒนาทักษะในการเชื่อมช่องว่างระหว่างภาพร่างแนวคิดและเอกสารพร้อมก่อสร้าง',
+    studioBio2: 'ฉันเชี่ยวชาญในรายละเอียด — ไม่ว่าจะเป็นการประสานงานแบบก่อสร้างหรือการปรับปรุงวัสดุของด้านหน้าอาคาร เป้าหมายของฉันคือเติบโตเป็นสถาปนิกที่รอบด้านซึ่งเข้าใจทุกชั้นของกระบวนการก่อสร้าง',
+    skillClarity: 'ความชัดเจนในแบบ', skillClarityDesc: 'แผนผังทุกแผ่นสื่อสารความตั้งใจได้อย่างไม่คลุมเครือ',
+    skill3D: 'การแสดงภาพ 3 มิติ', skill3DDesc: 'Rhino และ SketchUp เพื่อทดสอบคุณภาพเชิงพื้นที่',
+    skillBIM: 'การประสานงาน BIM', skillBIMDesc: 'การประสานงานโมเดลที่ซับซ้อนข้ามสาขา',
+    skillEnv: 'การออกแบบสิ่งแวดล้อม', skillEnvDesc: 'หลักการยั่งยืนตั้งแต่แนวคิดจนถึงรายละเอียด',
+    // Journey
+    personalNarrative: 'เรื่องราวส่วนตัว', theJourney: 'การเดินทาง',
+    journeyCaption: 'กรุงเทพฯ · ซิดนีย์ · กรุงเทพฯ',
+    j01label: 'ต้นกำเนิด', j01text: 'เกิดและเติบโตในประเทศไทย ถูกหล่อหลอมด้วยงานฝีมือ ความอยากรู้ และความรักในการสร้างสิ่งต่าง ๆ',
+    j02label: 'การออกเดินทาง', j02text: 'ออกจากบ้านเพื่อศึกษาสถาปัตยกรรมในออสเตรเลีย — ก้าวกล้าด้วยความตั้งใจและความทะเยอทะยาน',
+    j03label: 'บทใหม่', j03text: 'ปีแห่งการเริ่มต้น — ทำงานพาร์ทไทม์ ซึมซับเมืองใหม่ เรียนภาษาอังกฤษ และค้นหาทิศทางอย่างเงียบ ๆ',
+    j04label: 'การศึกษา', j04text: 'ปริญญาตรีสาขาการออกแบบสถาปัตยกรรม สำเร็จการศึกษาพร้อมรางวัล UTS Capstone',
+    j05label: 'อาชีพ', j05text: 'จากนักศึกษาฝึกงานสู่นักเขียนแบบสถาปัตยกรรมที่ Marcellino Sain Architects — ฝึกฝนความแม่นยำทางเทคนิคในโครงการเชิงพาณิชย์',
+    j06label: 'การกลับบ้าน', j06text: 'นำ 8 ปีของการศึกษา การปฏิบัติในสตูดิโอ และชีวิตในซิดนีย์ — กลับบ้านพร้อมทักษะที่ผ่านการฝึกฝนและประสาทการออกแบบที่เฉียบคม',
+    // Print / Subscribe
+    theAnnualDesign: 'การออกแบบประจำปี', publication: 'สิ่งพิมพ์',
+    printDesc: 'สามครั้งต่อปี เรื่องราวสถาปัตยกรรมเชิงลึก โปรไฟล์สตูดิโอ และข้อมูลเชิงลึกด้านการออกแบบ — คัดสรรและพิมพ์สำหรับผู้ที่มองอย่างละเอียด',
+    emailPlaceholder: 'ที่อยู่อีเมลของคุณ', subscribeFree: 'สมัครฟรี',
+    // Footer
+    footerDesc: 'นักออกแบบสถาปัตยกรรมและนักเขียนแบบ ตั้งอยู่ที่ขอนแก่น ประเทศไทย รับงานฟรีแลนซ์และงานร่วมมือ',
+    followStudio: 'ติดตามสตูดิโอ', navigate: 'นำทาง',
+    privacy: 'นโยบาย', terms: 'ข้อกำหนด', sitemap: 'แผนผัง', allRightsReserved: 'สงวนลิขสิทธิ์',
+    // Inquiry modal
+    startProject: 'เริ่มต้นโครงการ', newEnquiry: 'สอบถามใหม่',
+    messageSent: 'ส่งข้อความแล้ว', thankYou: 'ขอบคุณ จะติดต่อกลับเร็ว ๆ นี้',
+    yourName: 'ชื่อของคุณ', yourEmail: 'อีเมลของคุณ', aboutProject: 'เล่าถึงโครงการของคุณ',
+    sending: 'กำลังส่ง…', sendMessage: 'ส่งข้อความ',
+    fillFields: 'กรุณากรอกข้อมูลให้ครบถ้วน', somethingWrong: 'เกิดข้อผิดพลาด กรุณาลองใหม่',
+    // Project modal
+    roleLabel: 'บทบาท', clientLabel: 'ลูกค้า', builderLabel: 'ผู้รับเหมา',
+    areaLabel: 'พื้นที่', designTeamLabel: 'ทีมออกแบบ', photographyLabel: 'การถ่ายภาพ',
+    projectGallery: 'แกลเลอรีโครงการ', imageLabel: 'ภาพ', imagesLabel: 'ภาพ',
+    viewProject: 'ดูโครงการ',
+    // World map
+    globalFootprint: 'รอยเท้าทั่วโลก', whereBeen: 'สถานที่ที่ไปมา',
+    dragRotate: 'ลาก · หมุน · ซูม · คลิกที่ประเทศใดก็ได้',
+    livedWorked: 'อาศัยและทำงาน', travelled: 'เดินทาง', restOfWorld: 'ส่วนอื่นของโลก',
+    // Archive
+    projectArchive: 'คลังโครงการ', sortLabel: 'จัดเรียง', hoursLabel: 'ชั่วโมง',
+    nameLabel: 'ชื่อ', totalHours: 'ชั่วโมงรวม', close: 'ปิด',
+    searchPlaceholder: 'ค้นหาโครงการ...',
+  },
+} as const;
+
+type TKey = keyof typeof translations.en;
+
+const LangContext = createContext<{ lang: Lang; setLang: (l: Lang) => void }>({
+  lang: 'en',
+  setLang: () => {},
+});
+
+const useLang = () => {
+  const { lang, setLang } = useContext(LangContext);
+  const t = (k: TKey): string => translations[lang][k] as string;
+  return { lang, setLang, t };
+};
 
 // --- Types ---
 interface Project {
@@ -358,6 +533,20 @@ const PROJECTS: Project[] = [
   },
 ];
 
+const PROJECTS_TH: Record<number, { description: string; category: string }> = {
+  1:  { category: 'การตกแต่งภายใน', description: 'การออกแบบภายในร้านเสริมสวยหรูหราที่กำหนดด้วยความอบอุ่น สัมผัส และความประณีตสงบ แผงขาวลายขีด ส่วนทองเหลืองอบอุ่น และพื้นผิวเทอร์ราซโซนุ่มนวลสร้างบรรยากาศแห่งความเพลิดเพลินสงบ — พื้นที่ที่ออกแบบให้ผู้มาเยือนทุกคนรู้สึกไม่เร่งรีบ' },
+  6:  { category: 'อาหารและเครื่องดื่ม', description: 'การออกแบบคีออสก์ขนาดกะทัดรัดสำหรับไซต์อเล็กซานเดรียของ BYD ออสเตรเลีย — สร้างสมดุลระหว่างความสามารถในการให้บริการปริมาณสูงกับวัสดุอบอุ่นใกล้สวน ทุกรายละเอียดถูกแก้ปัญหาภายในพื้นที่ 50 ตร.ม. โดยไม่กระทบต่อคุณภาพเชิงพื้นที่' },
+  7:  { category: 'อาหารและเครื่องดื่ม', description: 'บาร์บนดาดฟ้าและพื้นที่พักผ่อนสำหรับ EVT Limited ในฟอร์ติจูดวาลลีย์ — พื้นที่หลบหนีบนท้องฟ้า 250 ตร.ม. ที่ผสมผสานการบริการแบบสบาย ๆ กับวิวเมืองอันกว้างไกล การออกแบบสร้างสมดุลระหว่างช่วงเวลาสังสรรค์แบบโจ่งแจ้งกับพื้นที่พักผ่อนเงียบสงบทั่วดาดฟ้า' },
+  8:  { category: 'ค้าปลีก', description: 'พื้นที่ค้าปลีกเครื่องใช้ในบ้านและเฟอร์นิเจอร์ขนาดใหญ่ 1,000 ตร.ม. ในซีฟอร์ด การออกแบบให้ความสำคัญกับการไหลของลูกค้าที่ใช้งานง่ายและการนำเสนอสินค้าที่สร้างแรงบันดาลใจ สร้างประสบการณ์โชว์รูมที่รู้สึกเป็นการคัดสรรมากกว่าเชิงพาณิชย์' },
+  9:  { category: 'ค้าปลีก', description: 'โชว์รูมเฟอร์นิเจอร์ 250 ตร.ม. ในเซอร์รีฮิลส์ ออกแบบให้รู้สึกน้อยเหมือนร้านค้าและมากเหมือนสภาพแวดล้อมการอยู่อาศัยที่พิจารณาอย่างดี ทุกวิเนตต์ถูกสร้างขึ้นเพื่อแสดงเฟอร์นิเจอร์ในบริบท กระตุ้นให้ผู้มาเยือนชะลอความเร็วและมีส่วนร่วมกับชิ้นส่วนในเชิงพื้นที่' },
+  10: { category: 'อาหารและเครื่องดื่ม', description: 'ร้านขายเนื้อและครัวเชิงพาณิชย์สำหรับ Alamour ในแพดดิงตัน — 250 ตร.ม. ที่แหล่งที่มาและงานฝีมือถูกแสดงออกผ่านทุกการตัดสินใจด้านวัสดุ ไม้ดิบ หินขัด และตู้เย็นเปิดโล่งสร้างพื้นที่ที่ซื่อสัตย์ต่ออาหารที่นำเสนอ' },
+  11: { category: 'ค้าปลีก', description: 'ร้านชุดราตรีและเครื่องประดับบูติกในแพดดิงตัน — 150 ตร.ม. ของความหรูหราที่พิจารณาอย่างดีซึ่งสถาปัตยกรรมถอยลงเพื่อให้เสื้อผ้าพูดแทน ซุ้มโค้งนุ่มนวล ผนังปูนนุ่ม และงานไม้สั่งทำสร้างบรรยากาศส่วนตัวคล้ายแกลเลอรี' },
+  12: { category: 'พาณิชยกรรม', description: 'ศูนย์บริการ 6,500 ตร.ม. สำหรับ BYD ออสเตรเลียในมาสคอต — การตกแต่งเชิงพาณิชย์ขนาดใหญ่ที่สร้างสมดุลระหว่างความต้องการด้านการปฏิบัติการของสภาพแวดล้อมบริการยานยนต์กับเอกลักษณ์เชิงพื้นที่ที่สะอาดและนำหน้าด้านแบรนด์' },
+  13: { category: 'พาณิชยกรรม', description: 'การตกแต่งวิทยาลัย 350 ตร.ม. สำหรับ Kingsford International Institute ในเซอร์รีฮิลส์ — สภาพแวดล้อมการศึกษาที่ออกแบบเพื่อสร้างแรงบันดาลใจในการมุ่งเน้น การทำงานร่วมกัน และความรู้สึกเป็นของสถานที่สำหรับชุมชนนักศึกษานานาชาติ' },
+  14: { category: 'พาณิชยกรรม', description: 'โชว์รูมหลักและเมกาสโตร์สำหรับ BYD ออสเตรเลียในมาสคอต — สภาพแวดล้อมค้าปลีกยานยนต์ขนาดใหญ่ที่ออกแบบเพื่อแสดงสายผลิตภัณฑ์รถยนต์ BYD ทั้งหมด โดยเน้นการดื่มด่ำกับแบรนด์ ความชัดเจนเชิงพื้นที่ และการเดินทางของลูกค้าที่พิจารณาอย่างดี' },
+  15: { category: 'อาหารและเครื่องดื่ม', description: 'แนวคิดคีออสก์คาเฟ่ที่ประณีตสำหรับย่านมาสคอตของ BYD ออสเตรเลีย — พื้นที่การบริการที่เป็นมิตรและกะทัดรัดออกแบบเพื่อเสริมวิทยาเขตโชว์รูม BYD วัสดุอบอุ่นและการจัดพื้นที่ที่พิจารณาอย่างดีสร้างสภาพแวดล้อมต้อนรับสำหรับลูกค้าและผู้มาเยือน' },
+};
+
 // --- Archive Projects (Toggl Track — 204 projects) ---
 interface ArchiveProject {
   name: string;
@@ -577,6 +766,7 @@ const ARCHIVE_CATEGORIES = ['All', 'Architecture', 'Commercial', 'Hospitality', 
 
 // --- Project Archive Modal ---
 function ProjectArchiveModal({ onClose }: { onClose: () => void }) {
+  const { lang, t } = useLang();
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   const [sortBy, setSortBy] = useState<'hours' | 'name'>('hours');
@@ -616,7 +806,7 @@ function ProjectArchiveModal({ onClose }: { onClose: () => void }) {
       {/* Header */}
       <div className="border-b border-stone-200 px-8 md:px-16 py-6 flex items-center justify-between flex-shrink-0">
         <div>
-          <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-400 block mb-1">Project Archive</span>
+          <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-400 block mb-1">{t('projectArchive')}</span>
           <h2 className="text-2xl md:text-3xl font-display font-light text-stone-900">
             {ARCHIVE_PROJECTS.length} Projects · {Math.round(totalHours).toLocaleString()}h Total
           </h2>
@@ -636,7 +826,7 @@ function ProjectArchiveModal({ onClose }: { onClose: () => void }) {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-400" />
           <input
             type="text"
-            placeholder="Search projects..."
+            placeholder={t('searchPlaceholder')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-9 pr-4 py-2.5 text-xs border border-stone-200 bg-white focus:outline-none focus:border-stone-400 font-light text-stone-800 placeholder-stone-400"
@@ -645,15 +835,15 @@ function ProjectArchiveModal({ onClose }: { onClose: () => void }) {
 
         {/* Sort */}
         <div className="flex items-center gap-2">
-          <span className="text-[9px] uppercase tracking-[0.3em] font-bold text-stone-400">Sort</span>
+          <span className="text-[9px] uppercase tracking-[0.3em] font-bold text-stone-400">{t('sortLabel')}</span>
           <button
             onClick={() => setSortBy('hours')}
             className={`px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.25em] border transition-all duration-200 ${sortBy === 'hours' ? 'bg-stone-900 text-white border-stone-900' : 'border-stone-200 text-stone-500 hover:border-stone-400'}`}
-          >Hours</button>
+          >{t('hoursLabel')}</button>
           <button
             onClick={() => setSortBy('name')}
             className={`px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.25em] border transition-all duration-200 ${sortBy === 'name' ? 'bg-stone-900 text-white border-stone-900' : 'border-stone-200 text-stone-500 hover:border-stone-400'}`}
-          >Name</button>
+          >{t('nameLabel')}</button>
         </div>
       </div>
 
@@ -717,7 +907,7 @@ function ProjectArchiveModal({ onClose }: { onClose: () => void }) {
         </div>
         {filtered.length === 0 && (
           <div className="py-24 text-center">
-            <p className="text-sm font-light text-stone-400">No projects found for "{search}"</p>
+            <p className="text-sm font-light text-stone-400">{lang === 'th' ? `ไม่พบโครงการสำหรับ "${search}"` : `No projects found for "${search}"`}</p>
           </div>
         )}
 
@@ -728,7 +918,7 @@ function ProjectArchiveModal({ onClose }: { onClose: () => void }) {
               {filtered.length} projects
             </span>
             <div className="flex items-center gap-3">
-              <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-400">Total Hours</span>
+              <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-400">{t('totalHours')}</span>
               <span className="text-lg font-mono font-light text-stone-800">
                 {filtered.reduce((sum, p) => sum + p.hours, 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}h
               </span>
@@ -950,6 +1140,59 @@ const ARTICLES: Article[] = [
     ],
   },
 ];
+
+const ARTICLES_TH: Record<number, { title: string; excerpt: string; category: string }> = {
+  13: {
+    title: "155 & 155A ถนนสจ๊วต — เบลคเฮิร์สต์",
+    excerpt: "โครงการที่อยู่อาศัยสองหน่วยในเบลคเฮิร์สต์ — สองยูนิตที่ออกแบบอย่างพิถีพิถันสำหรับที่ดินชานเมืองขนาดกะทัดรัด การออกแบบจัดการกับการนำเสนอหน้าถนน ความเป็นส่วนตัว และแสงธรรมชาติ ด้วยส่วนหน้าอาคารที่เป็นระเบียบ การจัดโรงรถที่พิจารณาอย่างดี และจานวัสดุที่เหมาะสมกับบริบทชานเมืองทางใต้ของซิดนีย์",
+    category: "โครงการปัจจุบัน",
+  },
+  12: {
+    title: "613–615 ถนนพิตต์วอเตอร์ — ดีไวย์",
+    excerpt: "โครงการที่ใหญ่ที่สุดในสตูดิโอ — การพัฒนาที่อยู่อาศัยขนาดใหญ่บนถนนพิตต์วอเตอร์ ดีไวย์ ครอบคลุมชั่วโมงการออกแบบกว่า 1,688 ชั่วโมง โครงการรวมตัวเลือกอาคารหลายรูปแบบ ประเภทยูนิต และเอกสารรายละเอียดทั่วทั้งไซต์ผสมผสานขนาดใหญ่บนชายฝั่งทางเหนือของซิดนีย์",
+    category: "โครงการปัจจุบัน",
+  },
+  11: {
+    title: "27 ถนนไทร์วิตต์ — มาเรบรา",
+    excerpt: "โครงการสถาปัตยกรรมที่อยู่อาศัยในมาเรบรา — บ้านหันหน้าสู่ถนนที่ออกแบบอย่างเหมาะเจาะ สร้างสมดุลบนที่ดินลาดเอียงด้วยความชัดเจนและความพอดี องค์ประกอบภายนอกสร้างสมดุลระหว่างความเป็นส่วนตัวและความเปิดโล่งด้วยรูปทรงเรขาคณิตสะอาดและจานวัสดุที่แข็งแกร่งเหมาะกับบริบทชานเมืองชายฝั่ง",
+    category: "โครงการปัจจุบัน",
+  },
+  10: {
+    title: "แมคควารีพาร์ค — การพัฒนาแบบผสมผสาน",
+    excerpt: "การศึกษาการพัฒนาแบบผสมผสานสำหรับแมคควารีพาร์ค สำรวจขนาดอาคาร ข้อจำกัดความสูง และตัวเลือกการออกแบบภายในขอบเขตการวางผังไซต์ การวิเคราะห์ขีดจำกัดความสูงอย่างละเอียดและการสร้างแบบจำลองเชิงปริมาตรทดสอบความเป็นไปได้ในหลายสถานการณ์การออกแบบ",
+    category: "โครงการปัจจุบัน",
+  },
+  4: {
+    title: "68 ถนนฮาร์เบอร์ — ฟูรามา ดาร์ลิ่งฮาร์เบอร์: ล็อบบี้และโรงอาหาร",
+    excerpt: "การเปลี่ยนแปลงด้านการบริการที่กำลังดำเนินอยู่ที่โรงแรมฟูรามาอันโดดเด่นบนถนนฮาร์เบอร์ — ออกแบบล็อบบี้และโรงอาหารใหม่ให้เป็นการต้อนรับที่อบอุ่นและมีชั้นเชิงสำหรับแขกที่มาถึงขอบดาร์ลิ่งฮาร์เบอร์ การออกแบบดึงเอาวัสดุนุ่มนวลและแสงสว่างที่ใส่ใจมาสร้างความรู้สึกแห่งการมาถึงที่ทั้งประณีตและกลมกลืน",
+    category: "โครงการปัจจุบัน",
+  },
+  5: {
+    title: "58 & 60 ถนนเบเลมบา — โรสแลนด์ส",
+    excerpt: "การเปลี่ยนแปลงที่อยู่อาศัยที่กำลังดำเนินอยู่ทั่วสองที่ดินติดกันในโรสแลนด์ส — ออกแบบอย่างใส่ใจเพื่อสร้างสมดุลระหว่างความเป็นส่วนตัว การเชื่อมต่อ และจังหวะของชีวิตประจำวัน โครงการสำรวจว่าการวางแผนพื้นที่ที่รอบคอบและความอบอุ่นของวัสดุสามารถยกระดับการอยู่อาศัยในชานเมืองให้เป็นสิ่งที่รู้สึกได้จริงได้อย่างไร",
+    category: "โครงการปัจจุบัน",
+  },
+  6: {
+    title: "K5 Monash Civic — แนวคิดเฟอร์นิเจอร์และการตกแต่งภายใน",
+    excerpt: "แนวคิดเฟอร์นิเจอร์และการตกแต่งภายในที่กำลังดำเนินอยู่สำหรับการตกแต่ง K5 Monash Civic — คัดเลือกชุดชิ้นส่วนที่พิจารณาอย่างดีซึ่งสร้างสมดุลระหว่างฟังก์ชันสาธารณะกับความอบอุ่นและเอกลักษณ์ การเลือกแต่ละชิ้นตอบสนองต่อขนาดและวัตถุประสงค์ของพื้นที่ สร้างสภาพแวดล้อมที่ทั้งมีจุดประสงค์และต้อนรับ",
+    category: "โครงการปัจจุบัน",
+  },
+  7: {
+    title: "1 เคิร์บบี้วอล์ค — เซตแลนด์",
+    excerpt: "การออกแบบแนวคิดที่กำลังดำเนินอยู่สำหรับล็อบบี้และพื้นที่อำนวยความสะดวกของที่อยู่อาศัยที่ 1 Kirby Walk เซตแลนด์ — โครงการที่สำรวจว่าความอบอุ่นและวัสดุสามารถนำมาใช้ในการพัฒนาที่อยู่อาศัยขนาดใหญ่โดยไม่สูญเสียความเป็นส่วนตัวได้อย่างไร ไม้ หิน และแสงสว่างที่ใส่ใจทำงานร่วมกันเพื่อสร้างความรู้สึกแห่งการมาถึงที่รู้สึกเหมือนที่อยู่อาศัยจริง",
+    category: "โครงการปัจจุบัน",
+  },
+  9: {
+    title: "1 เวสต์สตรีท — นอร์ธซิดนีย์",
+    excerpt: "การตกแต่งสำนักงานเชิงพาณิชย์ใจกลางนอร์ธซิดนีย์ — ออกแบบเพื่อส่งเสริมการทำงานร่วมกันและสมาธิภายในพื้นที่กะทัดรัด เส้นสะอาด การเลือกวัสดุที่พิจารณาอย่างดี และจานสีที่เป็นกลางสร้างสภาพแวดล้อมวิชาชีพที่รู้สึกทั้งประณีตและเข้าถึงได้",
+    category: "โครงการปัจจุบัน",
+  },
+  8: {
+    title: "12 ถนนสจ๊วต — บ้านพักวารูงา",
+    excerpt: "การตกแต่งภายในที่อยู่อาศัยที่อบอุ่นสำหรับบ้านครอบครัววารูงา — มุ่งเน้นที่พื้นที่ครัวและห้องอาหารที่ประณีตซึ่งสร้างสมดุลระหว่างฟังก์ชันในชีวิตประจำวันและวัสดุที่ใส่ใจ งานไม้ พื้นผิวหินนุ่มนวล และแสงสว่างหลายชั้นนำความรู้สึกสงบของบ้านมาสู่หัวใจของบ้าน",
+    category: "โครงการปัจจุบัน",
+  },
+};
 
 const MAKERS: Maker[] = [
   {
@@ -1290,6 +1533,52 @@ const MODEL_SLIDES = [
   },
 ];
 
+const MODEL_SLIDES_TH: { title: string; description: string }[] = [
+  { title: "ทางเข้าโชว์รูม — มุมมองจากถนน", description: "เรนเดอร์ภายนอกแบบถ่ายจริงของทางเข้า BYD Megastore — จับภาพส่วนหน้าอาคารที่นำหน้าด้วยแบรนด์ กระจกเต็มความสูง และลำดับการเข้าถึงที่คัดสรร" },
+  { title: "ภายในโชว์รูม — พื้นที่จัดแสดง", description: "เรนเดอร์ภายในพื้นที่จัดแสดงหลัก — พื้นที่กว้างและเต็มไปด้วยแสงออกแบบเพื่อแสดงสายผลิตภัณฑ์รถยนต์ BYD ทั้งหมดด้วยความชัดเจนและความแม่นยำด้านแบรนด์" },
+  { title: "โชว์รูม — มุมมอง 03", description: "เรนเดอร์สำรวจความลึกเชิงพื้นที่ของพื้นจัดแสดง — ช่องจอดรถถูกกรอบด้วยกริดเพดานสะอาดและกลยุทธ์แสงสว่างที่ใส่ใจ" },
+  { title: "โชว์รูม — มุมมอง 04", description: "มุมมองด้านข้างของภายในโชว์รูม — เน้นที่วัสดุ พื้นสำเร็จรูป และความสัมพันธ์ระหว่างรถยนต์กับสภาพแวดล้อมค้าปลีกโดยรอบ" },
+  { title: "โชว์รูม — มุมมอง 05", description: "เรนเดอร์ของโซนโชว์รูมด้านหลัง — จับภาพปริมาตรเชิงพื้นที่ทั้งหมดและป้ายสัญลักษณ์แบรนด์ที่ประสานงานกันตลอดผนังด้านหลัง" },
+  { title: "โชว์รูม — มุมมอง 06", description: "เรนเดอร์ยามเย็นของโชว์รูมที่เปิดใช้แสงประดิษฐ์ — แสดงกลยุทธ์แสงสว่างและผลกระทบต่อสภาพแวดล้อมแบรนด์" },
+  { title: "โชว์รูม — มุมมอง 07", description: "เรนเดอร์มุมกว้างของโชว์รูมที่ความจุเต็ม — ช่องจอดรถทุกช่องถูกครอบครอง แสดงประสิทธิภาพเชิงพื้นที่ของผังพื้น 6,500 ตร.ม." },
+  { title: "โชว์รูม — มุมมอง 08", description: "เรนเดอร์เจาะจงโซนรับลูกค้าและที่ปรึกษา — สร้างสมดุลระหว่างฟังก์ชันการปฏิบัติงานกับประสบการณ์เชิงพื้นที่ที่อบอุ่นและระดับพรีเมียม" },
+  { title: "โชว์รูม — มุมมอง 09", description: "เรนเดอร์รายละเอียดของการจัดช่องจัดแสดง — รถยนต์นำเสนอบนฉากหลังวัสดุที่ประณีตพร้อมแสงเน้นที่ควบคุม" },
+  { title: "โชว์รูม — มุมมอง 10", description: "มุมมองสูงของโชว์รูม — แสดงความสูงของเพดาน กริดโครงสร้าง และการผสมผสานของแสงธรรมชาติและแสงประดิษฐ์ตลอดแผ่นพื้น" },
+  { title: "โชว์รูม — มุมมอง 11", description: "เรนเดอร์ภายนอกยามพลบค่ำสุดท้ายของ BYD Megastore — แสดงส่วนหน้าอาคารที่ส่องสว่างและผลกระทบทางสายตาของการมีอยู่ของแบรนด์บนถนน" },
+  { title: "แรมป์โชว์รูม — มุมมองโมเดล 3D", description: "มุมมองโมเดล 3D ของแรมป์รถยนต์ภายใน — แสดงเรขาคณิตโครงสร้าง ความสูงช่องว่าง และการไหลของผังโชว์รูมหลายชั้น" },
+  { title: "คีออสก์คาเฟ่ — มุมมองภายใน", description: "เรนเดอร์มุมมองภายในของ BYD Cafe Kiosk — พื้นที่การบริการที่อบอุ่นใกล้สวนออกแบบเพื่อเสริมวิทยาเขตโชว์รูมที่กว้างขวาง" },
+  { title: "คีออสก์คาเฟ่ — มุมมองเคาน์เตอร์", description: "เรนเดอร์เจาะจงที่เคาน์เตอร์บริการ — วัสดุ รายละเอียดงานไม้ และความสัมพันธ์ระหว่างสถานีบาริสต้าและมุมมองสวน" },
+  { title: "คีออสก์คาเฟ่ — พื้นที่นั่ง", description: "เรนเดอร์มุมมองของโซนนั่ง — การจัดวางเฟอร์นิเจอร์กะทัดรัดและใส่ใจภายในพื้นที่ 50 ตร.ม. โดยไม่กระทบต่อคุณภาพเชิงพื้นที่" },
+  { title: "ห้องจัดแสดง — มุมมองจากถนน", description: "เรนเดอร์ภายนอกแบบถ่ายจริงของห้องจัดแสดงขาย — ศาลาสองชั้นพร้อมฉากไม้ กระจกสูงสองชั้น และป้ายสัญลักษณ์โครงการ 'one'" },
+  { title: "ห้องจัดแสดง — มุมมอง 02", description: "เรนเดอร์ภายนอกที่สองจากมุมถนนที่เปลี่ยนไป — จับภาพหลังคาคลุม ร่นภูมิทัศน์ และภาพการตลาดหอคอยบนส่วนหน้าอาคาร" },
+  { title: "ห้องจัดแสดง — มุมมอง 03", description: "เรนเดอร์ภายนอกกว้างของห้องจัดแสดงภายในบริบทไซต์ — แสดงความกว้างเต็มของอาคาร เรือนยอดต้นไม้ที่โตเต็มที่ และประสบการณ์การมาถึงของคนเดินเท้า" },
+  { title: "ส่วนหน้าถนน — มุมมอง 01", description: "เรนเดอร์ภายนอกของที่พักอาศัยถนน Tyrwhitt — องค์ประกอบหันหน้าสู่ถนนที่พิจารณาอย่างดีซึ่งจัดการกับที่ดินลาดเอียงด้วยรูปทรงเรขาคณิตสะอาดและจานวัสดุที่แข็งแกร่ง" },
+  { title: "ส่วนหน้าถนน — มุมมอง 02", description: "เรนเดอร์ภายนอกที่สองสำรวจความลึกของส่วนหน้าอาคาร เงาและแสง และความสัมพันธ์ระหว่างของแข็งและช่องว่างตลอดระดับชั้นหันหน้าสู่ถนน" },
+  { title: "ส่วนหน้าถนน — มุมมอง 03", description: "มุมมองภายนอกเอียงจับภาพโปรไฟล์อาคารทั้งหมด ลำดับทางเข้า และวัสดุของบริบทชานเมืองชายฝั่ง" },
+  { title: "อาคาร A — ตัวเลือก 01", description: "ตัวเลือกมวลสารเรนเดอร์สำหรับอาคาร A — สำรวจรูปแบบหอคอย การถอยร่นฐาน และการแสดงออกของส่วนหน้าอาคารสำหรับการพัฒนาแบบผสมผสานถนน Pittwater" },
+  { title: "อาคาร A — ตัวเลือก 02", description: "การออกแบบส่วนหน้าอาคารทางเลือกสำหรับอาคาร A — ปรับปรุงกริดระเบียง โซนวัสดุ และน้ำหนักทางสายตาของหอคอยเหนือฐาน" },
+  { title: "อาคาร A — ตัวเลือก 03", description: "ตัวเลือกการออกแบบที่สามทดสอบจานส่วนหน้าอาคารที่แตกต่าง — ชั้นบนสว่างกว่าเทียบกับฐานหนักกว่า พร้อมขอบระเบียงที่มีรายละเอียด" },
+  { title: "อาคาร A — ตัวเลือก 04", description: "ตัวเลือกมวลสารที่ต้องการสุดท้ายรวบรวมการแสดงออกของส่วนหน้าอาคาร วัสดุ และการกระตุ้นระดับถนนของฐานค้าปลีกชั้นล่าง" },
+  { title: "ยูนิต AG04 — มุมมอง 01", description: "เรนเดอร์ภายในของอพาร์ตเมนต์ชั้นล่าง AG04 — พื้นที่อยู่อาศัยและรับประทานอาหารแบบเปิดโล่งพร้อมเข้าถึงสวนโดยตรงและจานวัสดุที่พิจารณาอย่างดี" },
+  { title: "ยูนิต AG04 — มุมมอง 02", description: "โซนครัวและรับประทานอาหารของ AG04 — งานไม้ประณีต หินคาวน์เตอร์ และการเชื่อมต่อระหว่างพื้นที่อยู่อาศัยภายในกับสวนส่วนตัวภายนอก" },
+  { title: "ยูนิต AG04 — มุมมอง 03", description: "มุมมองพื้นที่อยู่อาศัยของ AG04 — กระจกเต็มความสูง แสงสว่างหลายชั้น และจานวัสดุอบอุ่นสร้างความสงบของบ้านภายในการพัฒนาที่อยู่อาศัย" },
+  { title: "ยูนิต AG04 — มุมมอง 04", description: "เรนเดอร์ภายในสุดท้ายของ AG04 พร้อมเฟอร์นิเจอร์ครบครัน — แสดงคุณภาพเชิงพื้นที่และความสามารถในการอยู่อาศัยของประเภทชั้นล่าง" },
+  { title: "ถนน Stuart — มุมมอง 01", description: "เรนเดอร์ภายนอกของที่พักอาศัยสองหน่วยเบลคเฮิร์สต์ — องค์ประกอบส่วนหน้าอาคารหันหน้าสู่ถนนพร้อมการรวมโรงรถที่พิจารณาอย่างดีและจานวัสดุที่เหมาะกับบริบทชานเมืองทางใต้ของซิดนีย์" },
+  { title: "ถนน Stuart — มุมมอง 02", description: "มุมมองภายนอกที่สอง — สำรวจความลึกของส่วนหน้าอาคาร เงาและแสง และความสัมพันธ์ระหว่างสองยูนิตในฐานะองค์ประกอบภูมิทัศน์ถนนที่ประกอบกัน" },
+  { title: "ถนน Stuart — มุมมอง 03", description: "มุมมองถนนเอียงจับภาพความกว้างเต็มของไซต์ — ทั้งสองยูนิตถูกแก้ปัญหาเป็นคู่ที่เป็นหนึ่งเดียวแต่แตกต่างกันภายในภูมิทัศน์ถนนชานเมือง" },
+  { title: "ถนน Stuart — โรงรถเปิด", description: "เรนเดอร์พร้อมประตูโรงรถเปิด — แสดงการรวมทางสายตาของโรงรถเข้ากับองค์ประกอบส่วนหน้าอาคารและผลกระทบต่อการนำเสนอหน้าถนน" },
+  { title: "ถนน Stuart — โรงรถปิด", description: "เรนเดอร์พร้อมประตูโรงรถปิด — แสดงองค์ประกอบที่หันหน้าสู่ถนนที่ต้องการโดยแผงโรงรถอ่านเป็นองค์ประกอบที่แก้ปัญหาแล้วของส่วนหน้าอาคาร" },
+  { title: "โชว์รูม Riedel — มุมมองจากถนน", description: "เรนเดอร์ภายนอกของโชว์รูมแก้ว Riedel ที่ 1 West Street — ส่วนหน้าอาคารสีเข้ม แถบป้ายสีแดง และด้านหน้าร้านกระจกเต็มความสูงในที่อยู่ระดับพรีเมียมนอร์ธซิดนีย์" },
+  { title: "โชว์รูม Riedel — มุมมองมุม", description: "มุมมองมุมจับภาพป้ายแบรนด์ Riedel, Spiegelau และ Nachtmann ตลอดทั้งสองระดับชั้นหันหน้าสู่ถนนพร้อมหลังคาทางเข้าจั่วขั้น" },
+  { title: "ภายนอก — มุมมอง 01", description: "เรนเดอร์ภายนอกของโชว์รูม BYD Haberfield บนถนน Parramatta — ส่วนหน้าอาคารค้าปลีกยานยนต์ที่นำหน้าด้วยแบรนด์ออกแบบเพื่อการมองเห็นบนถนนสายหลักและการมีส่วนร่วมของลูกค้า" },
+  { title: "ภายนอก — มุมมอง 02", description: "มุมมองภายนอกที่สองจับภาพความกว้างเต็มของส่วนหน้าอาคาร การวางป้าย และความสัมพันธ์ระหว่างทางเข้าโชว์รูมและขอบถนน" },
+  { title: "ภายในสำนักงาน — มุมมอง 01", description: "เรนเดอร์ภายในของโซนสำนักงานพนักงาน — พื้นที่ทำงานที่สะอาดและใช้งานได้รวมอยู่ในอาคารโชว์รูมด้วยจานวัสดุที่พิจารณาอย่างดี" },
+  { title: "ภายในสำนักงาน — มุมมอง 02", description: "มุมมองภายในสำนักงานที่สองสำรวจผังโต๊ะ กลยุทธ์แสงสว่าง และความสัมพันธ์เชิงพื้นที่ระหว่างสถานีทำงานและเส้นรอบนอกกระจก" },
+  { title: "ภายในสำนักงาน — มุมมอง 03", description: "เรนเดอร์ภายในสำนักงานที่สามพร้อมเฟอร์นิเจอร์ครบครัน — แสดงคุณภาพของสภาพแวดล้อมการทำงานภายในวิทยาเขต BYD Haberfield" },
+  { title: "ไอโซเมตริกสำนักงาน — มุมมอง 01", description: "เรนเดอร์ไอโซเมตริกของการตกแต่งสำนักงาน — เปิดเผยการจัดระเบียบเชิงพื้นที่ การจัดเฟอร์นิเจอร์ และผังรวมของพื้นที่ทำงานของพนักงาน" },
+  { title: "ไอโซเมตริกสำนักงาน — มุมมอง 02", description: "มุมมองไอโซเมตริกที่สองของสำนักงาน — แสดงขอบเขตทั้งหมดของการตกแต่งจากมุมสูง พร้อมโซนและเส้นทางการสัญจรที่แก้ปัญหาชัดเจน" },
+];
+
 const EXPERIENCE: Experience[] = [
   {
     year: "Feb 2020 — Dec 2022",
@@ -1321,6 +1610,29 @@ const EXPERIENCE: Experience[] = [
   },
 ];
 
+const EXPERIENCE_TH: { title: string; company: string; description: string }[] = [
+  {
+    title: 'ปริญญาตรีสาขาการออกแบบสถาปัตยกรรม',
+    company: 'มหาวิทยาลัยเทคโนโลยีซิดนีย์ ออสเตรเลีย',
+    description: 'ศึกษาสถาปัตยกรรมโดยเน้นการออกแบบเชิงพื้นที่ เอกสารทางเทคนิค และความสัมพันธ์ระหว่างรูปแบบที่ก่อสร้างและประสบการณ์มนุษย์',
+  },
+  {
+    title: 'นักศึกษาฝึกงานสถาปัตยกรรม',
+    company: 'M.A.R.S (Marcellino Sain Architects), ซิดนีย์, ออสเตรเลีย',
+    description: 'การฝึกงานเริ่มต้นเพื่อพัฒนาทักษะพื้นฐานด้านแบบสถาปัตยกรรม การสร้างโมเดล SketchUp และการทำงานในสตูดิโอ',
+  },
+  {
+    title: 'นักเขียนแบบสถาปัตยกรรม',
+    company: 'M.A.R.S (Marcellino Sain Architects), ซิดนีย์, ออสเตรเลีย',
+    description: 'บทบาทประจำในการจัดทำแบบสถาปัตยกรรมและแบบก่อสร้างสำหรับโครงการเชิงพาณิชย์ ค้าปลีก และการบริการ ทักษะได้แก่ การจัดทำเอกสารสถาปัตยกรรม แบบก่อสร้าง การประสานงาน และการสร้างโมเดล 3 มิติ',
+  },
+  {
+    title: 'นักเขียนแบบสถาปัตยกรรม',
+    company: 'Nissa Group, ขอนแก่น, ประเทศไทย',
+    description: 'บทบาทอาวุโสดูแลงานเอกสารสถาปัตยกรรมและการก่อสร้าง พร้อมจัดการการประสานงานโครงการและกระบวนการทำงานของทีมในโครงการออกแบบต่าง ๆ',
+  },
+];
+
 const PROCESS_STEPS = [
   {
     title: "Research & Site",
@@ -1348,6 +1660,7 @@ const PROCESS_STEPS = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { lang, setLang, t } = useLang();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -1356,13 +1669,13 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Projects', href: '#projects' },
-    { name: 'Articles', href: '#articles' },
-    { name: 'Makers', href: '#makers' },
-    { name: 'Studio', href: '#about' },
-    { name: 'Journal', href: '#journal' },
-    { name: 'World', href: '#worldmap' },
-    { name: 'Contact', href: '#contact' },
+    { name: t('navProjects'), href: '#projects' },
+    { name: t('navArticles'), href: '#articles' },
+    { name: t('navMakers'), href: '#makers' },
+    { name: t('navStudio'), href: '#about' },
+    { name: t('navJournal'), href: '#journal' },
+    { name: t('navWorld'), href: '#worldmap' },
+    { name: t('navContact'), href: '#contact' },
   ];
 
   return (
@@ -1370,7 +1683,7 @@ const Navbar = () => {
       <div className="max-w-[1400px] mx-auto px-8">
         {!isScrolled && (
           <div className="flex justify-center mb-4">
-            <span className="text-[9px] uppercase tracking-[0.5em] text-white/60 font-bold">Architecture & Design — Sydney, Australia & Khon Kaen, Thailand</span>
+            <span className="text-[9px] uppercase tracking-[0.5em] text-white/60 font-bold">{t('navTagline')}</span>
           </div>
         )}
         <div className="flex items-center justify-between">
@@ -1396,13 +1709,21 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Language toggle */}
+            <button
+              onClick={() => setLang(lang === 'en' ? 'th' : 'en')}
+              className={`hidden lg:flex items-center gap-1 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] border transition-all duration-300 ${isScrolled ? 'border-stone-300 text-stone-500 hover:border-stone-900 hover:text-stone-900' : 'border-white/30 text-white/60 hover:border-white hover:text-white'}`}
+              title="Toggle language"
+            >
+              {lang === 'en' ? 'TH' : 'EN'}
+            </button>
             {/* Available for work badge */}
             <div className="hidden lg:flex items-center gap-2">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </span>
-              <span className={`text-[9px] font-bold uppercase tracking-[0.2em] ${isScrolled ? 'text-green-600' : 'text-green-400'}`}>Available</span>
+              <span className={`text-[9px] font-bold uppercase tracking-[0.2em] ${isScrolled ? 'text-green-600' : 'text-green-400'}`}>{t('available')}</span>
             </div>
             <button className={`hidden lg:flex p-2 transition-colors ${isScrolled ? 'text-stone-400 hover:text-stone-900' : 'text-white/70 hover:text-white'}`}>
               <Search className="w-4 h-4" />
@@ -1411,7 +1732,7 @@ const Navbar = () => {
               href="#contact"
               className={`hidden lg:flex items-center px-5 py-2 text-[9px] font-bold uppercase tracking-[0.3em] border transition-all duration-300 ${isScrolled ? 'border-stone-900 text-stone-900 hover:bg-stone-900 hover:text-white' : 'border-white/60 text-white hover:bg-white hover:text-stone-900'}`}
             >
-              Subscribe
+              {t('subscribe')}
             </a>
             <button
               className={`lg:hidden p-2 ${isScrolled ? 'text-stone-900' : 'text-white'}`}
@@ -1441,6 +1762,13 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
+            {/* Mobile lang toggle */}
+            <button
+              onClick={() => { setLang(lang === 'en' ? 'th' : 'en'); setIsMobileMenuOpen(false); }}
+              className="text-left text-sm font-bold uppercase tracking-[0.3em] text-stone-400 hover:text-stone-900 transition-colors"
+            >
+              {lang === 'en' ? '🇹🇭 ภาษาไทย' : '🇬🇧 English'}
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -1450,6 +1778,7 @@ const Navbar = () => {
 
 // --- Project Modal ---
 const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => void }) => {
+  const { t } = useLang();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const allImages = project.gallery && project.gallery.length > 0 ? project.gallery : [project.image];
 
@@ -1519,36 +1848,36 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
           <div className="lg:col-span-5">
             <div className="grid grid-cols-2 gap-x-8 gap-y-7">
               <div>
-                <span className="text-[9px] uppercase tracking-widest text-stone-600 font-bold mb-2 block">Role</span>
+                <span className="text-[9px] uppercase tracking-widest text-stone-600 font-bold mb-2 block">{t('roleLabel')}</span>
                 <span className="text-xs text-stone-300 font-medium">{project.role}</span>
               </div>
               {project.client && (
                 <div>
-                  <span className="text-[9px] uppercase tracking-widest text-stone-600 font-bold mb-2 block">Client</span>
+                  <span className="text-[9px] uppercase tracking-widest text-stone-600 font-bold mb-2 block">{t('clientLabel')}</span>
                   <span className="text-xs text-stone-300 font-medium">{project.client}</span>
                 </div>
               )}
               {project.builder && (
                 <div>
-                  <span className="text-[9px] uppercase tracking-widest text-stone-600 font-bold mb-2 block">Builder</span>
+                  <span className="text-[9px] uppercase tracking-widest text-stone-600 font-bold mb-2 block">{t('builderLabel')}</span>
                   <span className="text-xs text-stone-300 font-medium">{project.builder}</span>
                 </div>
               )}
               {project.area && (
                 <div>
-                  <span className="text-[9px] uppercase tracking-widest text-stone-600 font-bold mb-2 block">Area</span>
+                  <span className="text-[9px] uppercase tracking-widest text-stone-600 font-bold mb-2 block">{t('areaLabel')}</span>
                   <span className="text-xs text-stone-300 font-medium">{project.area}</span>
                 </div>
               )}
               {project.designTeam && (
                 <div className="col-span-2">
-                  <span className="text-[9px] uppercase tracking-widest text-stone-600 font-bold mb-2 block">Design Team</span>
+                  <span className="text-[9px] uppercase tracking-widest text-stone-600 font-bold mb-2 block">{t('designTeamLabel')}</span>
                   <span className="text-xs text-stone-300 font-medium">{project.designTeam}</span>
                 </div>
               )}
               {project.photographer && (
                 <div className="col-span-2">
-                  <span className="text-[9px] uppercase tracking-widest text-stone-600 font-bold mb-2 block">Photography</span>
+                  <span className="text-[9px] uppercase tracking-widest text-stone-600 font-bold mb-2 block">{t('photographyLabel')}</span>
                   <span className="text-xs text-stone-300 font-medium">{project.photographer}</span>
                 </div>
               )}
@@ -1559,7 +1888,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
         {/* Gallery grid */}
         <div>
           <h4 className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-600 mb-10">
-            Project Gallery — {allImages.length} {allImages.length === 1 ? 'Image' : 'Images'}
+            {t('projectGallery')} — {allImages.length} {allImages.length === 1 ? t('imageLabel') : t('imagesLabel')}
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {allImages.map((img, i) => (
@@ -1645,7 +1974,10 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
 
 // --- Project Feature Item ---
 // --- Hero Project Card (first item, full-width) ---
-const ProjectHeroCard = ({ project, onOpen }: { project: Project; onOpen: () => void }) => (
+const ProjectHeroCard = ({ project, onOpen }: { project: Project; onOpen: () => void }) => {
+  const { lang, t } = useLang();
+  const pth = lang === 'th' ? PROJECTS_TH[project.id] : undefined;
+  return (
   <motion.div
     initial={{ opacity: 0, y: 40 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -1661,18 +1993,15 @@ const ProjectHeroCard = ({ project, onOpen }: { project: Project; onOpen: () => 
         className="w-full h-full object-cover transition-transform duration-[3s] ease-out group-hover:scale-105 opacity-75"
         referrerPolicy="no-referrer"
       />
-      {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-stone-900/80 via-stone-900/30 to-transparent" />
-      {/* Top badges */}
       <div className="absolute top-8 left-8 flex items-center gap-3">
         <span className="px-3 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 text-[9px] font-bold uppercase tracking-[0.25em] text-white">
-          {project.category}
+          {pth?.category ?? project.category}
         </span>
         <span className="px-3 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 text-[9px] font-bold uppercase tracking-[0.25em] text-white/70">
           {project.year}
         </span>
       </div>
-      {/* Content overlay */}
       <div className="absolute bottom-0 left-0 p-8 md:p-12 max-w-2xl">
         <div className="flex items-center gap-2 mb-4 text-[9px] font-mono text-white/50 uppercase tracking-widest">
           <MapPin className="w-3 h-3" /> {project.location}
@@ -1681,18 +2010,18 @@ const ProjectHeroCard = ({ project, onOpen }: { project: Project; onOpen: () => 
           {project.title}
         </h3>
         <p className="text-sm text-white/70 font-light leading-relaxed mb-6 max-w-lg">
-          {project.description}
+          {pth?.description ?? project.description}
         </p>
         <div className="flex items-center gap-4">
           <div className="flex flex-col">
-            <span className="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-0.5">Role</span>
+            <span className="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-0.5">{t('roleLabel')}</span>
             <span className="text-xs text-white/80 font-medium">{project.role}</span>
           </div>
           {project.area && (
             <>
               <span className="text-white/20">|</span>
               <div className="flex flex-col">
-                <span className="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-0.5">Area</span>
+                <span className="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-0.5">{t('areaLabel')}</span>
                 <span className="text-xs text-white/80 font-medium">{project.area}</span>
               </div>
             </>
@@ -1701,23 +2030,26 @@ const ProjectHeroCard = ({ project, onOpen }: { project: Project; onOpen: () => 
             <>
               <span className="text-white/20">|</span>
               <div className="flex flex-col">
-                <span className="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-0.5">Client</span>
+                <span className="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-0.5">{t('clientLabel')}</span>
                 <span className="text-xs text-white/80 font-medium">{project.client}</span>
               </div>
             </>
           )}
         </div>
       </div>
-      {/* View cta */}
       <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-white/50 group-hover:text-white transition-colors duration-500">
-        View Project <ArrowRight className="w-3 h-3" />
+        {t('viewProject')} <ArrowRight className="w-3 h-3" />
       </div>
     </div>
   </motion.div>
-);
+  );
+};
 
 // --- Grid Project Card (remaining items) ---
-const ProjectItem = ({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) => (
+const ProjectItem = ({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) => {
+  const { lang, t } = useLang();
+  const pth = lang === 'th' ? PROJECTS_TH[project.id] : undefined;
+  return (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -1726,7 +2058,6 @@ const ProjectItem = ({ project, index, onOpen }: { project: Project; index: numb
     className="group cursor-pointer flex flex-col"
     onClick={onOpen}
   >
-    {/* Image */}
     <div className="aspect-[3/2] overflow-hidden bg-stone-100 soft-shadow relative mb-0 rounded-xl">
       <img
         src={project.image}
@@ -1736,14 +2067,12 @@ const ProjectItem = ({ project, index, onOpen }: { project: Project; index: numb
       />
       <div className="absolute top-5 left-5 flex gap-2">
         <span className="px-2.5 py-1 bg-white/90 backdrop-blur-sm text-[9px] font-bold uppercase tracking-[0.2em] text-stone-900">
-          {project.category}
+          {pth?.category ?? project.category}
         </span>
       </div>
-      {/* Hover overlay */}
       <div className="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/20 transition-colors duration-700" />
     </div>
 
-    {/* Content */}
     <div className="flex-1 pt-7 pb-2 border-t border-stone-200 mt-0">
       <div className="flex items-center justify-between mb-3">
         <span className="text-[9px] font-mono text-stone-300 uppercase tracking-widest flex items-center gap-1.5">
@@ -1757,24 +2086,23 @@ const ProjectItem = ({ project, index, onOpen }: { project: Project; index: numb
       </h3>
 
       <p className="text-sm text-stone-500 font-light leading-relaxed mb-6">
-        {project.description}
+        {pth?.description ?? project.description}
       </p>
 
-      {/* Metadata strip */}
       <div className="flex flex-wrap gap-x-6 gap-y-3 pt-5 border-t border-stone-100">
         <div>
-          <span className="text-[9px] uppercase tracking-widest text-stone-300 font-bold block mb-1">Role</span>
+          <span className="text-[9px] uppercase tracking-widest text-stone-300 font-bold block mb-1">{t('roleLabel')}</span>
           <span className="text-xs text-stone-600 font-medium">{project.role}</span>
         </div>
         {project.area && (
           <div>
-            <span className="text-[9px] uppercase tracking-widest text-stone-300 font-bold block mb-1">Area</span>
+            <span className="text-[9px] uppercase tracking-widest text-stone-300 font-bold block mb-1">{t('areaLabel')}</span>
             <span className="text-xs text-stone-600 font-medium">{project.area}</span>
           </div>
         )}
         {project.client && (
           <div>
-            <span className="text-[9px] uppercase tracking-widest text-stone-300 font-bold block mb-1">Client</span>
+            <span className="text-[9px] uppercase tracking-widest text-stone-300 font-bold block mb-1">{t('clientLabel')}</span>
             <span className="text-xs text-stone-600 font-medium">{project.client}</span>
           </div>
         )}
@@ -1783,11 +2111,12 @@ const ProjectItem = ({ project, index, onOpen }: { project: Project; index: numb
       <div className="flex items-center gap-2 mt-6 text-[10px] font-bold uppercase tracking-[0.3em] text-stone-300 group-hover:text-stone-900 transition-colors">
         <span>{project.readTime}</span>
         <span>·</span>
-        <span className="flex items-center gap-1.5">View Project <ArrowRight className="w-3 h-3" /></span>
+        <span className="flex items-center gap-1.5">{t('viewProject')} <ArrowRight className="w-3 h-3" /></span>
       </div>
     </div>
   </motion.div>
-);
+  );
+};
 
 // --- Maker Card ---
 const MakerCard = ({ maker, delay = 0 }: { maker: Maker; delay?: number }) => (
@@ -2281,6 +2610,7 @@ const FANTASY_MARKERS = [
 type MarkerData = typeof FANTASY_MARKERS[number];
 
 const WorldMapSection = () => {
+  const { t } = useLang();
   const globeEl = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState<{ id: string; name: string } | null>(null);
   const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
@@ -2379,9 +2709,9 @@ const WorldMapSection = () => {
     <div className="max-w-[1400px] mx-auto px-8">
       {/* Header */}
       <div className="mb-14">
-        <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-[rgba(200,169,110,0.4)] block mb-3">Global Footprint</span>
-        <h2 className="text-3xl md:text-5xl font-display font-light text-[#e8dcc8]">Where I've Been</h2>
-        <p className="text-xs text-[rgba(200,169,110,0.4)] mt-3 tracking-widest uppercase">Drag · Rotate · Zoom · Click any country</p>
+        <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-[rgba(200,169,110,0.4)] block mb-3">{t('globalFootprint')}</span>
+        <h2 className="text-3xl md:text-5xl font-display font-light text-[#e8dcc8]">{t('whereBeen')}</h2>
+        <p className="text-xs text-[rgba(200,169,110,0.4)] mt-3 tracking-widest uppercase">{t('dragRotate')}</p>
       </div>
 
       {/* 3D Fantasy Globe */}
@@ -2399,15 +2729,15 @@ const WorldMapSection = () => {
         <div className="absolute bottom-4 right-4 flex flex-col gap-2 z-10">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-sm inline-block" style={{ background: '#c8a96e' }} />
-            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[rgba(200,169,110,0.6)]">Lived & Worked</span>
+            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[rgba(200,169,110,0.6)]">{t('livedWorked')}</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-sm inline-block" style={{ background: '#4a7c6b' }} />
-            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[rgba(200,169,110,0.6)]">Travelled</span>
+            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[rgba(200,169,110,0.6)]">{t('travelled')}</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-sm inline-block" style={{ background: '#1a2540' }} />
-            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[rgba(200,169,110,0.3)]">Rest of World</span>
+            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[rgba(200,169,110,0.3)]">{t('restOfWorld')}</span>
           </div>
         </div>
 
@@ -2651,22 +2981,28 @@ const StatItem = ({ value, suffix, label, delay = 0 }: { value: number; suffix: 
     </motion.div>
   );
 };
-const StatsSection = () => (
-  <section className="py-20 bg-[#fdfaf6] border-t border-stone-100">
-    <div className="max-w-[1400px] mx-auto px-8">
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-12">
-        <StatItem value={ARCHIVE_PROJECTS.length} suffix="" label="Involving Projects" delay={0} />
-        <StatItem value={12} suffix="+" label="Projects Completed" delay={0.1} />
-        <StatItem value={3} suffix="+" label="Years Experience" delay={0.2} />
-        <StatItem value={5} suffix="" label="Cities" delay={0.3} />
-        <StatItem value={2} suffix="" label="Countries" delay={0.4} />
+const StatsSection = () => {
+  const { t } = useLang();
+  return (
+    <section className="py-20 bg-[#fdfaf6] border-t border-stone-100">
+      <div className="max-w-[1400px] mx-auto px-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-12">
+          <StatItem value={ARCHIVE_PROJECTS.length} suffix="" label={t('involvingProjects')} delay={0} />
+          <StatItem value={12} suffix="+" label={t('projectsCompleted')} delay={0.1} />
+          <StatItem value={3} suffix="+" label={t('yearsExperience')} delay={0.2} />
+          <StatItem value={5} suffix="" label={t('cities')} delay={0.3} />
+          <StatItem value={2} suffix="" label={t('countries')} delay={0.4} />
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 // --- Main App ---
 export default function App() {
+  const [lang, setLang] = useState<Lang>('en');
+  const t = (k: TKey): string => translations[lang][k] as string;
+
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 1.05]);
@@ -2717,7 +3053,7 @@ export default function App() {
 
   const handleInquirySubmit = async () => {
     if (!inquiryForm.name || !inquiryForm.email || !inquiryForm.message) {
-      setInquiryError('Please fill in all fields.');
+      setInquiryError(t('fillFields'));
       return;
     }
     setInquiryError('');
@@ -2739,10 +3075,10 @@ export default function App() {
         setInquiryForm({ name: '', email: '', message: '' });
       } else {
         const data = await res.json().catch(() => ({}));
-        setInquiryError(data?.error || 'Something went wrong. Please try again.');
+        setInquiryError(data?.error || t('somethingWrong'));
       }
     } catch {
-      setInquiryError('Something went wrong. Please try again.');
+      setInquiryError(t('somethingWrong'));
     } finally {
       setInquirySending(false);
     }
@@ -2757,6 +3093,7 @@ export default function App() {
 
 
   return (
+    <LangContext.Provider value={{ lang, setLang }}>
     <div className="min-h-screen font-sans selection:bg-[#f3e5d0] selection:text-[#3d3a35]">
 
       {/* Toast */}
@@ -2835,7 +3172,7 @@ export default function App() {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
         </span>
-        Start a Project
+        {t('startProject')}
       </motion.button>
 
       {/* Inquiry Modal */}
@@ -2861,30 +3198,30 @@ export default function App() {
               </button>
               {inquirySent ? (
                 <div className="text-center py-8">
-                  <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold mb-3">Message Sent</p>
-                  <h3 className="text-2xl font-display font-light text-stone-800">Thank you, I'll be in touch.</h3>
+                  <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold mb-3">{t('messageSent')}</p>
+                  <h3 className="text-2xl font-display font-light text-stone-800">{t('thankYou')}</h3>
                 </div>
               ) : (
                 <>
-                  <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold mb-2">New Enquiry</p>
-                  <h3 className="text-2xl font-display font-light text-stone-800 mb-8">Start a Project</h3>
+                  <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold mb-2">{t('newEnquiry')}</p>
+                  <h3 className="text-2xl font-display font-light text-stone-800 mb-8">{t('startProject')}</h3>
                   <div className="space-y-5">
                     <input
                       type="text"
-                      placeholder="Your name"
+                      placeholder={t('yourName')}
                       value={inquiryForm.name}
                       onChange={(e) => setInquiryForm(f => ({ ...f, name: e.target.value }))}
                       className="w-full border-b border-stone-200 pb-3 text-sm text-stone-800 placeholder:text-stone-300 focus:outline-none focus:border-stone-900 bg-transparent"
                     />
                     <input
                       type="email"
-                      placeholder="Your email"
+                      placeholder={t('yourEmail')}
                       value={inquiryForm.email}
                       onChange={(e) => setInquiryForm(f => ({ ...f, email: e.target.value }))}
                       className="w-full border-b border-stone-200 pb-3 text-sm text-stone-800 placeholder:text-stone-300 focus:outline-none focus:border-stone-900 bg-transparent"
                     />
                     <textarea
-                      placeholder="Tell me about your project"
+                      placeholder={t('aboutProject')}
                       rows={4}
                       value={inquiryForm.message}
                       onChange={(e) => setInquiryForm(f => ({ ...f, message: e.target.value }))}
@@ -2898,7 +3235,7 @@ export default function App() {
                       disabled={inquirySending}
                       className="w-full bg-stone-900 text-white py-4 text-[9px] font-bold uppercase tracking-[0.4em] hover:bg-stone-700 transition-colors duration-300 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {inquirySending ? 'Sending…' : 'Send Message'}
+                      {inquirySending ? t('sending') : t('sendMessage')}
                     </button>
                   </div>
                 </>
@@ -3011,27 +3348,27 @@ export default function App() {
               className="max-w-2xl"
             >
               <span className="text-[9px] font-bold uppercase tracking-[0.5em] text-white/60 mb-6 block">
-                Featured Studio — Sydney, Australia
+                {t('heroBadge')}
               </span>
               <h1 className="text-5xl md:text-8xl font-display font-light text-white leading-none tracking-tighter mb-6 golden-glow">
                 SAM <br /><span className="italic">SAENPAO</span>
               </h1>
               <div className="h-px w-16 bg-white/40 mb-6" />
               <p className="text-base md:text-lg text-white/75 max-w-lg leading-relaxed font-light mb-10">
-                Documenting architecture and design across Australia and beyond — where precision meets poetic vision.
+                {t('heroSubtitle')}
               </p>
               <div className="flex items-center gap-6 flex-wrap">
                 <a
                   href="#projects"
                   className="flex items-center gap-3 px-8 py-4 bg-white text-stone-900 text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-stone-100 transition-colors"
                 >
-                  Explore Work <ArrowRight className="w-3 h-3" />
+                  {t('exploreWork')} <ArrowRight className="w-3 h-3" />
                 </a>
                 <a
                   href="#articles"
                   className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-white/70 hover:text-white transition-colors"
                 >
-                  <BookOpen className="w-4 h-4" /> Read Articles
+                  <BookOpen className="w-4 h-4" /> {t('readArticles')}
                 </a>
               </div>
             </motion.div>
@@ -3042,7 +3379,7 @@ export default function App() {
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <span className="text-[8px] uppercase tracking-[0.4em]">Scroll</span>
+            <span className="text-[8px] uppercase tracking-[0.4em]">{t('scroll')}</span>
             <ChevronDown className="w-4 h-4" />
           </motion.div>
         </section>
@@ -3052,14 +3389,14 @@ export default function App() {
         {/* Publication strip */}
         <section className="py-5 bg-[#3d3a35]">
           <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between">
-            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">Architecture & Design Publication</span>
+            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">{t('pubLabel')}</span>
             <div className="hidden md:flex items-center gap-6 text-[9px] uppercase tracking-[0.3em] text-stone-500 font-bold">
-              <span>Projects</span><span>·</span>
-              <span>Articles</span><span>·</span>
-              <span>Makers</span><span>·</span>
-              <span>Print Edition</span>
+              <span>{t('navProjects')}</span><span>·</span>
+              <span>{t('navArticles')}</span><span>·</span>
+              <span>{t('navMakers')}</span><span>·</span>
+              <span>{t('printEdition')}</span>
             </div>
-            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">v1.4.0 · 2025</span>
+            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">v1.5.0 · 2025</span>
           </div>
         </section>
 
@@ -3068,8 +3405,8 @@ export default function App() {
           <div className="max-w-[1400px] mx-auto px-8">
             <div className="flex items-end justify-between mb-16 border-b border-stone-100 pb-8">
               <div>
-                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">Editorial</span>
-                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">Latest Features</h2>
+                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">{t('editorial')}</span>
+                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">{t('latestFeatures')}</h2>
               </div>
               {/* Nav arrows */}
               <div className="flex items-center gap-3">
@@ -3097,7 +3434,9 @@ export default function App() {
                 animate={{ x: `calc(-${articleIndex * 100}% - ${articleIndex * 2}rem)` }}
                 transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
               >
-                {ARTICLES.map((article) => (
+                {ARTICLES.map((article) => {
+                  const ath = lang === 'th' ? ARTICLES_TH[article.id] : undefined;
+                  return (
                   <div key={article.id} className="min-w-full group cursor-pointer">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                       {/* Image — left */}
@@ -3109,13 +3448,13 @@ export default function App() {
                         >
                           <img
                             src={article.image}
-                            alt={article.title}
+                            alt={ath?.title ?? article.title}
                             className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
                             referrerPolicy="no-referrer"
                           />
                           <div className="absolute top-6 left-6">
                             <span className="px-3 py-1.5 bg-white/90 backdrop-blur-sm text-[9px] font-bold uppercase tracking-[0.2em] text-stone-900">
-                              {article.category}
+                              {ath?.category ?? article.category}
                             </span>
                           </div>
                         </div>
@@ -3128,18 +3467,19 @@ export default function App() {
                           <span className="text-[9px] font-mono text-stone-300 uppercase tracking-widest">{article.readTime}</span>
                         </div>
                         <h3 className="text-3xl md:text-4xl font-display font-light text-stone-800 mb-6 leading-tight group-hover:text-stone-500 transition-colors">
-                          {article.title}
+                          {ath?.title ?? article.title}
                         </h3>
                         <p className="text-sm text-stone-400 font-light leading-relaxed mb-8">
-                          {article.excerpt}
+                          {ath?.excerpt ?? article.excerpt}
                         </p>
                         <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-stone-400 group-hover:text-stone-900 transition-colors">
-                          Read Feature <ArrowRight className="w-3 h-3" />
+                          {t('readFeature')} <ArrowRight className="w-3 h-3" />
                         </div>
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </motion.div>
             </div>
 
@@ -3167,8 +3507,8 @@ export default function App() {
           <div className="max-w-[1400px] mx-auto px-8 pt-24 pb-12">
             <div className="flex items-end justify-between border-b border-stone-800 pb-8">
               <div>
-                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-600 block mb-3">Visual Work</span>
-                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-200">Rendering</h2>
+                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-600 block mb-3">{t('visualWork')}</span>
+                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-200">{t('rendering')}</h2>
               </div>
               <div className="flex items-center gap-3">
                 <button
@@ -3225,10 +3565,10 @@ export default function App() {
                     {MODEL_SLIDES[modelSlide].tool}
                   </span>
                   <h3 className="text-3xl md:text-5xl font-display font-light text-stone-100 mb-4 leading-tight">
-                    {MODEL_SLIDES[modelSlide].title}
+                    {(lang === 'th' ? MODEL_SLIDES_TH[modelSlide]?.title : undefined) ?? MODEL_SLIDES[modelSlide].title}
                   </h3>
                   <p className="text-sm text-stone-400 font-light max-w-lg leading-relaxed">
-                    {MODEL_SLIDES[modelSlide].description}
+                    {(lang === 'th' ? MODEL_SLIDES_TH[modelSlide]?.description : undefined) ?? MODEL_SLIDES[modelSlide].description}
                   </p>
                 </motion.div>
               </AnimatePresence>
@@ -3266,23 +3606,26 @@ export default function App() {
           {/* Thumbnail strip */}
           <div className="max-w-[1400px] mx-auto px-8 pb-24">
             <div className="flex gap-3 overflow-x-auto">
-              {MODEL_SLIDES.map((slide, i) => (
-                <button
-                  key={i}
-                  onClick={() => setModelSlide(i)}
-                  className={`flex-shrink-0 relative overflow-hidden transition-all duration-300 ${
-                    i === modelSlide ? 'ring-1 ring-stone-400 opacity-100' : 'opacity-35 hover:opacity-65'
-                  }`}
-                  style={{ width: 140, height: 90 }}
-                >
-                  <img src={slide.image} alt={slide.title} className="w-full h-full object-cover bg-stone-900"
-                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.background = '#1c1c1c'; }}
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-2 py-2">
-                    <span className="text-[8px] font-mono text-stone-400 uppercase tracking-widest leading-none block">{slide.step} — {slide.title}</span>
-                  </div>
-                </button>
-              ))}
+              {MODEL_SLIDES.map((slide, i) => {
+                const sth = lang === 'th' ? MODEL_SLIDES_TH[i] : undefined;
+                return (
+                  <button
+                    key={i}
+                    onClick={() => setModelSlide(i)}
+                    className={`flex-shrink-0 relative overflow-hidden transition-all duration-300 ${
+                      i === modelSlide ? 'ring-1 ring-stone-400 opacity-100' : 'opacity-35 hover:opacity-65'
+                    }`}
+                    style={{ width: 140, height: 90 }}
+                  >
+                    <img src={slide.image} alt={slide.title} className="w-full h-full object-cover bg-stone-900"
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).style.background = '#1c1c1c'; }}
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-2 py-2">
+                      <span className="text-[8px] font-mono text-stone-400 uppercase tracking-widest leading-none block">{slide.step} — {sth?.title ?? slide.title}</span>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -3313,23 +3656,17 @@ export default function App() {
               viewport={{ once: true }}
               transition={{ duration: 1.2, delay: 0.3 }}
             >
-              <span className="text-[9px] font-bold uppercase tracking-[0.5em] text-white/35 block mb-10">Who Am I</span>
+              <span className="text-[9px] font-bold uppercase tracking-[0.5em] text-white/35 block mb-10">{t('whoAmI')}</span>
               <h3 className="text-5xl md:text-6xl lg:text-7xl font-display font-light text-white mb-10 leading-[1.05] tracking-tight">
                 Sam <span className="italic">Saenpao</span>
               </h3>
               <div className="space-y-5 text-sm text-white/55 font-light leading-relaxed max-w-sm">
-                <p>
-                  I am an Architectural Designer and Drafter shaped by two worlds — the warmth and craft culture of Thailand, where I was born and raised, and the precision and professionalism of Sydney's architectural industry, where I spent eight formative years building my career.
-                </p>
-                <p>
-                  Growing up in Thailand instilled in me an appreciation for material culture, human-scale environments, and the quiet poetry of everyday spaces. Moving to Australia at 19 pushed me to grow independently — working part-time, studying English, earning my degree at UTS, and eventually finding my professional footing at M.A.R.S Architects across a diverse range of commercial, retail, and hospitality projects.
-                </p>
-                <p>
-                  That journey across cultures, cities, and disciplines is what defines how I approach design — with curiosity, adaptability, and a commitment to work that is both technically rigorous and deeply considered. I bring that breadth of experience to every project I take on.
-                </p>
+                <p>{t('whoAmIText1')}</p>
+                <p>{t('whoAmIText2')}</p>
+                <p>{t('whoAmIText3')}</p>
               </div>
               <a href="#about" className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.35em] text-white/35 hover:text-white transition-colors mt-12">
-                Full Studio Profile <ArrowRight className="w-3 h-3" />
+                {t('fullStudioProfile')} <ArrowRight className="w-3 h-3" />
               </a>
             </motion.div>
 
@@ -3403,8 +3740,8 @@ export default function App() {
           <div className="max-w-[1400px] mx-auto px-8">
             <div className="flex items-end justify-between mb-20 border-b border-stone-200 pb-8">
               <div>
-                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">Featured Work</span>
-                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">Completed</h2>
+                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">{t('featuredWork')}</span>
+                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">{t('completed')}</h2>
               </div>
               <div className="hidden md:flex gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400">
                 {['All', 'Interior', 'Retail', 'Food & Beverage', 'Commercial'].map((cat) => (
@@ -3442,7 +3779,7 @@ export default function App() {
                 whileHover={{ scale: 1.02 }}
                 onClick={() => setShowArchive(true)}
               >
-                View Full Archive
+                {t('viewFullArchive')}
               </motion.button>
             </div>
           </div>
@@ -3453,11 +3790,11 @@ export default function App() {
           <div className="max-w-[1400px] mx-auto px-8">
             <div className="flex items-end justify-between mb-16 border-b border-stone-100 pb-8">
               <div>
-                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">Marketplace</span>
-                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">Makers & Materials</h2>
+                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">{t('marketplace')}</span>
+                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">{t('makersAndMaterials')}</h2>
               </div>
               <a href="#" className="hidden md:flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400 hover:text-stone-900 transition-colors">
-                View Marketplace <ArrowRight className="w-3 h-3" />
+                {t('viewMarketplace')} <ArrowRight className="w-3 h-3" />
               </a>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -3476,8 +3813,8 @@ export default function App() {
           <div className="max-w-[1400px] mx-auto px-8">
             <div className="flex items-end justify-between mb-16 border-b border-stone-100 pb-8">
               <div>
-                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">Academic Work</span>
-                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">University</h2>
+                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">{t('academicWork')}</span>
+                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">{t('university')}</h2>
               </div>
             </div>
             <UniversitySection />
@@ -3489,8 +3826,8 @@ export default function App() {
           <div className="max-w-[1400px] mx-auto px-8">
             <div className="flex items-end justify-between mb-12 border-b border-stone-800 pb-8">
               <div>
-                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-600 block mb-3">Workflow</span>
-                <h2 className="text-3xl md:text-5xl font-display font-light text-white">3D Modelling Process</h2>
+                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-600 block mb-3">{t('workflow')}</span>
+                <h2 className="text-3xl md:text-5xl font-display font-light text-white">{t('modelling3D')}</h2>
               </div>
               <span className="hidden md:block text-[9px] uppercase tracking-[0.4em] font-bold text-stone-600">37 frames</span>
             </div>
@@ -3503,8 +3840,8 @@ export default function App() {
           <div className="max-w-[1400px] mx-auto px-8">
             <div className="flex items-end justify-between mb-16 border-b border-stone-100 pb-8">
               <div>
-                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">Qualifications</span>
-                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">Credentials</h2>
+                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">{t('qualifications')}</span>
+                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">{t('credentials')}</h2>
               </div>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -3531,7 +3868,7 @@ export default function App() {
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
               >
                 <img src="/logos/uts.png" alt="UTS" className="h-10 mb-8 object-contain object-left" />
-                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-6">Academic Background</span>
+                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-6">{t('academicBackground')}</span>
                 <h4 className="text-xl md:text-2xl font-display font-light text-stone-800 mb-6 leading-snug">
                   A design education grounded in built environment thinking
                 </h4>
@@ -3540,10 +3877,10 @@ export default function App() {
                 </p>
                 <div className="space-y-4">
                   {[
-                    { label: 'Degree', value: 'Bachelor of Design in Architecture' },
-                    { label: 'Institution', value: 'University of Technology Sydney' },
-                    { label: 'Location', value: 'Ultimo, NSW, Australia' },
-                    { label: 'Conferred', value: '7 February 2023' },
+                    { label: t('degreeLabel'), value: 'Bachelor of Design in Architecture' },
+                    { label: t('institutionLabel'), value: 'University of Technology Sydney' },
+                    { label: t('locationLabel'), value: 'Ultimo, NSW, Australia' },
+                    { label: t('conferredLabel'), value: '7 February 2023' },
                   ].map((item) => (
                     <div key={item.label} className="flex items-baseline gap-4 border-b border-stone-100 pb-4">
                       <span className="text-[9px] uppercase tracking-[0.35em] font-bold text-stone-400 w-24 flex-shrink-0">{item.label}</span>
@@ -3561,7 +3898,7 @@ export default function App() {
           <div className="max-w-[1400px] mx-auto px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
               <div className="lg:col-span-5">
-                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 block mb-8">Studio Profile</span>
+                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 block mb-8">{t('studioProfile')}</span>
                 <h2 className="text-4xl md:text-6xl font-display font-light mb-10 tracking-tight leading-none">
                   Architectural <br />Designer & <br /><span className="italic">Drafter</span>
                 </h2>
@@ -3586,25 +3923,21 @@ export default function App() {
               </div>
               <div className="lg:col-span-7 pt-20">
                 <p className="text-2xl font-display font-light text-stone-300 leading-relaxed mb-12 italic">
-                  "I believe in an architecture that is as technically sound as it is emotionally resonant."
+                  {t('studioQuote')}
                 </p>
                 <p className="text-base text-stone-400 leading-relaxed font-light mb-8">
-                  A UTS Architecture graduate with a passion for the technical intricacies of design.
-                  With 8 years of experience in Sydney — studying at UTS and working at M.A.R.S (Marcellino Sain Architects) —
-                  I've honed my skills in bridging the gap between conceptual sketches and construction-ready documentation.
+                  {t('studioBio1')}
                 </p>
                 <p className="text-sm text-stone-500 leading-relaxed font-light mb-16">
-                  I thrive in the details—whether it's coordinating construction drawings or
-                  refining the materiality of a facade. My goal is to grow into a versatile
-                  architect who understands every layer of the building process.
+                  {t('studioBio2')}
                 </p>
 
                 <div className="grid grid-cols-2 gap-10 mb-16">
                   {[
-                    { title: "Clarity in Drawings", desc: "Every plan communicates intent without ambiguity." },
-                    { title: "3D Visualization", desc: "Rhino & SketchUp to test spatial qualities." },
-                    { title: "BIM Coordination", desc: "Complex model coordination across disciplines." },
-                    { title: "Environmental Design", desc: "Sustainable principles from concept to detail." },
+                    { title: t('skillClarity'), desc: t('skillClarityDesc') },
+                    { title: t('skill3D'), desc: t('skill3DDesc') },
+                    { title: t('skillBIM'), desc: t('skillBIMDesc') },
+                    { title: t('skillEnv'), desc: t('skillEnvDesc') },
                   ].map((skill) => (
                     <div key={skill.title}>
                       <h5 className="text-xs font-bold uppercase tracking-widest mb-3 text-stone-300">{skill.title}</h5>
@@ -3614,48 +3947,51 @@ export default function App() {
                 </div>
 
                 <h4 className="text-[10px] uppercase tracking-[0.4em] font-bold text-stone-500 border-t border-stone-700 pt-12 mb-10">
-                  Experience & Education
+                  {t('experienceEducation')}
                 </h4>
                 <div className="space-y-10">
-                  {EXPERIENCE.map((exp, idx) => (
-                    <div key={idx} className="grid grid-cols-12 gap-6">
-                      <div className="col-span-3">
-                        <span className="text-[10px] font-mono text-stone-600">{exp.year}</span>
-                      </div>
-                      <div className="col-span-1 flex items-start pt-0.5">
-                        {exp.logo ? (
-                          <div className="w-8 h-8 rounded bg-white flex items-start justify-center overflow-hidden flex-shrink-0 p-0.5">
-                            <img
-                              src={exp.logo}
-                              alt=""
-                              className="w-full h-full object-contain object-top"
-                              onError={(e) => {
-                                const el = e.currentTarget;
-                                el.parentElement!.style.display = 'none';
-                                if (el.parentElement?.nextElementSibling) (el.parentElement.nextElementSibling as HTMLElement).style.display = 'flex';
-                              }}
-                            />
+                  {EXPERIENCE.map((exp, idx) => {
+                    const eth = lang === 'th' ? EXPERIENCE_TH[idx] : undefined;
+                    return (
+                      <div key={idx} className="grid grid-cols-12 gap-6">
+                        <div className="col-span-3">
+                          <span className="text-[10px] font-mono text-stone-600">{exp.year}</span>
+                        </div>
+                        <div className="col-span-1 flex items-start pt-0.5">
+                          {exp.logo ? (
+                            <div className="w-8 h-8 rounded bg-white flex items-start justify-center overflow-hidden flex-shrink-0 p-0.5">
+                              <img
+                                src={exp.logo}
+                                alt=""
+                                className="w-full h-full object-contain object-top"
+                                onError={(e) => {
+                                  const el = e.currentTarget;
+                                  el.parentElement!.style.display = 'none';
+                                  if (el.parentElement?.nextElementSibling) (el.parentElement.nextElementSibling as HTMLElement).style.display = 'flex';
+                                }}
+                              />
+                            </div>
+                          ) : null}
+                          <div
+                            className="w-8 h-8 rounded bg-stone-700 flex items-center justify-center text-[9px] font-bold text-stone-400 uppercase tracking-wide"
+                            style={{ display: exp.logo ? 'none' : 'flex' }}
+                          >
+                            {exp.company.split(' ').slice(0, 2).map(w => w[0]).join('')}
                           </div>
-                        ) : null}
-                        <div
-                          className="w-8 h-8 rounded bg-stone-700 flex items-center justify-center text-[9px] font-bold text-stone-400 uppercase tracking-wide"
-                          style={{ display: exp.logo ? 'none' : 'flex' }}
-                        >
-                          {exp.company.split(' ').slice(0, 2).map(w => w[0]).join('')}
+                        </div>
+                        <div className="col-span-8">
+                          <h5 className="text-base font-display font-medium mb-1 text-stone-200">{eth?.title ?? exp.title}</h5>
+                          <h6 className="text-xs text-stone-500 uppercase tracking-widest mb-2">{eth?.company ?? exp.company}</h6>
+                          <p className="text-xs text-stone-600 font-light leading-relaxed">{eth?.description ?? exp.description}</p>
                         </div>
                       </div>
-                      <div className="col-span-8">
-                        <h5 className="text-base font-display font-medium mb-1 text-stone-200">{exp.title}</h5>
-                        <h6 className="text-xs text-stone-500 uppercase tracking-widest mb-2">{exp.company}</h6>
-                        <p className="text-xs text-stone-600 font-light leading-relaxed">{exp.description}</p>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 <div className="mt-12">
                   <motion.a
-                    href="/cv.html"
+                    href={lang === 'th' ? '/cv-th.html' : '/cv.html'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-4 px-10 py-5 bg-[#fdfaf6] text-[#3d3a35] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-stone-200 transition-colors"
@@ -3663,7 +3999,7 @@ export default function App() {
                     whileTap={{ scale: 0.98 }}
                   >
                     <Download className="w-4 h-4" />
-                    Download CV
+                    {t('downloadCV')}
                   </motion.a>
                 </div>
               </div>
@@ -3706,10 +4042,10 @@ export default function App() {
 
             {/* Header */}
             <div className="mb-14 border-b border-[rgba(200,169,110,0.15)] pb-8">
-              <span className="text-[9px] uppercase tracking-[0.5em] font-bold text-[rgba(200,169,110,0.45)] block mb-3">Personal Narrative</span>
+              <span className="text-[9px] uppercase tracking-[0.5em] font-bold text-[rgba(200,169,110,0.45)] block mb-3">{t('personalNarrative')}</span>
               <div className="flex items-end justify-between">
-                <h2 className="text-3xl md:text-5xl font-display font-light text-[#e8dcc8]">The Journey</h2>
-                <span className="hidden md:block text-[10px] font-mono uppercase tracking-[0.35em] text-[rgba(200,169,110,0.4)]">Bangkok · Sydney · Bangkok</span>
+                <h2 className="text-3xl md:text-5xl font-display font-light text-[#e8dcc8]">{t('theJourney')}</h2>
+                <span className="hidden md:block text-[10px] font-mono uppercase tracking-[0.35em] text-[rgba(200,169,110,0.4)]">{t('journeyCaption')}</span>
               </div>
             </div>
 
@@ -3727,42 +4063,12 @@ export default function App() {
             {/* Milestone cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-px bg-[rgba(200,169,110,0.1)]">
               {[
-                {
-                  num: '01',
-                  label: 'ORIGIN',
-                  place: 'Bangkok, Thailand',
-                  text: 'Born and raised in Thailand. Shaped by craft, curiosity, and an early love of building things.',
-                },
-                {
-                  num: '02',
-                  label: 'DEPARTURE',
-                  place: 'Sydney, 2018',
-                  text: 'Left home to pursue architectural education in Australia — a leap of intent and ambition.',
-                },
-                {
-                  num: '03',
-                  label: 'NEW CHAPTER',
-                  place: 'Sydney, 2018–2019',
-                  text: 'A year of beginnings — working part-time, absorbing a new city, studying English, and quietly searching for direction.',
-                },
-                {
-                  num: '04',
-                  label: 'EDUCATION',
-                  place: 'UTS, 2020–2022',
-                  text: 'Bachelor of Design in Architecture. Graduated with UTS Capstone Prize.',
-                },
-                {
-                  num: '05',
-                  label: 'CAREER',
-                  place: 'M.A.R.S, 2023–Present',
-                  text: 'From Intern to Architectural Drafter at Marcellino Sain Architects — honing technical precision across commercial projects.',
-                },
-                {
-                  num: '06',
-                  label: 'THE RETURN',
-                  place: 'Bangkok, Thailand',
-                  text: 'Bringing 8 years of study, studio practice, and life in Sydney — returning home with refined skills and a sharpened design sensibility.',
-                },
+                { num: '01', label: t('j01label'), place: 'Bangkok, Thailand', text: t('j01text') },
+                { num: '02', label: t('j02label'), place: 'Sydney, 2018', text: t('j02text') },
+                { num: '03', label: t('j03label'), place: 'Sydney, 2018–2019', text: t('j03text') },
+                { num: '04', label: t('j04label'), place: 'UTS, 2020–2022', text: t('j04text') },
+                { num: '05', label: t('j05label'), place: 'M.A.R.S, 2023–Present', text: t('j05text') },
+                { num: '06', label: t('j06label'), place: 'Bangkok, Thailand', text: t('j06text') },
               ].map((card, i) => (
                 <motion.div
                   key={i}
@@ -3794,21 +4100,21 @@ export default function App() {
               viewport={{ once: true }}
               transition={{ duration: 1.2 }}
             >
-              <span className="text-[9px] uppercase tracking-[0.5em] font-bold text-stone-300 block mb-6">Print Edition</span>
+              <span className="text-[9px] uppercase tracking-[0.5em] font-bold text-stone-300 block mb-6">{t('printEdition')}</span>
               <h2 className="text-4xl md:text-6xl font-display font-light text-stone-800 mb-8 leading-tight">
-                The Annual Design <br /><span className="italic">Publication</span>
+                {t('theAnnualDesign')} <br /><span className="italic">{t('publication')}</span>
               </h2>
               <p className="text-sm text-stone-400 font-light leading-relaxed max-w-lg mx-auto mb-12">
-                Three times a year, in-depth architectural stories, studio profiles, and design insights — curated and printed for those who look closer.
+                {t('printDesc')}
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <input
                   type="email"
-                  placeholder="Your email address"
+                  placeholder={t('emailPlaceholder')}
                   className="w-full sm:w-80 px-6 py-4 border border-stone-200 text-sm text-stone-600 placeholder:text-stone-300 focus:outline-none focus:border-stone-900 bg-white"
                 />
                 <button className="w-full sm:w-auto px-10 py-4 bg-stone-900 text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-stone-700 transition-colors whitespace-nowrap">
-                  Subscribe Free
+                  {t('subscribeFree')}
                 </button>
               </div>
             </motion.div>
@@ -3823,27 +4129,26 @@ export default function App() {
             <div className="lg:col-span-2">
               <h2 className="text-2xl font-display font-medium tracking-tight mb-6">SAM SAENPAO</h2>
               <p className="text-stone-400 max-w-sm leading-relaxed mb-8 font-light text-sm">
-                Architectural Designer & Drafter based in Khon Kaen, Thailand.
-                Available for freelance projects and collaborations.
+                {t('footerDesc')}
               </p>
-              <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-stone-500 mb-4">Follow the Studio</p>
+              <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-stone-500 mb-4">{t('followStudio')}</p>
               <div className="flex gap-5 text-stone-500">
                 <a href="https://www.instagram.com/sammy_architecture" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Instagram className="w-4 h-4" /></a>
                 <a href="https://www.linkedin.com/in/sam-saenpao-a58373250" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Linkedin className="w-4 h-4" /></a>
               </div>
             </div>
             <div>
-              <h4 className="text-[9px] font-bold uppercase tracking-[0.4em] text-stone-500 mb-8">Navigate</h4>
+              <h4 className="text-[9px] font-bold uppercase tracking-[0.4em] text-stone-500 mb-8">{t('navigate')}</h4>
               <ul className="space-y-4">
                 {[
-                  { label: 'Projects', href: '#projects' },
-                  { label: 'Articles', href: '#articles' },
-                  { label: 'Makers', href: '#makers' },
-                  { label: 'Studio', href: '#about' },
-                  { label: 'Journal', href: '#journal' },
-                  { label: 'Contact', href: '#contact' },
+                  { label: t('navProjects'), href: '#projects' },
+                  { label: t('navArticles'), href: '#articles' },
+                  { label: t('navMakers'), href: '#makers' },
+                  { label: t('navStudio'), href: '#about' },
+                  { label: t('navJournal'), href: '#journal' },
+                  { label: t('navContact'), href: '#contact' },
                 ].map((l) => (
-                  <li key={l.label}>
+                  <li key={l.href}>
                     <a href={l.href} className="text-xs text-stone-400 hover:text-white transition-colors font-light">{l.label}</a>
                   </li>
                 ))}
@@ -3861,16 +4166,17 @@ export default function App() {
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] font-bold uppercase tracking-[0.3em] text-stone-600">
-            <p>© {new Date().getFullYear()} SAM SAENPAO. All Rights Reserved.</p>
+            <p>© {new Date().getFullYear()} SAM SAENPAO. {t('allRightsReserved')}</p>
             <div className="flex gap-8">
-              <a href="#" className="hover:text-stone-300 transition-colors">Privacy</a>
-              <a href="#" className="hover:text-stone-300 transition-colors">Terms</a>
-              <a href="#" className="hover:text-stone-300 transition-colors">Sitemap</a>
+              <a href="#" className="hover:text-stone-300 transition-colors">{t('privacy')}</a>
+              <a href="#" className="hover:text-stone-300 transition-colors">{t('terms')}</a>
+              <a href="#" className="hover:text-stone-300 transition-colors">{t('sitemap')}</a>
             </div>
           </div>
-          <p className="mt-4 text-center text-[8px] font-mono text-stone-400 tracking-[0.2em]">v1.4.0</p>
+          <p className="mt-4 text-center text-[8px] font-mono text-stone-400 tracking-[0.2em]">v1.5.0</p>
         </div>
       </footer>
     </div>
+    </LangContext.Provider>
   );
 }
