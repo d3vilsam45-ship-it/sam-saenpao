@@ -33,8 +33,8 @@ type Lang = 'en' | 'th';
 const translations = {
   en: {
     // Nav
-    navProjects: 'Projects', navArticles: 'Articles', navMakers: 'Makers',
-    navStudio: 'Studio', navJournal: 'Journal', navWorld: 'World', navContact: 'Contact',
+    navProjects: 'Projects', navArticles: 'Articles', navMakers: 'Clients',
+    navStudio: 'Studio', navJournal: 'Journal', navWorld: 'World', navContact: 'Contact', navServices: 'Services',
     available: 'Available', subscribe: 'Subscribe',
     navTagline: 'Architecture & Design — Sydney, Australia & Khon Kaen, Thailand',
     // Hero
@@ -54,8 +54,8 @@ const translations = {
     whoAmIText3: "That journey across cultures, cities, and disciplines is what defines how I approach design — with curiosity, adaptability, and a commitment to work that is both technically rigorous and deeply considered. I bring that breadth of experience to every project I take on.",
     // Projects
     featuredWork: 'Featured Work', completed: 'Completed', viewFullArchive: 'View Full Archive',
-    // Makers
-    marketplace: 'Marketplace', makersAndMaterials: 'Makers & Materials', viewMarketplace: 'View Marketplace',
+    // Clients
+    clientsLabel: 'Selected Clients', clientsTitle: 'Collaborated With', clientsProjects: 'projects',
     // Stats
     involvingProjects: 'Involving Projects', projectsCompleted: 'Projects Completed',
     yearsExperience: 'Years Experience', cities: 'Cities', countries: 'Countries',
@@ -81,9 +81,10 @@ const translations = {
     j04label: 'EDUCATION', j04text: 'Bachelor of Design in Architecture. Graduated with UTS Capstone Prize.',
     j05label: 'CAREER', j05text: 'From Intern to Architectural Drafter at Marcellino Sain Architects — honing technical precision across commercial projects.',
     j06label: 'THE RETURN', j06text: 'Bringing 8 years of study, studio practice, and life in Sydney — returning home with refined skills and a sharpened design sensibility.',
-    // Print / Subscribe
-    theAnnualDesign: 'The Annual Design', publication: 'Publication',
-    printDesc: 'Three times a year, in-depth architectural stories, studio profiles, and design insights — curated and printed for those who look closer.',
+    // Contact section
+    contactSectionLabel: 'Get In Touch', contactSectionTitle: 'Let\'s Work Together',
+    contactSectionDesc: 'Have a project in mind? I\'d love to hear about it. Reach out directly or scan the QR code to connect on LINE.',
+    contactEmail: 'Email', contactLine: 'LINE', contactLocation: 'Location',
     emailPlaceholder: 'Your email address', subscribeFree: 'Subscribe Free',
     // Footer
     footerDesc: 'Architectural Designer & Drafter based in Khon Kaen, Thailand. Available for freelance projects and collaborations.',
@@ -95,6 +96,7 @@ const translations = {
     yourName: 'Your name', yourEmail: 'Your email', aboutProject: 'Tell me about your project',
     sending: 'Sending…', sendMessage: 'Send Message',
     fillFields: 'Please fill in all fields.', somethingWrong: 'Something went wrong. Please try again.',
+    lineAlt: 'Or contact via LINE', lineDesc: 'Scan QR code to message me directly on LINE — in case email doesn\'t reach.',
     // Project modal
     roleLabel: 'Role', clientLabel: 'Client', builderLabel: 'Builder',
     areaLabel: 'Area', designTeamLabel: 'Design Team', photographyLabel: 'Photography',
@@ -111,8 +113,8 @@ const translations = {
   },
   th: {
     // Nav
-    navProjects: 'โครงการ', navArticles: 'บทความ', navMakers: 'ผู้ผลิต',
-    navStudio: 'สตูดิโอ', navJournal: 'บันทึก', navWorld: 'โลก', navContact: 'ติดต่อ',
+    navProjects: 'โครงการ', navArticles: 'บทความ', navMakers: 'ลูกค้า',
+    navStudio: 'สตูดิโอ', navJournal: 'บันทึก', navWorld: 'โลก', navContact: 'ติดต่อ', navServices: 'บริการ',
     available: 'ว่างงาน', subscribe: 'สมัครสมาชิก',
     navTagline: 'สถาปัตยกรรมและการออกแบบ — ซิดนีย์, ออสเตรเลีย & ขอนแก่น, ไทย',
     // Hero
@@ -132,8 +134,8 @@ const translations = {
     whoAmIText3: 'การเดินทางข้ามวัฒนธรรม เมือง และสาขาวิชาต่าง ๆ คือสิ่งที่กำหนดแนวทางการออกแบบของฉัน — ด้วยความอยากรู้ ความยืดหยุ่น และความมุ่งมั่นในงานที่ทั้งเข้มแข็งทางเทคนิคและลึกซึ้งทางความคิด',
     // Projects
     featuredWork: 'ผลงานเด่น', completed: 'เสร็จสิ้น', viewFullArchive: 'ดูคลังทั้งหมด',
-    // Makers
-    marketplace: 'ตลาด', makersAndMaterials: 'ผู้ผลิตและวัสดุ', viewMarketplace: 'ดูตลาด',
+    // Clients
+    clientsLabel: 'ลูกค้าที่เลือก', clientsTitle: 'ได้ร่วมงานกับ', clientsProjects: 'โครงการ',
     // Stats
     involvingProjects: 'โครงการที่เกี่ยวข้อง', projectsCompleted: 'โครงการที่เสร็จสิ้น',
     yearsExperience: 'ปีประสบการณ์', cities: 'เมือง', countries: 'ประเทศ',
@@ -159,9 +161,10 @@ const translations = {
     j04label: 'การศึกษา', j04text: 'ปริญญาตรีสาขาการออกแบบสถาปัตยกรรม สำเร็จการศึกษาพร้อมรางวัล UTS Capstone',
     j05label: 'อาชีพ', j05text: 'จากนักศึกษาฝึกงานสู่นักเขียนแบบสถาปัตยกรรมที่ Marcellino Sain Architects — ฝึกฝนความแม่นยำทางเทคนิคในโครงการเชิงพาณิชย์',
     j06label: 'การกลับบ้าน', j06text: 'นำ 8 ปีของการศึกษา การปฏิบัติในสตูดิโอ และชีวิตในซิดนีย์ — กลับบ้านพร้อมทักษะที่ผ่านการฝึกฝนและประสาทการออกแบบที่เฉียบคม',
-    // Print / Subscribe
-    theAnnualDesign: 'การออกแบบประจำปี', publication: 'สิ่งพิมพ์',
-    printDesc: 'สามครั้งต่อปี เรื่องราวสถาปัตยกรรมเชิงลึก โปรไฟล์สตูดิโอ และข้อมูลเชิงลึกด้านการออกแบบ — คัดสรรและพิมพ์สำหรับผู้ที่มองอย่างละเอียด',
+    // Contact section
+    contactSectionLabel: 'ติดต่อเรา', contactSectionTitle: 'มาทำงานร่วมกัน',
+    contactSectionDesc: 'มีโครงการในใจ? อยากฟังเรื่องราวของคุณ ติดต่อโดยตรงหรือสแกน QR Code เพื่อเชื่อมต่อทาง LINE',
+    contactEmail: 'อีเมล', contactLine: 'LINE', contactLocation: 'ที่อยู่',
     emailPlaceholder: 'ที่อยู่อีเมลของคุณ', subscribeFree: 'สมัครฟรี',
     // Footer
     footerDesc: 'นักออกแบบสถาปัตยกรรมและนักเขียนแบบ ตั้งอยู่ที่ขอนแก่น ประเทศไทย รับงานฟรีแลนซ์และงานร่วมมือ',
@@ -173,6 +176,7 @@ const translations = {
     yourName: 'ชื่อของคุณ', yourEmail: 'อีเมลของคุณ', aboutProject: 'เล่าถึงโครงการของคุณ',
     sending: 'กำลังส่ง…', sendMessage: 'ส่งข้อความ',
     fillFields: 'กรุณากรอกข้อมูลให้ครบถ้วน', somethingWrong: 'เกิดข้อผิดพลาด กรุณาลองใหม่',
+    lineAlt: 'หรือติดต่อผ่าน LINE', lineDesc: 'สแกน QR Code เพื่อส่งข้อความหาผมโดยตรงทาง LINE — กรณีที่อีเมลอาจไม่ถึง',
     // Project modal
     roleLabel: 'บทบาท', clientLabel: 'ลูกค้า', builderLabel: 'ผู้รับเหมา',
     areaLabel: 'พื้นที่', designTeamLabel: 'ทีมออกแบบ', photographyLabel: 'การถ่ายภาพ',
@@ -233,13 +237,12 @@ interface Article {
   gallery?: string[];
 }
 
-interface Maker {
+interface ClientLogo {
   id: number;
   name: string;
-  type: string;
-  image: string;
-  origin: string;
-  description: string;
+  sub: string;
+  projects: number;
+  logo?: string;
 }
 
 interface Experience {
@@ -388,9 +391,9 @@ const PROJECTS: Project[] = [
     image: "/photos/field-to-fork/660ad8_efc788e9926d4fc8b788d66908dffd4c~mv2.jpg",
     category: "Food & Beverage",
     role: "Design Team Member",
-    description: "A butcher shop and commercial kitchen for Alamour in Paddington — 250m² where provenance and craft are expressed through every material decision. Raw timber, honed stone, and exposed refrigeration create a space that is honest about the food it serves.",
+    description: "A butcher shop and commercial kitchen for Field to Fork in Paddington — 250m² where provenance and craft are expressed through every material decision. Raw timber, honed stone, and exposed refrigeration create a space that is honest about the food it serves.",
     readTime: "5 min read",
-    client: "Alamour",
+    client: "Field to Fork",
     builder: "Urban Core Pty Ltd",
     area: "250 sqm",
     designTeam: "Sam Saenpao, Chloe Lam, Carla D'Angelo & Shaun Khor",
@@ -1194,31 +1197,21 @@ const ARTICLES_TH: Record<number, { title: string; excerpt: string; category: st
   },
 };
 
-const MAKERS: Maker[] = [
-  {
-    id: 1,
-    name: "Haiku Stone",
-    type: "Material / Stone",
-    image: "https://picsum.photos/seed/maker-stone/800/600",
-    origin: "Sydney, NSW",
-    description: "Locally quarried sandstone surfaces, handcut and finished for bespoke architectural applications.",
-  },
-  {
-    id: 2,
-    name: "Form & Flux",
-    type: "Furniture / Objects",
-    image: "https://picsum.photos/seed/maker-form/800/600",
-    origin: "Melbourne, VIC",
-    description: "Studio practice producing limited-edition furniture objects at the intersection of craft and industrial process.",
-  },
-  {
-    id: 3,
-    name: "Lumen Studio",
-    type: "Lighting Design",
-    image: "https://picsum.photos/seed/maker-lumen/800/600",
-    origin: "Brisbane, QLD",
-    description: "Handcrafted lighting that explores how form can shape the quality of light within architectural space.",
-  },
+const CLIENT_LOGOS: ClientLogo[] = [
+  { id: 1,  name: "BYD",                  sub: "BYD Australia Pty Ltd",            projects: 4, logo: "/logos/byd.png" },
+  { id: 2,  name: "LYLO",                 sub: "EVT Limited",                       projects: 1, logo: "/logos/lylo.jpg" },
+  { id: 3,  name: "Grace & Co",           sub: "Something by Grace & Co",           projects: 1, logo: "/logos/grace.jpg" },
+  { id: 4,  name: "Betta Home",           sub: "Betta Home Living Pty Ltd",         projects: 1, logo: "/logos/betta-home.png" },
+  { id: 5,  name: "K5 Furniture",         sub: "K5 Furniture Pty Ltd",              projects: 1, logo: "/logos/k5-furniture.jpg" },
+  { id: 6,  name: "Alamour",              sub: "Alamour",                            projects: 1, logo: "/logos/alamour.jpg" },
+  { id: 7,  name: "Kii College",          sub: "Kingsford International Institute", projects: 1, logo: "/logos/kii-college.png" },
+  { id: 8,  name: "Furama Hotels",        sub: "Furama Hotels & Apartments",        projects: 1 },
+  { id: 9,  name: "Field to Fork",        sub: "Field to Fork",                     projects: 1, logo: "/logos/field-to-fork.png" },
+  { id: 10, name: "One Capital Group",    sub: "One Capital Group",                 projects: 1, logo: "/logos/one-capital-group.jpg" },
+  { id: 11, name: "Denza",               sub: "Denza",                              projects: 1, logo: "/logos/denza.jpg" },
+  { id: 12, name: "BeiGene",             sub: "BeiGene",                            projects: 1, logo: "/logos/beigene.png" },
+  { id: 13, name: "Healthcare Homeloans",sub: "Healthcare Homeloans",               projects: 1, logo: "/logos/healthcare-homeloans.jpg" },
+  { id: 14, name: "Redel",              sub: "Redel — The Wine Glass",              projects: 1, logo: "/logos/redel.png" },
 ];
 
 const MODEL_SLIDES = [
@@ -1706,6 +1699,14 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
+            <a
+              href="/services"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`text-[10px] uppercase tracking-[0.25em] font-bold transition-colors duration-300 ${isScrolled ? 'text-stone-400 hover:text-stone-900' : 'text-white/70 hover:text-white'}`}
+            >
+              {t('navServices')}
+            </a>
           </div>
 
           <div className="flex items-center gap-4">
@@ -1732,7 +1733,7 @@ const Navbar = () => {
               href="#contact"
               className={`hidden lg:flex items-center px-5 py-2 text-[9px] font-bold uppercase tracking-[0.3em] border transition-all duration-300 ${isScrolled ? 'border-stone-900 text-stone-900 hover:bg-stone-900 hover:text-white' : 'border-white/60 text-white hover:bg-white hover:text-stone-900'}`}
             >
-              {t('subscribe')}
+              {t('navContact')}
             </a>
             <button
               className={`lg:hidden p-2 ${isScrolled ? 'text-stone-900' : 'text-white'}`}
@@ -1762,6 +1763,15 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
+            <a
+              href="/services"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-2xl font-display text-stone-800"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {t('navServices')}
+            </a>
             {/* Mobile lang toggle */}
             <button
               onClick={() => { setLang(lang === 'en' ? 'th' : 'en'); setIsMobileMenuOpen(false); }}
@@ -2118,26 +2128,19 @@ const ProjectItem = ({ project, index, onOpen }: { project: Project; index: numb
   );
 };
 
-// --- Maker Card ---
-const MakerCard = ({ maker, delay = 0 }: { maker: Maker; delay?: number }) => (
+// --- Client Logo Tile ---
+const ClientLogoTile = ({ client, delay = 0 }: { client: ClientLogo; delay?: number }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 16 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    transition={{ duration: 1, delay }}
-    className="group cursor-pointer"
+    transition={{ duration: 0.7, delay }}
+    className="group flex flex-col items-center justify-center gap-3 border border-stone-200 bg-white p-8 hover:border-stone-400 hover:shadow-sm transition-all duration-300 cursor-default"
   >
-    <div className="aspect-[4/3] overflow-hidden bg-stone-100 mb-6 soft-shadow rounded-xl">
-      <img
-        src={maker.image}
-        alt={maker.name}
-        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
-        referrerPolicy="no-referrer"
-      />
-    </div>
-    <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-stone-300 mb-3 block">{maker.type} · {maker.origin}</span>
-    <h4 className="text-xl font-display font-light text-stone-800 mb-3 group-hover:text-stone-500 transition-colors">{maker.name}</h4>
-    <p className="text-xs text-stone-400 font-light leading-relaxed">{maker.description}</p>
+    {client.logo && (
+      <img src={client.logo} alt={client.name} className="h-16 w-full object-contain transition-all duration-500" />
+    )}
+    <span className="text-sm font-light text-stone-400 group-hover:text-stone-600 transition-colors tracking-wide">{client.name}</span>
   </motion.div>
 );
 
@@ -3238,6 +3241,13 @@ export default function App() {
                       {inquirySending ? t('sending') : t('sendMessage')}
                     </button>
                   </div>
+                  <div className="mt-8 pt-8 border-t border-stone-100 flex items-center gap-6">
+                    <img src="/line-qr.jpeg" alt="LINE QR Code" className="w-24 h-24 flex-shrink-0" />
+                    <div>
+                      <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold mb-1">{t('lineAlt')}</p>
+                      <p className="text-xs text-stone-500 font-light leading-relaxed">{t('lineDesc')}</p>
+                    </div>
+                  </div>
                 </>
               )}
             </motion.div>
@@ -3394,9 +3404,9 @@ export default function App() {
               <span>{t('navProjects')}</span><span>·</span>
               <span>{t('navArticles')}</span><span>·</span>
               <span>{t('navMakers')}</span><span>·</span>
-              <span>{t('printEdition')}</span>
+              <span>{t('navContact')}</span>
             </div>
-            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">v1.5.0 · 2025</span>
+            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">v1.6.0.1 · 2025</span>
           </div>
         </section>
 
@@ -3785,21 +3795,16 @@ export default function App() {
           </div>
         </section>
 
-        {/* Makers & Materials */}
+        {/* Clients */}
         <section id="makers" className="py-24 md:py-36 bg-[#fdfaf6]">
           <div className="max-w-[1400px] mx-auto px-8">
-            <div className="flex items-end justify-between mb-16 border-b border-stone-100 pb-8">
-              <div>
-                <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">{t('marketplace')}</span>
-                <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">{t('makersAndMaterials')}</h2>
-              </div>
-              <a href="#" className="hidden md:flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400 hover:text-stone-900 transition-colors">
-                {t('viewMarketplace')} <ArrowRight className="w-3 h-3" />
-              </a>
+            <div className="mb-16 border-b border-stone-100 pb-8">
+              <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-3">{t('clientsLabel')}</span>
+              <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">{t('clientsTitle')}</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {MAKERS.map((maker, i) => (
-                <MakerCard key={maker.id} maker={maker} delay={i * 0.15} />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {CLIENT_LOGOS.map((client, i) => (
+                <ClientLogoTile key={client.id} client={client} delay={i * 0.08} />
               ))}
             </div>
           </div>
@@ -4008,30 +4013,61 @@ export default function App() {
         </section>
 
         {/* Design Process */}
-        <section id="process" className="py-24 md:py-36 bg-[#fdfaf6]">
-          <div className="max-w-[1400px] mx-auto px-8">
-            <div className="mb-20 text-center">
+        <section id="process" className="py-24 md:py-40 bg-[#fdfaf6] overflow-hidden relative">
+          {/* Decorative background circles */}
+          <div className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full border border-stone-100 pointer-events-none" />
+          <div className="absolute -top-16 -right-16 w-[440px] h-[440px] rounded-full border border-stone-100 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-[280px] h-[280px] rounded-full border border-stone-100 pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-[360px] h-[360px] rounded-full border border-stone-100 pointer-events-none" />
+          <div className="absolute -bottom-8 -left-8 w-[220px] h-[220px] rounded-full border border-stone-100 pointer-events-none" />
+
+          <div className="max-w-[1400px] mx-auto px-8 relative z-10">
+            <div className="mb-24 text-center">
               <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300 block mb-4">Methodology</span>
               <h2 className="text-3xl md:text-5xl font-display font-light text-stone-800">From Vision to Detail</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
-              {PROCESS_STEPS.map((step, idx) => (
-                <motion.div
-                  key={step.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, delay: idx * 0.15 }}
-                  className="p-10 border border-stone-100 hover:border-stone-900 hover:bg-stone-900 hover:text-white transition-all duration-500 group"
-                >
-                  <div className="text-stone-300 group-hover:text-white transition-colors duration-500 mb-8">
-                    {step.icon}
-                  </div>
-                  <span className="text-[10px] font-mono text-stone-200 group-hover:text-stone-500 mb-4 block">0{idx + 1}</span>
-                  <h4 className="text-lg font-display font-medium mb-4 text-stone-800 group-hover:text-white transition-colors">{step.title}</h4>
-                  <p className="text-sm text-stone-400 font-light leading-relaxed">{step.description}</p>
-                </motion.div>
-              ))}
+
+            {/* Flow */}
+            <div className="relative">
+              {/* Dashed connector line (desktop only) */}
+              <div className="hidden lg:block absolute top-[88px] left-[12.5%] right-[12.5%] pointer-events-none">
+                <svg width="100%" height="2" className="overflow-visible">
+                  <line x1="0" y1="1" x2="100%" y2="1" stroke="#d6d3d1" strokeWidth="1" strokeDasharray="8 6" />
+                  {[0.33, 0.66].map((pos, i) => (
+                    <polygon key={i} points="0,-5 10,0 0,5" fill="#d6d3d1"
+                      transform={`translate(${pos * 100}%,1) translate(-5,0)`} />
+                  ))}
+                </svg>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+                {PROCESS_STEPS.map((step, idx) => (
+                  <motion.div
+                    key={step.title}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: idx * 0.15 }}
+                    className="flex flex-col items-center text-center group cursor-default"
+                  >
+                    {/* Circle node */}
+                    <div className="w-20 h-20 rounded-full bg-white shadow-md border border-stone-100 flex items-center justify-center mb-8 relative group-hover:shadow-xl group-hover:border-stone-400 transition-all duration-500">
+                      <div className="text-stone-400 group-hover:text-stone-800 transition-colors duration-300">
+                        {step.icon}
+                      </div>
+                      <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-stone-800 text-white text-[9px] font-bold flex items-center justify-center">
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+
+                    {/* Card */}
+                    <div className="bg-white border border-stone-100 p-7 w-full shadow-sm group-hover:shadow-md group-hover:border-stone-300 transition-all duration-500">
+                      <h4 className="text-base font-display font-medium mb-3 text-stone-800">{step.title}</h4>
+                      <p className="text-xs text-stone-400 font-light leading-relaxed">{step.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -4091,30 +4127,55 @@ export default function App() {
 
         <WorldMapSection />
 
-        {/* Print Edition / Subscribe CTA */}
-        <section className="py-24 bg-[#fdfaf6] border-t border-stone-100">
-          <div className="max-w-[900px] mx-auto px-8 text-center">
+        {/* Contact Section */}
+        <section className="py-24 md:py-36 bg-[#fdfaf6] border-t border-stone-100">
+          <div className="max-w-[1400px] mx-auto px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 1.2 }}
+              transition={{ duration: 1 }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
             >
-              <span className="text-[9px] uppercase tracking-[0.5em] font-bold text-stone-300 block mb-6">{t('printEdition')}</span>
-              <h2 className="text-4xl md:text-6xl font-display font-light text-stone-800 mb-8 leading-tight">
-                {t('theAnnualDesign')} <br /><span className="italic">{t('publication')}</span>
-              </h2>
-              <p className="text-sm text-stone-400 font-light leading-relaxed max-w-lg mx-auto mb-12">
-                {t('printDesc')}
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <input
-                  type="email"
-                  placeholder={t('emailPlaceholder')}
-                  className="w-full sm:w-80 px-6 py-4 border border-stone-200 text-sm text-stone-600 placeholder:text-stone-300 focus:outline-none focus:border-stone-900 bg-white"
-                />
-                <button className="w-full sm:w-auto px-10 py-4 bg-stone-900 text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-stone-700 transition-colors whitespace-nowrap">
-                  {t('subscribeFree')}
+              {/* Left */}
+              <div>
+                <span className="text-[9px] uppercase tracking-[0.5em] font-bold text-stone-300 block mb-6">{t('contactSectionLabel')}</span>
+                <h2 className="text-4xl md:text-6xl font-display font-light text-stone-800 mb-8 leading-tight">{t('contactSectionTitle')}</h2>
+                <p className="text-sm text-stone-400 font-light leading-relaxed max-w-md mb-12">{t('contactSectionDesc')}</p>
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 border border-stone-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Mail className="w-3.5 h-3.5 text-stone-400" />
+                    </div>
+                    <div>
+                      <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-stone-300 mb-1">{t('contactEmail')}</p>
+                      <a href="mailto:sam@nissa.co.th" className="text-sm text-stone-700 hover:text-stone-900 transition-colors">sam@nissa.co.th</a>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 border border-stone-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <MapPin className="w-3.5 h-3.5 text-stone-400" />
+                    </div>
+                    <div>
+                      <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-stone-300 mb-1">{t('contactLocation')}</p>
+                      <p className="text-sm text-stone-700">888/141 Moo 5 Ban Pet<br />Khon Kaen 40000, Thailand</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right — QR + CTA */}
+              <div className="flex flex-col items-center lg:items-end gap-8">
+                <div className="bg-white border border-stone-100 p-8 shadow-sm flex flex-col items-center gap-4 w-full max-w-xs">
+                  <p className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-300">{t('contactLine')}</p>
+                  <img src="/line-qr.jpeg" alt="LINE QR Code" className="w-40 h-40 object-contain" />
+                  <p className="text-xs text-stone-400 font-light text-center">Scan to message on LINE</p>
+                </div>
+                <button
+                  onClick={() => setInquiryOpen(true)}
+                  className="w-full max-w-xs bg-stone-900 text-white py-4 text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-stone-700 transition-colors duration-300"
+                >
+                  {t('startProject')}
                 </button>
               </div>
             </motion.div>
@@ -4173,7 +4234,7 @@ export default function App() {
               <a href="#" className="hover:text-stone-300 transition-colors">{t('sitemap')}</a>
             </div>
           </div>
-          <p className="mt-4 text-center text-[8px] font-mono text-stone-400 tracking-[0.2em]">v1.5.0</p>
+          <p className="mt-4 text-center text-[8px] font-mono text-stone-400 tracking-[0.2em]">v1.6.0.1</p>
         </div>
       </footer>
     </div>

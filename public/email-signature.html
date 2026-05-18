@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Email Signature — Sam Saenpao</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    .instructions {
+      max-width: 600px;
+      width: 100%;
+      background: #fff;
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      font-size: 13px;
+      color: #444;
+      line-height: 1.7;
+    }
+    .instructions h2 {
+      font-size: 15px;
+      color: #1a3a8a;
+      margin-bottom: 12px;
+    }
+    .instructions ol { padding-left: 18px; }
+    .instructions li { margin-bottom: 6px; }
+    .copy-btn {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 24px;
+      background: #1a3a8a;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+    }
+    .copy-btn:hover { background: #0d2a6a; }
+    .copied { background: #16a34a !important; }
+
+    /* Signature preview wrapper */
+    .preview-wrapper {
+      max-width: 600px;
+      width: 100%;
+      background: white;
+      border-radius: 8px;
+      padding: 32px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .preview-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="instructions">
+  <h2>How to add this signature to Gmail</h2>
+  <ol>
+    <li>Click <strong>"Copy Signature"</strong> below</li>
+    <li>Open <strong>Gmail</strong> → Settings (gear icon) → <strong>See all settings</strong></li>
+    <li>Scroll to <strong>Signature</strong> → click <strong>Create new</strong></li>
+    <li>Name it <em>Nissa Group</em>, then paste (Ctrl+V) into the signature box</li>
+    <li>Click <strong>Save Changes</strong> at the bottom</li>
+  </ol>
+  <button class="copy-btn" onclick="copySignature()">Copy Signature</button>
+</div>
+
+<div class="preview-wrapper">
+  <div class="preview-label">Preview</div>
+
+  <!-- ═══════════════════════════════════════════
+       EMAIL SIGNATURE — copy everything below
+       ═══════════════════════════════════════════ -->
+  <div id="signature">
+    <table cellpadding="0" cellspacing="0" border="0"
+           style="font-family: Arial, sans-serif; color: #333333; border-collapse: collapse; max-width: 480px;">
+
+      <!-- Kind Regards -->
+      <tr>
+        <td style="padding-bottom: 16px; font-size: 13px; color: #333;">
+          Kind Regards,
+        </td>
+      </tr>
+
+      <!-- Name -->
+      <tr>
+        <td style="padding-bottom: 2px;">
+          <span style="font-size: 15px; font-weight: 700; color: #1a3a8a;">Sam Saenpao</span>
+        </td>
+      </tr>
+
+      <!-- Title -->
+      <tr>
+        <td style="padding-bottom: 8px;">
+          <span style="font-size: 13px; color: #333;">Architectural Drafter</span>
+        </td>
+      </tr>
+
+      <!-- Phone -->
+      <tr>
+        <td style="padding-bottom: 3px;">
+          <span style="font-size: 13px; color: #1a3a8a; font-weight: 700;">m: </span>
+          <a href="tel:0626759627" style="font-size: 13px; color: #1a3a8a; font-weight: 700; text-decoration: none;">+66 62 675 9627</a>
+        </td>
+      </tr>
+
+      <!-- Email -->
+      <tr>
+        <td style="padding-bottom: 20px;">
+          <span style="font-size: 13px; color: #1a3a8a; font-weight: 700;">Email: </span>
+          <a href="mailto:Sam@nissa.co.th" style="font-size: 13px; color: #1a5fbf; font-weight: 700; text-decoration: none;">Sam@nissa.co.th</a>
+        </td>
+      </tr>
+
+      <!-- Logo icon -->
+      <tr>
+        <td style="padding-bottom: 6px;">
+          <img
+            src="https://samsaenpao.com/logos/nissa.png"
+            alt="Nissa Group"
+            width="100"
+            style="display: block;"
+          />
+        </td>
+      </tr>
+
+      <!-- Company name -->
+      <tr>
+        <td style="padding-bottom: 3px;">
+          <span style="font-size: 17px; font-weight: 900; color: #1a3a8a; letter-spacing: 0.03em;">NISSA GROUP CO., LTD.</span>
+        </td>
+      </tr>
+
+      <!-- Slogan -->
+      <tr>
+        <td style="padding-bottom: 16px;">
+          <span style="font-size: 11px; font-weight: 700; color: #1a5fbf; letter-spacing: 0.15em;">GATEWAY TO INNOVATION</span>
+        </td>
+      </tr>
+
+      <!-- Divider -->
+      <tr>
+        <td style="padding-bottom: 10px;">
+          <table cellpadding="0" cellspacing="0" border="0"><tr>
+            <td style="height: 1px; width: 460px; background: #cccccc; font-size: 0; line-height: 0;">&nbsp;</td>
+          </tr></table>
+        </td>
+      </tr>
+
+      <!-- Countries -->
+      <tr>
+        <td style="padding-bottom: 8px;">
+          <span style="font-size: 12px; font-weight: 700; color: #1a3a8a;">Thailand : Singapore : Philippines : Indonesia : Malaysia : Vietnam : Australia : New Zealand</span>
+        </td>
+      </tr>
+
+      <!-- Address -->
+      <tr>
+        <td style="padding-bottom: 10px;">
+          <span style="font-size: 11px; color: #555;">888/141 Ps Home Village Maliwan, Ban Pet, Mueang Khon Kaen 40000</span>
+        </td>
+      </tr>
+
+      <!-- Disclaimer -->
+      <tr>
+        <td>
+          <span style="font-size: 10px; color: #999; line-height: 1.6;">
+            This message is for the named person's use only. It may contain confidential, proprietary or legally privileged information.
+            Nissa Group does not waive any confidentiality, copyright or legally privileged information by any transmission.
+            If you receive this message in error, please immediately delete it and all copies of it from your system,
+            destroy any hard copies of it and notify the sender. You must not, directly or indirectly, use, disclose, distribute, print,
+            or copy any part of this message if you are not the intended recipient. Nissa Group reserve the right to monitor all e-mail
+            communications through its networks. Any views expressed in this message are those of the individual sender, except where the
+            message states otherwise and the sender is authorised to state them to be the views of any such entity.
+          </span>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+  <!-- ═══════════════════════════════════════════
+       END OF SIGNATURE
+       ═══════════════════════════════════════════ -->
+
+</div>
+
+<script>
+  function copySignature() {
+    const sig = document.getElementById('signature');
+    const range = document.createRange();
+    range.selectNodeContents(sig);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    document.execCommand('copy');
+    sel.removeAllRanges();
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy Signature';
+      btn.classList.remove('copied');
+    }, 2500);
+  }
+</script>
+
+</body>
+</html>
