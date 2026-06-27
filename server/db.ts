@@ -136,15 +136,15 @@ function seedIfEmpty() {
   insertExp.run({ year: "Feb 2020 — Dec 2022", title: "Bachelor of Design in Architecture", company: "University of Technology Sydney, Australia", description: "Studied architecture with a focus on spatial design, technical documentation, and the relationship between built form and human experience.", logo: "/logos/uts.png", sort_order: 1 });
   insertExp.run({ year: "Jan 2023 — Feb 2023", title: "Architectural Intern", company: "M.A.R.S (Marcellino Sain Architects), Sydney, Australia", description: "Introductory placement developing foundational skills in architectural drawings, SketchUp modelling, and studio workflow.", logo: "/logos/mars.png", sort_order: 2 });
   insertExp.run({ year: "Feb 2023 — Present", title: "Architectural Drafter", company: "M.A.R.S (Marcellino Sain Architects), Sydney, Australia", description: "Full-time role producing architectural and construction drawings across a range of commercial, retail, and hospitality projects.", logo: "/logos/mars.png", sort_order: 3 });
-  insertExp.run({ year: "2025 — Present", title: "Architectural Drafter", company: "Nissa Group, Khon Kaen, Thailand", description: "Senior role overseeing architectural and construction documentation while managing project coordination and team workflows.", logo: "/logos/nissa.png", sort_order: 4 });
+  insertExp.run({ year: "2025 — Present", title: "Architectural Manager", company: "Nissa Group, Khon Kaen, Thailand", description: "Senior role overseeing architectural and construction documentation while managing project coordination and team workflows.", logo: "/logos/nissa.png", sort_order: 4 });
 
   const setSetting = db.prepare('INSERT OR IGNORE INTO settings (key, value) VALUES (?, ?)');
   setSetting.run('hero_title', 'SAM SAENPAO');
   setSetting.run('hero_subtitle', 'Documenting architecture and design across Australia and beyond — where precision meets poetic vision.');
-  setSetting.run('about_bio', 'Architectural drafter and designer based in Sydney, Australia. Eight years building a career across interior, retail, and commercial design.');
+  setSetting.run('about_bio', 'Architectural Manager based in Khon Kaen, Thailand. Leading design and construction documentation across commercial, retail, and hospitality projects.');
   setSetting.run('available', 'true');
   setSetting.run('site_title', 'Sam Saenpao — Architecture & Design');
-  setSetting.run('meta_description', 'Portfolio of Sam Saenpao — architectural drafter and designer documenting projects across Australia.');
+  setSetting.run('meta_description', 'Portfolio of Sam Saenpao — architectural manager documenting projects across Australia and beyond.');
 }
 
 seedIfEmpty();

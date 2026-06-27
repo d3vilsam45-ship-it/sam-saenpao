@@ -49,7 +49,7 @@ const translations = {
     visualWork: 'Visual Work', rendering: 'Rendering', workflow: 'Workflow', modelling3D: '3D Modelling Process',
     // Who Am I
     whoAmI: 'Who Am I', fullStudioProfile: 'Full Studio Profile',
-    whoAmIText1: "I am an Architectural Designer and Drafter shaped by two worlds — the warmth and craft culture of Thailand, where I was born and raised, and the precision and professionalism of Sydney's architectural industry, where I spent eight formative years building my career.",
+    whoAmIText1: "I am an Architectural Manager shaped by two worlds — the warmth and craft culture of Thailand, where I was born and raised, and the precision and professionalism of Sydney's architectural industry, where I spent eight formative years building my career.",
     whoAmIText2: "Growing up in Thailand instilled in me an appreciation for material culture, human-scale environments, and the quiet poetry of everyday spaces. Moving to Australia at 19 pushed me to grow independently — working part-time, studying English, earning my degree at UTS, and eventually finding my professional footing at M.A.R.S Architects across a diverse range of commercial, retail, and hospitality projects.",
     whoAmIText3: "That journey across cultures, cities, and disciplines is what defines how I approach design — with curiosity, adaptability, and a commitment to work that is both technically rigorous and deeply considered. I bring that breadth of experience to every project I take on.",
     // Projects
@@ -87,7 +87,7 @@ const translations = {
     contactEmail: 'Email', contactLine: 'LINE', contactLocation: 'Location',
     emailPlaceholder: 'Your email address', subscribeFree: 'Subscribe Free',
     // Footer
-    footerDesc: 'Architectural Designer & Drafter based in Khon Kaen, Thailand. Available for freelance projects and collaborations.',
+    footerDesc: 'Architectural Manager based in Khon Kaen, Thailand. Available for freelance projects and collaborations.',
     followStudio: 'Follow the Studio', navigate: 'Navigate',
     privacy: 'Privacy', terms: 'Terms', sitemap: 'Sitemap', allRightsReserved: 'All Rights Reserved.',
     // Inquiry modal
@@ -129,7 +129,7 @@ const translations = {
     visualWork: 'งานภาพ', rendering: 'งานเรนเดอร์', workflow: 'กระบวนการ', modelling3D: 'กระบวนการสร้างโมเดล 3 มิติ',
     // Who Am I
     whoAmI: 'ฉันคือใคร', fullStudioProfile: 'โปรไฟล์สตูดิโอทั้งหมด',
-    whoAmIText1: 'ฉันเป็นนักออกแบบสถาปัตยกรรมและนักเขียนแบบที่ถูกหล่อหลอมจากสองโลก — ความอบอุ่นและวัฒนธรรมงานฝีมือของไทย ที่ที่ฉันเกิดและเติบโต และความแม่นยำและความเป็นมืออาชีพของอุตสาหกรรมสถาปัตยกรรมในซิดนีย์ ที่ที่ฉันใช้เวลาแปดปีสร้างอาชีพ',
+    whoAmIText1: 'ฉันเป็นผู้จัดการด้านสถาปัตยกรรมที่ถูกหล่อหลอมจากสองโลก — ความอบอุ่นและวัฒนธรรมงานฝีมือของไทย ที่ที่ฉันเกิดและเติบโต และความแม่นยำและความเป็นมืออาชีพของอุตสาหกรรมสถาปัตยกรรมในซิดนีย์ ที่ที่ฉันใช้เวลาแปดปีสร้างอาชีพ',
     whoAmIText2: 'การเติบโตในประเทศไทยทำให้ฉันซาบซึ้งกับวัฒนธรรมงานวัสดุ สภาพแวดล้อมในระดับมนุษย์ และบทกวีเงียบของพื้นที่ในชีวิตประจำวัน การย้ายไปออสเตรเลียตอนอายุ 19 ปีผลักดันให้ฉันเติบโตอย่างอิสระ — ทำงานพาร์ทไทม์ เรียนภาษาอังกฤษ สำเร็จการศึกษาที่ UTS และในที่สุดก็ก้าวสู่เส้นทางอาชีพที่ M.A.R.S Architects',
     whoAmIText3: 'การเดินทางข้ามวัฒนธรรม เมือง และสาขาวิชาต่าง ๆ คือสิ่งที่กำหนดแนวทางการออกแบบของฉัน — ด้วยความอยากรู้ ความยืดหยุ่น และความมุ่งมั่นในงานที่ทั้งเข้มแข็งทางเทคนิคและลึกซึ้งทางความคิด',
     // Projects
@@ -167,7 +167,7 @@ const translations = {
     contactEmail: 'อีเมล', contactLine: 'LINE', contactLocation: 'ที่อยู่',
     emailPlaceholder: 'ที่อยู่อีเมลของคุณ', subscribeFree: 'สมัครฟรี',
     // Footer
-    footerDesc: 'นักออกแบบสถาปัตยกรรมและนักเขียนแบบ ตั้งอยู่ที่ขอนแก่น ประเทศไทย รับงานฟรีแลนซ์และงานร่วมมือ',
+    footerDesc: 'ผู้จัดการด้านสถาปัตยกรรม ตั้งอยู่ที่ขอนแก่น ประเทศไทย รับงานฟรีแลนซ์และงานร่วมมือ',
     followStudio: 'ติดตามสตูดิโอ', navigate: 'นำทาง',
     privacy: 'นโยบาย', terms: 'ข้อกำหนด', sitemap: 'แผนผัง', allRightsReserved: 'สงวนลิขสิทธิ์',
     // Inquiry modal
@@ -1596,7 +1596,7 @@ const EXPERIENCE: Experience[] = [
   },
   {
     year: "2025 — Present",
-    title: "Architectural Drafter",
+    title: "Architectural Manager",
     company: "Nissa Group, Khon Kaen, Thailand",
     description: "Senior role overseeing architectural and construction documentation while managing project coordination and team workflows across a range of design projects.",
     logo: "/logos/nissa.png",
@@ -1620,7 +1620,7 @@ const EXPERIENCE_TH: { title: string; company: string; description: string }[] =
     description: 'บทบาทประจำในการจัดทำแบบสถาปัตยกรรมและแบบก่อสร้างสำหรับโครงการเชิงพาณิชย์ ค้าปลีก และการบริการ ทักษะได้แก่ การจัดทำเอกสารสถาปัตยกรรม แบบก่อสร้าง การประสานงาน และการสร้างโมเดล 3 มิติ',
   },
   {
-    title: 'นักเขียนแบบสถาปัตยกรรม',
+    title: 'ผู้จัดการสถาปัตยกรรม',
     company: 'Nissa Group, ขอนแก่น, ประเทศไทย',
     description: 'บทบาทอาวุโสดูแลงานเอกสารสถาปัตยกรรมและการก่อสร้าง พร้อมจัดการการประสานงานโครงการและกระบวนการทำงานของทีมในโครงการออกแบบต่าง ๆ',
   },
@@ -3905,7 +3905,7 @@ export default function App() {
               <div className="lg:col-span-5">
                 <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 block mb-8">{t('studioProfile')}</span>
                 <h2 className="text-4xl md:text-6xl font-display font-light mb-10 tracking-tight leading-none">
-                  Architectural <br />Designer & <br /><span className="italic">Drafter</span>
+                  Architectural <br /><span className="italic">Manager</span>
                 </h2>
                 <div className="aspect-[4/5] overflow-hidden mb-10 relative">
                   <AnimatePresence mode="wait">
